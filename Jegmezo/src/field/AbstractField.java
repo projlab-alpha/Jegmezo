@@ -63,6 +63,15 @@ public abstract class AbstractField {
     public abstract void Accept(character.Character c);
 
     /**
+     * Beállítja, milyen tárgy van a jégtáblába fagyva
+     * @param i A beállítandó tárgy
+     */
+    public void setItem(Item i) {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "setItem()");
+        item = i;
+    }
+
+    /**
      * Elmozgat egy c karaktert a d irányban lévő jégtáblára
      * @param d Mozgatás iránya
      * @param c Mozgatott karakter

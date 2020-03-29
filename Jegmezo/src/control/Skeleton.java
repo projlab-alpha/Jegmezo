@@ -194,6 +194,18 @@ public class Skeleton {
                 c.setField(f1);
                 System.out.println("//// RUN ////");
                 c.UseAbility(Direction.NORTH);
+                break;
+            }
+            case 15: {
+                System.out.println("//// INIT ////");
+                Researcher c = new Researcher();
+                Floe f1 = new Floe();
+                Floe f2 = new Floe();
+                c.setField(f1);
+                f1.setNeighbour(Direction.NORTH, f2);
+                System.out.println("//// RUN ////");
+                c.UseAbility(Direction.NORTH);
+                break;
             }
             default:
                 break;

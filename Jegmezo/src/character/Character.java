@@ -47,6 +47,18 @@ public abstract class Character {
     protected AbstractField field;
 
     /**
+     * Konstruktor
+     */
+    public Character() {
+        Skeleton.ctorCalled(this.getClass().getSimpleName());
+        actionpoint = 5;
+        warmth = 5;
+        drowning = false;
+        inventory = new ArrayList<>();
+        waterstrat = new WaterStrategyDefault();
+    }
+
+    /**
      * Visszatér a mezővel, amin a karakter jelenleg áll
      * @return A mező, amin a karakter áll
      */

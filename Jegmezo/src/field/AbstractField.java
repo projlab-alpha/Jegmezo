@@ -29,7 +29,7 @@ public abstract class AbstractField {
     /**
      * A szomszédokat és irányokat tárolja
      */
-    private HashMap<Direction, AbstractField> neighbours; //TODO: szerintem így jobb, de írjátok át nyugodtan.
+    private HashMap<Direction, AbstractField> neighbours;
 
     /**
      * A jégtáblán tartózkodó karakterek listája.
@@ -45,6 +45,16 @@ public abstract class AbstractField {
      * A jégtáblába fagyott tárgy
      */
     protected Item item;
+
+    /**
+     * Konstruktor
+     */
+    public AbstractField() {
+        Skeleton.ctorCalled(this.getClass().getSimpleName());
+        neighbours = new HashMap<>();
+        characters = new ArrayList<>();
+        snowstormstrat = new SnowstormStrategyDefault();
+    }
 
     /**
      * Átvesz egy karaktert egy másik mezőről

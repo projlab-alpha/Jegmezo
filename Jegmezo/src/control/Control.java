@@ -37,13 +37,13 @@ public class Control {
      * Vesztettek, mert meghalt valaki
      */
     public void CharacterDied(){
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "CharacterDied()");
     }
 
     /**
      * Jelzőrakétát sikeresen kilőtték
      */
     public void Win(){
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "Win()");
     }
 }

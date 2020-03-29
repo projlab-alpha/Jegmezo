@@ -165,6 +165,17 @@ public class Skeleton {
                 c.UseItem(0);
                 break;
             }
+            case 12: {
+                System.out.println("//// INIT ////");
+                Eskimo c = new Eskimo();
+                Floe f1 = new Floe();
+                Shovel s = new Shovel();
+                c.setField(f1);
+                c.addItem(s);
+                System.out.println("//// RUN ////");
+                c.UseItem(0);
+                break;
+            }
             default:
                 break;
         }

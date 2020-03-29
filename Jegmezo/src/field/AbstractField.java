@@ -1,8 +1,11 @@
 package field;
 
 import control.Direction;
+import control.Skeleton;
 import item.Item;
 import snowstormStrategy.SnowstormStrategy;
+import snowstormStrategy.SnowstormStrategyDefault;
+import snowstormStrategy.SnowstormStrategyIgloo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +34,7 @@ public abstract class AbstractField {
     /**
      * A jégtáblán tartózkodó karakterek listája.
      */
-    private ArrayList<Character> characters;
+    protected ArrayList<character.Character> characters;
 
     /**
      * Megmutatja, milyen módon kell az adott mezőn eljárni hóvihar esetén
@@ -47,17 +50,16 @@ public abstract class AbstractField {
      * Átvesz egy karaktert egy másik mezőről
      * @param c Az átvett karakter
      */
-    public void Accept(Character c){ //TODO: Mire gondoltatok? (Java-ban minden virtual alapból)
-
-    }
+    public abstract void Accept(character.Character c);
 
     /**
      * Elmozgat egy c karaktert a d irányban lévő jégtáblára
      * @param d Mozgatás iránya
      * @param c Mozgatott karakter
      */
-    public void MoveChar(Direction d, Character c){
-
+    public void MoveChar(Direction d, character.Character c){
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "MoveChar()");
+        this.neighbours.get(d).Accept(c);
     }
 
     /**
@@ -66,47 +68,48 @@ public abstract class AbstractField {
      * @param neighbour A beállított jégtábla
      */
     public void setNeighbour(Direction d, AbstractField neighbour) {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "setNeighbour()");
         neighbours.put(d, neighbour);
     }
 
     /**
      * Megváltoztatja a hó menyiségét a jégtáblán
-     * @param i
+     * @param i A változtatás mennyisége
      */
     public void ChangeSnow(int i){
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "ChangeSnow()");
     }
 
     /**
-     * Épít egy iglut a jégtáblára
-     * @return az építés sikeressége
-     */
-    public boolean BuildIgloo(){ //TODO: Nincs osztálydiagramon
-
-    }
-
-    /**
-     * Megvizsgálja, hogy a karakternek van-e szükséges tárgya
-     * @return A karakter tárgya
+     * Visszatér a táblán lévő tárgyal
+     * @return A táblán lévő tárgy
      */
     public Item RequestItem(){
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "RequestItem()");
+        return this.item;
     }
 
     /**
-     * Visszatér a jégtábla teherbírásával
+     * Visszatér egy szomszédos jégtábla teherbírásával
      * @param d A keresett irány
      * @return A jégtábla kapacitása
      */
     public int FindCapacity(Direction d){
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "FindCapacity()");
+        return this.neighbours.get(d).capacity;
     }
 
     /**
      * Eléri a jégtáblát egy vihar
      */
     public void SnowStormHit(){
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "SnowStormShit()");
+        boolean res = Skeleton.askQuestion("Van a mezon iglu?");
+        if(res)
+            this.snowstormstrat = new SnowstormStrategyIgloo();
+        else
+            this.snowstormstrat = new SnowstormStrategyDefault();
+        this.snowstormstrat.execute(this.characters);
     }
 
     /**
@@ -115,14 +118,25 @@ public abstract class AbstractField {
      * @return A jégtáblán van-e
      */
     public boolean CheckFlareGun(){
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "CheckFlareGun()");
+        boolean flare = false, pistol = false, cart = false;
+        for (character.Character c : this.characters) {
+            if(c.HasItem("Flare")) flare = true;
+            if(c.HasItem("Pistol")) pistol = true;
+            if(c.HasItem("Cartridge")) cart = true;
+        }
+        return (flare && pistol && cart);
     }
 
     /**
      * Kiment egy bajba jutott játékost
      */
     public void Rescue(){
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "Rescue()");
+        for (Direction d : Direction.values()) {
+            if(this.neighbours.containsKey(d))
+                this.neighbours.get(d).RescueChars(d);
+        }
     }
 
     /**
@@ -130,7 +144,12 @@ public abstract class AbstractField {
      * @param d a mentés iránya
      */
     public void RescueChars(Direction d){ //TODO: Nincs dokumentumba specifikálva.
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "RescueChars()");
+        boolean res = Skeleton.askQuestion("Van a szomszedos mezon fulldoklo karakter?");
+        if(res) {
+            this.characters.set(0, new character.Eskimo());
+            this.characters.get(0).Move(d);
+        }
     }
 
     /**
@@ -138,7 +157,6 @@ public abstract class AbstractField {
      * @param s Az új viharkor bekövetkező esemény
      */
     public void ChangeStrategy(SnowstormStrategy s){
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "ChangeStrategy()");
     }
-
 }

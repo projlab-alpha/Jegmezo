@@ -104,6 +104,8 @@ public class Skeleton {
                 System.out.println("//// INIT ////");
                 GameField gf = new GameField();
                 Floe f1 = new Floe();
+                Eskimo c = new Eskimo();
+                f1.Accept(c);
                 gf.addField(f1);
                 System.out.println("//// RUN ////");
                 gf.SnowStorm();

@@ -115,6 +115,9 @@ public abstract class Character {
      */
     public void ChangeWarmth(int i){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "ChangeWarmth()");
+        boolean res = Skeleton.askQuestion("Elfogyott a karakter melegsége?");
+        if(res)
+            Control.getInstance().CharacterDied();
     }
 
     /**

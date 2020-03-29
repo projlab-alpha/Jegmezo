@@ -100,7 +100,8 @@ public class Skeleton {
                 c.Move(Direction.NORTH);
                 break;
             }
-            case 5: {
+            case 5:
+            case 6: {
                 System.out.println("//// INIT ////");
                 GameField gf = new GameField();
                 Floe f1 = new Floe();
@@ -111,6 +112,7 @@ public class Skeleton {
                 gf.SnowStorm();
                 break;
             }
+
             default:
                 break;
         }

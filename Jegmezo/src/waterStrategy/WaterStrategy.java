@@ -9,5 +9,5 @@ public interface WaterStrategy {
      * A megvalósítandó metódus
      * @param c Az érintett karakter
      */
-    public void execute(Character c);
+    void execute(character.Character c);
 }

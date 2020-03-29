@@ -11,5 +11,5 @@ public interface SnowstormStrategy {
      * A hóviharkor bekövetkező stratégiát végrehajtó metódus
      * @param chars Az érintett karakterek listája
      */
-    public void execute(ArrayList<Character> chars);
+    void execute(ArrayList<character.Character> chars);
 }

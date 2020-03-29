@@ -1,5 +1,7 @@
 package waterStrategy;
 
+import control.Skeleton;
+
 /**
  * A vízbeesési stratégia bóvárruhában
  */
@@ -11,7 +13,7 @@ public class WaterStrategySuit implements WaterStrategy {
      * @param c Az érintett karakter
      */
     @Override
-    public void execute(Character c) {
-
+    public void execute(character.Character c) {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "execute()");
     }
 }

@@ -8,7 +8,12 @@ import java.util.ArrayList;
  * A hóvihar stratégia, abban az esetben, amikor nincsen iglu a kérdéses mezőn
  */
 public class SnowstormStrategyDefault implements SnowstormStrategy {
-
+    /**
+     * Konstruktor
+     */
+    public SnowstormStrategyDefault() {
+        Skeleton.ctorCalled(this.getClass().getSimpleName());
+    }
     /**
      * Az összes listában szereplő karakter
      * testhőjét csökkenti 1 egységgel,

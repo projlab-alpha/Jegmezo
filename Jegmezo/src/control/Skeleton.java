@@ -187,6 +187,14 @@ public class Skeleton {
                 c.PickUpItem();
                 break;
             }
+            case 14: {
+                System.out.println("//// INIT ////");
+                Eskimo c = new Eskimo();
+                Floe f1 = new Floe();
+                c.setField(f1);
+                System.out.println("//// RUN ////");
+                c.UseAbility(Direction.NORTH);
+            }
             default:
                 break;
         }

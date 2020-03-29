@@ -138,6 +138,19 @@ public class Skeleton {
                 System.out.println("//// RUN ////");
                 c.UseItem(0);
             }
+            case 10: {
+                System.out.println("//// INIT ////");
+                Eskimo c1 = new Eskimo();
+                Eskimo c2 = new Eskimo();
+                Rope r = new Rope();
+                Floe f1 = new Floe();
+                Floe f2 = new Floe();
+                c1.setField(f1);
+                c1.addItem(r);
+                f2.Accept(c2);
+                System.out.println("//// RUN ////");
+                c1.UseItem(0);
+            }
             default:
                 break;
         }

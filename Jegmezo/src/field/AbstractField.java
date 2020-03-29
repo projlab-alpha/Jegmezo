@@ -157,8 +157,7 @@ public abstract class AbstractField {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "RescueChars()");
         boolean res = Skeleton.askQuestion("Van a szomszedos mezon fulldoklo karakter?");
         if(res) {
-            this.characters.set(0, new character.Eskimo());
-            this.characters.get(0).Move(d);
+            this.characters.get(0).Move(Direction.SOUTH);
         }
     }
 

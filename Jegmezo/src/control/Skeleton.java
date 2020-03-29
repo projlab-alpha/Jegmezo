@@ -147,6 +147,8 @@ public class Skeleton {
                 Floe f2 = new Floe();
                 c1.setField(f1);
                 c1.addItem(r);
+                f1.setNeighbour(Direction.NORTH, f2);
+                f2.setNeighbour(Direction.SOUTH, f1);
                 f2.Accept(c2);
                 System.out.println("//// RUN ////");
                 c1.UseItem(0);

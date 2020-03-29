@@ -1,5 +1,7 @@
 package item;
 
+import control.Skeleton;
+
 /**
  * Megnöveli eggyel a játékos testhőjét, majd eltűnik az a birtokából.
  */
@@ -11,7 +13,9 @@ public class Food implements Item {
      * @return Sikeres-e a használat.
      */
     @Override
-    public boolean UseItem(Character c) {
-
+    public boolean UseItem(character.Character c) {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
+        c.ChangeWarmth(1);
+        return true;
     }
 }

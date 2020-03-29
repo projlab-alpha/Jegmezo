@@ -1,5 +1,7 @@
 package item;
 
+import control.Skeleton;
+
 /**
  * Azonos mennyiségű munkával kettő egység havat takarít el egy mezőről.
  */
@@ -11,7 +13,9 @@ public class Shovel implements Item {
      * @return Sikeres-e a használat.
      */
     @Override
-    public boolean UseItem(Character c) {
-
+    public boolean UseItem(character.Character c) {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
+        c.getField().ChangeSnow(-2);
+        return true;
     }
 }

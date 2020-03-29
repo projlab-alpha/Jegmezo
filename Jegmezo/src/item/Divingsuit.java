@@ -1,5 +1,8 @@
 package item;
 
+import control.Skeleton;
+import waterStrategy.WaterStrategySuit;
+
 /**
  * Túlélővé teszi a karaktert a vízbe fulladással szemben.
  */
@@ -12,7 +15,10 @@ public class Divingsuit implements Item {
      * @return Sikeres-e a használat.
      */
     @Override
-    public boolean UseItem(Character c) {
-
+    public boolean UseItem(character.Character c) {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
+        WaterStrategySuit wss = new WaterStrategySuit();
+        c.ChangeStrategy(wss);
+        return true;
     }
 }

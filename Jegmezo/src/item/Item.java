@@ -10,5 +10,5 @@ public interface Item {
      * @param c A karakter aki használja
      * @return Sikeres-e a használat.
      */
-    public boolean UseItem(Character c);
+    boolean UseItem(character.Character c);
 }

@@ -67,11 +67,16 @@ public abstract class Character {
     }
 
     /**
-     * Beállítja a mezpt, amin a karakter áll
+     * Beállítja a mezőt, amin a karakter áll
      * @param f A mező, amin a karakter áll
      */
     public void setField(AbstractField f) { this.field = f; }
 
+    /**
+     * Hozzáad egy itemet a karakter inventory-ához
+     * @param i A hozzáadandó item
+     */
+    public void addItem(Item i) { this.inventory.add(i); }
     /**
      * A karakter a d irányban lévő jégtáblára mozog
      * @param d A mozgás iránya
@@ -102,7 +107,7 @@ public abstract class Character {
 
     /**
      * A karakter használ egy nála lévő tárgyat
-     * @param n //TODO: Mi az n?
+     * @param n A használni kivánt tárgy indexe az inventory-ban
      */
     public void UseItem(int n){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");

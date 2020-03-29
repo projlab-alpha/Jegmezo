@@ -59,7 +59,7 @@ public class Skeleton {
                 c.Dig();
                 break;
             case 2:
-                /*Teszteset 2 ide*/
+                /*Teszteset 2 ide*/     //TODO: a maradék teszteset
                 break;
             default:
                 break;
@@ -67,7 +67,7 @@ public class Skeleton {
     }
 
     public static void methodCalled(String classname, String methodname) {
-        System.out.println(classname +"."+ methodname);
+        System.out.println(classname +"."+ methodname);     //TODO: Indentálás megoldása
     }
 
     public static boolean askQuestion(String s) {

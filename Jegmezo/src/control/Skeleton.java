@@ -120,7 +120,8 @@ public class Skeleton {
                 break;
             }
             case 8: {
-
+                System.out.println("//// INIT ////");
+                Eskimo c = new Eskimo();
             }
             default:
                 break;

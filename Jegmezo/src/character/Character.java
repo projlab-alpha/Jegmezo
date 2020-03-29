@@ -62,7 +62,7 @@ public abstract class Character {
      * Visszatér a mezővel, amin a karakter jelenleg áll
      * @return A mező, amin a karakter áll
      */
-    public AbstractField getField() {       //TODO: osztálydiagram + leírás
+    public AbstractField getField() {
         return this.field;
     }
 

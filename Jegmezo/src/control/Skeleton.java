@@ -2,6 +2,7 @@ package control;
 
 import field.*;
 import character.*;
+import item.*;
 
 import java.util.Scanner;
 /**
@@ -122,6 +123,12 @@ public class Skeleton {
             case 8: {
                 System.out.println("//// INIT ////");
                 Eskimo c = new Eskimo();
+                Floe f1 = new Floe();
+                Flare f = new Flare();
+                c.setField(f1);
+                c.addItem(f);
+                System.out.println("//// RUN ////");
+                c.UseItem(0);
             }
             default:
                 break;

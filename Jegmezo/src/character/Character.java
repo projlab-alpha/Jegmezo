@@ -63,6 +63,7 @@ public abstract class Character {
      * @return A mező, amin a karakter áll
      */
     public AbstractField getField() {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "getField()");
         return this.field;
     }
 
@@ -70,13 +71,19 @@ public abstract class Character {
      * Beállítja a mezőt, amin a karakter áll
      * @param f A mező, amin a karakter áll
      */
-    public void setField(AbstractField f) { this.field = f; }
+    public void setField(AbstractField f) {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "setField()");
+        this.field = f;
+    }
 
     /**
      * Hozzáad egy itemet a karakter inventory-ához
      * @param i A hozzáadandó item
      */
-    public void addItem(Item i) { this.inventory.add(i); }
+    public void addItem(Item i) {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "addItem()");
+        this.inventory.add(i);
+    }
     /**
      * A karakter a d irányban lévő jégtáblára mozog
      * @param d A mozgás iránya

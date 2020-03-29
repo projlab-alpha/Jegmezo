@@ -112,7 +112,16 @@ public class Skeleton {
                 gf.SnowStorm();
                 break;
             }
+            case 7: {
+                System.out.println("//// INIT ////");
+                Eskimo c = new Eskimo();
+                System.out.println("//// RUN ////");
+                c.FellInWater();
+                break;
+            }
+            case 8: {
 
+            }
             default:
                 break;
         }

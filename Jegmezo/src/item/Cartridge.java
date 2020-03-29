@@ -13,6 +13,13 @@ import waterStrategy.WaterStrategySuit;
  */
 public class Cartridge implements Item {
     /**
+     * Konstruktor
+     */
+    public Cartridge() {
+        Skeleton.ctorCalled(this.getClass().getSimpleName());
+    }
+
+    /**
      * Használatkor ellenőrzi, hogy a tárgy másik két társa
      * azon a mezőn van-e amin ő és amennyiben igen akkor a játék véget ér.
      * @param c A karakter aki használja

@@ -6,6 +6,12 @@ import control.Skeleton;
  * Megnöveli eggyel a játékos testhőjét, majd eltűnik az a birtokából.
  */
 public class Food implements Item {
+    /**
+     * Konstruktor
+     */
+    public Food() {
+        Skeleton.ctorCalled(this.getClass().getSimpleName());
+    }
 
     /**
      * Megnöveli a c karakter testhőjét eggyel

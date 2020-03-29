@@ -10,6 +10,12 @@ import control.Skeleton;
  * Nem szükséges, hogy minden tárgy ugyanannál a játékosnál legyen.
  */
 public class Pistol implements Item {
+    /**
+     * Konstruktor
+     */
+    public Pistol() {
+        Skeleton.ctorCalled(this.getClass().getSimpleName());
+    }
 
     /**
      * Használatkor ellenőrzi, hogy a tárgy másik két társa

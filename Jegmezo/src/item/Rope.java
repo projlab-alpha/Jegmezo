@@ -6,7 +6,12 @@ import control.Skeleton;
  * Segít kihúzni egy vízbeesett karaktert.
  */
 public class Rope implements Item { //TODO: Dokumentációban rossz a leírás
-
+    /**
+     * Konstruktor
+     */
+    public Rope() {
+        Skeleton.ctorCalled(this.getClass().getSimpleName());
+    }
 
     /**
      * Kimenti c karaktert

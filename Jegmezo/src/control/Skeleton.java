@@ -130,6 +130,14 @@ public class Skeleton {
                 System.out.println("//// RUN ////");
                 c.UseItem(0);
             }
+            case 9: {
+                System.out.println("//// INIT ////");
+                Eskimo c = new Eskimo();
+                Food f = new Food();
+                c.addItem(f);
+                System.out.println("//// RUN ////");
+                c.UseItem(0);
+            }
             default:
                 break;
         }

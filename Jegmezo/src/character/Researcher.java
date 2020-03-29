@@ -1,6 +1,7 @@
 package character;
 
 import control.Direction;
+import control.Skeleton;
 
 /**
  * Egy játszható karakter,
@@ -16,6 +17,7 @@ public class Researcher extends Character {
      */
     @Override
     public int UseAbility(Direction d) {
-
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseAbility()");
+        return this.field.FindCapacity(d);
     }
 }

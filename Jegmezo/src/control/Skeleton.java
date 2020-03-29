@@ -100,6 +100,15 @@ public class Skeleton {
                 c.Move(Direction.NORTH);
                 break;
             }
+            case 5: {
+                System.out.println("//// INIT ////");
+                GameField gf = new GameField();
+                Floe f1 = new Floe();
+                gf.addField(f1);
+                System.out.println("//// RUN ////");
+                gf.SnowStorm();
+                break;
+            }
             default:
                 break;
         }

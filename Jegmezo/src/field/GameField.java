@@ -15,7 +15,13 @@ public class GameField {
      */
     private ArrayList<AbstractField> floes;
 
+    public GameField() {
+        Skeleton.ctorCalled(this.getClass().getSimpleName());
+        floes = new ArrayList<>();
+    }
+
     public void addField(AbstractField f) {
+        Skeleton.methodCalled(this.getClass().getSimpleName(), "addField()");
         floes.add(f);
     }
 

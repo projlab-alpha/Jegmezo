@@ -129,6 +129,7 @@ public class Skeleton {
                 c.addItem(f);
                 System.out.println("//// RUN ////");
                 c.UseItem(0);
+                break;
             }
             case 9: {
                 System.out.println("//// INIT ////");
@@ -137,6 +138,7 @@ public class Skeleton {
                 c.addItem(f);
                 System.out.println("//// RUN ////");
                 c.UseItem(0);
+                break;
             }
             case 10: {
                 System.out.println("//// INIT ////");
@@ -152,6 +154,16 @@ public class Skeleton {
                 f2.Accept(c2);
                 System.out.println("//// RUN ////");
                 c1.UseItem(0);
+                break;
+            }
+            case 11: {
+                System.out.println("//// INIT ////");
+                Eskimo c = new Eskimo();
+                Divingsuit d = new Divingsuit();
+                c.addItem(d);
+                System.out.println("//// RUN ////");
+                c.UseItem(0);
+                break;
             }
             default:
                 break;

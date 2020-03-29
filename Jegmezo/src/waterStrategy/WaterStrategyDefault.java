@@ -6,6 +6,12 @@ import control.Skeleton;
  * A vízbeesési stratégia búvárruha nélkül
  */
 public class WaterStrategyDefault implements WaterStrategy {
+    /**
+     * Konstruktor
+     */
+    public WaterStrategyDefault() {
+        Skeleton.ctorCalled(this.getClass().getSimpleName());
+    }
 
     /**
      * A karakter elkezd fuldokolni,

@@ -65,7 +65,7 @@ public class Skeleton {
                 System.out.println("//// INIT ////");
                 Floe f1 = new Floe();
                 Eskimo c = new Eskimo();
-                c.setField(f1);
+                f1.Accept(c);
                 System.out.println("//// RUN ////");
                 c.Dig();
                 break;
@@ -76,7 +76,7 @@ public class Skeleton {
                 Floe f2 = new Floe();
                 Eskimo c = new Eskimo();
                 f1.setNeighbour(Direction.NORTH, f2);
-                c.setField(f1);
+                f1.Accept(c);
                 System.out.println("//// RUN ////");
                 c.Move(Direction.NORTH);
                 break;
@@ -88,7 +88,6 @@ public class Skeleton {
                 Eskimo c = new Eskimo();
                 f1.setNeighbour(Direction.NORTH, uf);
                 f1.Accept(c);
-                c.setField(f1);
                 System.out.println("//// RUN ////");
                 c.Move(Direction.NORTH);
                 break;
@@ -99,7 +98,7 @@ public class Skeleton {
                 Hole h = new Hole();
                 Eskimo c = new Eskimo();
                 f1.setNeighbour(Direction.NORTH, h);
-                c.setField(f1);
+                f1.Accept(c);
                 System.out.println("//// RUN ////");
                 c.Move(Direction.NORTH);
                 break;
@@ -136,7 +135,6 @@ public class Skeleton {
                 Eskimo c = new Eskimo();
                 Floe f1 = new Floe();
                 Flare f = new Flare();
-                c.setField(f1);
                 f1.Accept(c);
                 c.addItem(f);
                 System.out.println("//// RUN ////");
@@ -159,11 +157,11 @@ public class Skeleton {
                 Rope r = new Rope();
                 Floe f1 = new Floe();
                 Floe f2 = new Floe();
-                c1.setField(f1);
-                c1.addItem(r);
                 f1.setNeighbour(Direction.NORTH, f2);
                 f2.setNeighbour(Direction.SOUTH, f1);
+                f1.Accept(c1);
                 f2.Accept(c2);
+                c1.addItem(r);
                 System.out.println("//// RUN ////");
                 c1.UseItem(0);
                 break;
@@ -182,7 +180,7 @@ public class Skeleton {
                 Eskimo c = new Eskimo();
                 Floe f1 = new Floe();
                 Shovel s = new Shovel();
-                c.setField(f1);
+                f1.Accept(c);
                 c.addItem(s);
                 System.out.println("//// RUN ////");
                 c.UseItem(0);
@@ -193,7 +191,7 @@ public class Skeleton {
                 Eskimo c = new Eskimo();
                 Floe f1 = new Floe();
                 Shovel s = new Shovel();
-                c.setField(f1);
+                f1.Accept(c);
                 f1.setItem(s);
                 System.out.println("//// RUN ////");
                 c.PickUpItem();
@@ -203,7 +201,7 @@ public class Skeleton {
                 System.out.println("//// INIT ////");
                 Eskimo c = new Eskimo();
                 Floe f1 = new Floe();
-                c.setField(f1);
+                f1.Accept(c);
                 System.out.println("//// RUN ////");
                 c.UseAbility(Direction.NORTH);
                 break;
@@ -213,7 +211,7 @@ public class Skeleton {
                 Researcher c = new Researcher();
                 Floe f1 = new Floe();
                 Floe f2 = new Floe();
-                c.setField(f1);
+                f1.Accept(c);
                 f1.setNeighbour(Direction.NORTH, f2);
                 System.out.println("//// RUN ////");
                 c.UseAbility(Direction.NORTH);

@@ -80,7 +80,9 @@ public abstract class AbstractField {
      */
     public void MoveChar(Direction d, character.Character c){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "MoveChar()");
+        Skeleton.indent();
         this.neighbours.get(d).Accept(c);
+        Skeleton.returned();
     }
 
     /**
@@ -90,7 +92,9 @@ public abstract class AbstractField {
      */
     public void setNeighbour(Direction d, AbstractField neighbour) {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "setNeighbour()");
+        Skeleton.indent();
         neighbours.put(d, neighbour);
+        Skeleton.returned();
     }
 
     /**
@@ -127,12 +131,12 @@ public abstract class AbstractField {
      */
     public void SnowStormHit(){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "SnowStormShit()");
+        Skeleton.indent();
         boolean res = Skeleton.askQuestion("Van a mezon iglu?");
         if(res)
             this.snowstormstrat = new SnowstormStrategyIgloo();
-        else
-            this.snowstormstrat = new SnowstormStrategyDefault();
         this.snowstormstrat.execute(this.characters);
+        Skeleton.returned();
     }
 
     /**
@@ -142,12 +146,14 @@ public abstract class AbstractField {
      */
     public boolean CheckFlareGun(){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "CheckFlareGun()");
+        Skeleton.indent();
         boolean flare = false, pistol = false, cart = false;
         for (character.Character c : this.characters) {
             if(c.HasItem("Flare")) flare = true;
             if(c.HasItem("Pistol")) pistol = true;
             if(c.HasItem("Cartridge")) cart = true;
         }
+        Skeleton.returned();
         return (flare && pistol && cart);
     }
 
@@ -156,10 +162,12 @@ public abstract class AbstractField {
      */
     public void Rescue(){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "Rescue()");
+        Skeleton.indent();
         for (Direction d : Direction.values()) {
             if(this.neighbours.containsKey(d))
                 this.neighbours.get(d).RescueChars(d);
         }
+        Skeleton.returned();
     }
 
     /**
@@ -169,9 +177,11 @@ public abstract class AbstractField {
     public void RescueChars(Direction d){ //TODO: Nincs dokumentumba specifikálva.
         Skeleton.methodCalled(this.getClass().getSimpleName(), "RescueChars()");
         boolean res = Skeleton.askQuestion("Van a szomszedos mezon fulldoklo karakter?");
+        Skeleton.indent();
         if(res) {
-            this.characters.get(0).Move(Direction.SOUTH);
+            this.characters.get(0).Move(Direction.SOUTH);   //placeholder until final enum directions are decided
         }
+        Skeleton.returned();
     }
 
     /**

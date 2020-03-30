@@ -52,8 +52,8 @@ public abstract class Character {
     public Character() {
         Skeleton.ctorCalled(this.getClass().getSimpleName());
         Skeleton.indent();
-        actionpoint = 5;
-        warmth = 5;
+        actionpoint = 0;
+        warmth = 0;
         drowning = false;
         inventory = new ArrayList<>();
         waterstrat = new WaterStrategyDefault();
@@ -92,7 +92,9 @@ public abstract class Character {
      */
     public void Move(Direction d){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "Move()");
+        Skeleton.indent();
         this.field.MoveChar(d, this);
+        Skeleton.returned();
     }
 
     /**
@@ -100,7 +102,9 @@ public abstract class Character {
      */
     public void Dig(){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "Dig()");
+        Skeleton.indent();
         this.field.ChangeSnow(-1);
+        Skeleton.returned();
     }
 
     /**
@@ -108,10 +112,12 @@ public abstract class Character {
      */
     public void PickUpItem(){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "PickUpItem()");
+        Skeleton.indent();
         Item i = this.field.RequestItem();
         if (i != null) {
             this.inventory.add(i);
         }
+        Skeleton.returned();
     }
 
     /**
@@ -120,7 +126,9 @@ public abstract class Character {
      */
     public void UseItem(int n){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
+        Skeleton.indent();
         this.inventory.get(n).UseItem(this);
+        Skeleton.returned();
     }
 
     /**
@@ -129,9 +137,11 @@ public abstract class Character {
      */
     public void ChangeWarmth(int i){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "ChangeWarmth()");
+        Skeleton.indent();
         boolean res = Skeleton.askQuestion("Elfogyott a karakter melegsége?");
         if(res)
             Control.getInstance().CharacterDied();
+        Skeleton.returned();
     }
 
     /**
@@ -147,12 +157,14 @@ public abstract class Character {
      */
     public void FellInWater(){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "FellInWater()");
+        Skeleton.indent();
         boolean res = Skeleton.askQuestion("Van a karakteren buvarruha?");
         if(res)
             this.waterstrat = new WaterStrategySuit();
         else
             this.waterstrat = new WaterStrategyDefault();
         this.waterstrat.execute(this);
+        Skeleton.returned();
     }
 
     /**

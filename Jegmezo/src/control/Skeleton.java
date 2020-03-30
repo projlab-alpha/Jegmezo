@@ -136,6 +136,7 @@ public class Skeleton {
                 Floe f1 = new Floe();
                 Flare f = new Flare();
                 c.setField(f1);
+                f1.Accept(c);
                 c.addItem(f);
                 System.out.println("//// RUN ////");
                 c.UseItem(0);

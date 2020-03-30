@@ -24,6 +24,6 @@ public class Shovel implements Item {
         Skeleton.indent();
         c.getField().ChangeSnow(-2);
         Skeleton.returned();
-        return true;
+        return false;
     }
 }

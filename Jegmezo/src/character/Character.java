@@ -127,7 +127,9 @@ public abstract class Character {
     public void UseItem(int n){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
         Skeleton.indent();
-        this.inventory.get(n).UseItem(this);
+        boolean res = this.inventory.get(n).UseItem(this);
+        if(res)
+            this.inventory.remove(n);
         Skeleton.returned();
     }
 

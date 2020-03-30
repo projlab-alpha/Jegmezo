@@ -31,11 +31,8 @@ public class Cartridge implements Item {
         boolean res = Skeleton.askQuestion("Sikerult osszerakni a jelzopisztolyt?");
         if(res) {
             Control.getInstance().Win();
-            Skeleton.returned();
-            return true;
-        } else {
+        }
             Skeleton.returned();
             return false;
-        }
     }
 }

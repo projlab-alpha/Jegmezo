@@ -24,6 +24,6 @@ public class Rope implements Item { //TODO: Dokumentációban rossz a leírás
         Skeleton.indent();
         c.getField().Rescue();
         Skeleton.returned();
-        return true;
+        return false;
     }
 }

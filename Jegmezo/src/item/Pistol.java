@@ -29,13 +29,10 @@ public class Pistol implements Item {
         Skeleton.indent();
         c.getField().CheckFlareGun();
         boolean res = Skeleton.askQuestion("Sikerult osszerakni a jelzopisztolyt?");
-        if (res) {
+        if(res) {
             Control.getInstance().Win();
-            Skeleton.returned();
-            return true;
-        } else {
-            Skeleton.returned();
-            return false;
         }
+        Skeleton.returned();
+        return false;
     }
 }

@@ -2,8 +2,6 @@ package item;
 
 import control.Control;
 import control.Skeleton;
-import waterStrategy.WaterStrategyDefault;
-import waterStrategy.WaterStrategySuit;
 
 /**
  * A játék megnyeréséhez szükséges tárgyat lehet belőle összeépíteni,

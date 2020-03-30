@@ -51,9 +51,11 @@ public abstract class AbstractField {
      */
     public AbstractField() {
         Skeleton.ctorCalled(this.getClass().getSimpleName());
+        Skeleton.indent();
         neighbours = new HashMap<>();
         characters = new ArrayList<>();
         snowstormstrat = new SnowstormStrategyDefault();
+        Skeleton.returned();
     }
 
     /**
@@ -96,7 +98,9 @@ public abstract class AbstractField {
      * @param i A változtatás mennyisége
      */
     public void ChangeSnow(int i){
+        Skeleton.indent();
         Skeleton.methodCalled(this.getClass().getSimpleName(), "ChangeSnow()");
+        Skeleton.returned();
     }
 
     /**

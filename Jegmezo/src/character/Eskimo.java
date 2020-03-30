@@ -14,7 +14,7 @@ public class Eskimo extends Character {
     /**
      * A karakter épít egy iglut a mezőre, amin áll
      * @param d Az irány amerre használja képességét.
-     * @return //TODO: Milyen számot ad vissza?
+     * @return Az eszkimó képességének visszatérési értéke használatlan, így mindig 0
      */
     @Override
     public int UseAbility(Direction d) {

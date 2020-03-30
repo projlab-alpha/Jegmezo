@@ -13,7 +13,7 @@ public class Researcher extends Character {
     /**
      * Megvizsgálja a szomszédos mező teherbírását
      * @param d Az irány amerre használja képességét.
-     * @return //TODO: Milyen számot ad vissza?
+     * @return A kutatott tábla kapacitása
      */
     @Override
     public int UseAbility(Direction d) {

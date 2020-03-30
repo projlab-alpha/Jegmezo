@@ -51,11 +51,13 @@ public abstract class Character {
      */
     public Character() {
         Skeleton.ctorCalled(this.getClass().getSimpleName());
+        Skeleton.indent();
         actionpoint = 5;
         warmth = 5;
         drowning = false;
         inventory = new ArrayList<>();
         waterstrat = new WaterStrategyDefault();
+        Skeleton.returned();
     }
 
     /**

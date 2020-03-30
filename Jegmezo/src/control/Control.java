@@ -11,7 +11,7 @@ public class Control {
      * Játékosok száma
      */
     private int PlayerCount;
-    private GameField gameField; //TODO: Ezt nem teljesen értettem a diagramon
+    private GameField gameField;
     /**
      *  Az egyetlen példánya az osztálynak
      */

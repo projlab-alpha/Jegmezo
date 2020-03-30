@@ -10,6 +10,8 @@ import java.util.Scanner;
  * A jenlegi iterációban ez a program belépési pontja is
  */
 public class Skeleton {
+    private static int indentLevel = 0;
+
     public static void main(String[] args) {
         boolean exit = false;
         Scanner scanner = new Scanner(System.in);
@@ -101,8 +103,7 @@ public class Skeleton {
                 c.Move(Direction.NORTH);
                 break;
             }
-            case 5:
-            case 6: {
+            case 5: {
                 System.out.println("//// INIT ////");
                 GameField gf = new GameField();
                 Floe f1 = new Floe();
@@ -111,6 +112,15 @@ public class Skeleton {
                 gf.addField(f1);
                 System.out.println("//// RUN ////");
                 gf.SnowStorm();
+                break;
+            }
+            case 6: {
+                System.out.println("//// INIT ////");
+                Floe f1 = new Floe();
+                Eskimo c = new Eskimo();
+                f1.Accept(c);
+                System.out.println("//// RUN ////");
+                f1.SnowStormHit();
                 break;
             }
             case 7: {
@@ -207,18 +217,35 @@ public class Skeleton {
                 c.UseAbility(Direction.NORTH);
                 break;
             }
-            default:
+            default:    //?
                 break;
         }
     }
 
     public static void methodCalled(String classname, String methodname) {
-        System.out.println(classname +"."+ methodname);     //TODO: Indentálás megoldása
+        String indent = "";
+        for(int i = 0; i < indentLevel; i++) {
+            indent = indent + "    ";
+        }
+        System.out.println(indent+classname +"."+ methodname);     //TODO: Indentálás megoldása
+    }
+
+    public static void indent() {
+        indentLevel++;
+    }
+
+    public static void returned() {
+        indentLevel--;
     }
 
     public static void ctorCalled(String classname) {
-        System.out.println(classname+"."+classname+"()");     //TODO: Indentálás megoldása
+        String indent = "";
+        for(int i = 0; i < indentLevel; i++) {
+            indent = indent + "    ";
+        }
+        System.out.println(indent+classname+"."+classname+"()");     //TODO: Indentálás megoldása
     }
+
 
     public static boolean askQuestion(String s) {
         System.out.println("---"+s+" (I/N)---");

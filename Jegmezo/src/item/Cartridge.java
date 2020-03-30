@@ -26,11 +26,16 @@ public class Cartridge implements Item {
     @Override
     public boolean UseItem(character.Character c) {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
+        Skeleton.indent();
         c.getField().CheckFlareGun();
         boolean res = Skeleton.askQuestion("Sikerult osszerakni a jelzopisztolyt?");
         if(res) {
             Control.getInstance().Win();
+            Skeleton.returned();
             return true;
-        } else return false;
+        } else {
+            Skeleton.returned();
+            return false;
+        }
     }
 }

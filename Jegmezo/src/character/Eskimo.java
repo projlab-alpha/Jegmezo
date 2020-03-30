@@ -19,8 +19,10 @@ public class Eskimo extends Character {
     @Override
     public int UseAbility(Direction d) {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "UseAbility()");
+        Skeleton.indent();
         SnowstormStrategyIgloo strat = new SnowstormStrategyIgloo();
         this.field.ChangeStrategy(strat);
+        Skeleton.returned();
         return 0;
     }
 }

@@ -33,6 +33,8 @@ public class GameField {
      */
     public void SnowStorm(){
         Skeleton.methodCalled(this.getClass().getSimpleName(), "SnowStorm()");
+        Skeleton.indent();
         floes.get(0).SnowStormHit();        //Egyelőre mindig ugyanarra az egy mezőre jut el a jégvihar, késöbb véletlen darab mezőre
+        Skeleton.returned();
     }
 }

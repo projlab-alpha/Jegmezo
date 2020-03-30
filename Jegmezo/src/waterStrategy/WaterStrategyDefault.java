@@ -21,6 +21,8 @@ public class WaterStrategyDefault implements WaterStrategy {
     @Override
     public void execute(character.Character c) {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "execute()");
+        Skeleton.indent();
         c.Drown();
+        Skeleton.returned();
     }
 }

@@ -22,8 +22,10 @@ public class Divingsuit implements Item {
     @Override
     public boolean UseItem(character.Character c) {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
+        Skeleton.indent();
         WaterStrategySuit wss = new WaterStrategySuit();
         c.ChangeStrategy(wss);
+        Skeleton.returned();
         return true;
     }
 }

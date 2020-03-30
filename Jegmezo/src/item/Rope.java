@@ -21,7 +21,9 @@ public class Rope implements Item { //TODO: Dokumentációban rossz a leírás
     @Override
     public boolean UseItem(character.Character c) {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
+        Skeleton.indent();
         c.getField().Rescue();
+        Skeleton.returned();
         return true;
     }
 }

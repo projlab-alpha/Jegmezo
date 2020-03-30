@@ -22,7 +22,9 @@ public class SnowstormStrategyDefault implements SnowstormStrategy {
     @Override
     public void execute(ArrayList<character.Character> chars) {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "execute()");
+        Skeleton.indent();
         for (character.Character c : chars)
             c.ChangeWarmth(-1);
+        Skeleton.returned();
     }
 }

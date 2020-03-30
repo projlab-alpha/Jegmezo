@@ -87,6 +87,7 @@ public class Skeleton {
                 UnstableFloe uf = new UnstableFloe();
                 Eskimo c = new Eskimo();
                 f1.setNeighbour(Direction.NORTH, uf);
+                f1.Accept(c);
                 c.setField(f1);
                 System.out.println("//// RUN ////");
                 c.Move(Direction.NORTH);
@@ -224,11 +225,15 @@ public class Skeleton {
     }
 
     public static void methodCalled(String classname, String methodname) {
+        System.out.println(getIndent()+classname +"."+ methodname);
+    }
+
+    private static String getIndent() {
         String indent = "";
         for(int i = 0; i < indentLevel; i++) {
             indent = indent + "    ";
         }
-        System.out.println(indent+classname +"."+ methodname);     //TODO: Indentálás megoldása
+        return indent;
     }
 
     public static void indent() {
@@ -240,16 +245,12 @@ public class Skeleton {
     }
 
     public static void ctorCalled(String classname) {
-        String indent = "";
-        for(int i = 0; i < indentLevel; i++) {
-            indent = indent + "    ";
-        }
-        System.out.println(indent+classname+"."+classname+"()");     //TODO: Indentálás megoldása
+        System.out.println(getIndent()+classname+"."+classname+"()");
     }
 
 
     public static boolean askQuestion(String s) {
-        System.out.println("---"+s+" (I/N)---");
+        System.out.println(getIndent()+"---"+s+"(I/N)---");
         Scanner scanner = new Scanner(System.in);
         while(true) {
             char answer = scanner.nextLine().charAt(0);

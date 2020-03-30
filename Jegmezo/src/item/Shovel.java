@@ -21,7 +21,9 @@ public class Shovel implements Item {
     @Override
     public boolean UseItem(character.Character c) {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
+        Skeleton.indent();
         c.getField().ChangeSnow(-2);
+        Skeleton.returned();
         return true;
     }
 }

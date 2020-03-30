@@ -161,8 +161,6 @@ public abstract class Character {
         boolean res = Skeleton.askQuestion("Van a karakteren buvarruha?");
         if(res)
             this.waterstrat = new WaterStrategySuit();
-        else
-            this.waterstrat = new WaterStrategyDefault();
         this.waterstrat.execute(this);
         Skeleton.returned();
     }

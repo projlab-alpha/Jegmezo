@@ -21,7 +21,9 @@ public class Food implements Item {
     @Override
     public boolean UseItem(character.Character c) {
         Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
+        Skeleton.indent();
         c.ChangeWarmth(1);
+        Skeleton.returned();
         return true;
     }
 }

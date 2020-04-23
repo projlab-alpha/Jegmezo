@@ -1,11 +1,10 @@
 package field;
 
+import bearAttackStrategy.BearAttackStrategy;
 import control.Direction;
-import control.Skeleton;
 import item.Item;
 import snowstormStrategy.SnowstormStrategy;
 import snowstormStrategy.SnowstormStrategyDefault;
-import snowstormStrategy.SnowstormStrategyIgloo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,178 +16,206 @@ import java.util.HashMap;
 public abstract class AbstractField {
 
     /**
-     * Megmutatja, mennyi egység hó van a jégtáblán
+     * A mezőt fedő hó mennyisége.
      */
-    private int snowCount;
+    private int SnowCount;
 
     /**
-     * A jégtáblák teherbírása
+     * A mező teherbíró képessége, megadja, egyszerre hány karakter fér el
+     * rajta vízbe esés veszélye nélkül.
      */
-    private int capacity;
+    protected int Capacity; //TODO: dokumentációban private helyett protected kellene
 
     /**
-     * A szomszédokat és irányokat tárolja
+     * A stratégia, amely meghatározza a működést abban az esetben, ha
+     * egy medve lép a mezőre.
      */
-    private HashMap<Direction, AbstractField> neighbours;
+    private BearAttackStrategy bearattackstrat;
 
     /**
-     * A jégtáblán tartózkodó karakterek listája.
-     */
-    protected ArrayList<character.Character> characters;
-
-    /**
-     * Megmutatja, milyen módon kell az adott mezőn eljárni hóvihar esetén
+     * A stratégia, amely meghatározza a működést abban az esetben, ha
+     * a mezőt jégvihar érint.
      */
     private SnowstormStrategy snowstormstrat;
 
     /**
-     * A jégtáblába fagyott tárgy
+     * A mezőn található item. Ha a mezőn nincsen item, akkor ennek értéke null.
      */
-    protected Item item;
+    private Item item;
 
     /**
-     * Konstruktor
+     * Kollekció, amely a mezővel szomszédos mezők referenciáját tárolja, a lehetséges irányokban.
      */
-    public AbstractField() {
-        Skeleton.ctorCalled(this.getClass().getSimpleName());
-        Skeleton.indent();
+    private HashMap<Direction, AbstractField> neighbours;
+
+    /**
+     * Kollekció a mezőn jelenleg elhelyezkedő karakterekről.
+     */
+    protected ArrayList<character.Character> characters;
+
+
+    /**
+     * Beállítja a jégtáblába fagyott tárgyat, a tábla kapacitását, és a táblán lévő hó mennyiségét.
+     * @param item a jégtáblába fagyott tárgy
+     * @param capacity a tábla kapacitása
+     * @param snowcount a táblán lévő hó mennyisége
+     */
+    public AbstractField(Item item, int capacity, int snowcount) {
+        this.item = item;
+        this.Capacity = capacity;
+        this.SnowCount = snowcount;
         neighbours = new HashMap<>();
         characters = new ArrayList<>();
         snowstormstrat = new SnowstormStrategyDefault();
-        Skeleton.returned();
     }
 
     /**
-     * Átvesz egy karaktert egy másik mezőről
+     * Absztrakt metódus, elfogad egy karaktert, amely a mezőre próbál mozogni.
      * @param c Az átvett karakter
      */
     public abstract void Accept(character.Character c);
 
     /**
-     * Beállítja, milyen tárgy van a jégtáblába fagyva
-     * @param i A beállítandó tárgy
-     */
-    public void setItem(Item i) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "setItem()");
-        item = i;
-    }
-
-    /**
-     * Elmozgat egy c karaktert a d irányban lévő jégtáblára
-     * @param d Mozgatás iránya
-     * @param c Mozgatott karakter
+     * Átlépteti az argumentumként átadott
+     * karaktert a megfelelő irányban lévő szomszédos mezőre, úgy, hogy meghívja a
+     * szomszédos mező Accept metódusát az átadott karakterrel.
+     * @param d A mozgás iránya
+     * @param c A mozgatandó karakter
      */
     public void MoveChar(Direction d, character.Character c){
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "MoveChar()");
-        Skeleton.indent();
-        this.neighbours.get(d).Accept(c);
-        Skeleton.returned();
+        neighbours.get(d).Accept(c);
     }
 
     /**
-     * Bealítja a d irányban lévő jégtáblát
-     * @param d A beállítandó irány
-     * @param neighbour A beállított jégtábla
+     * Az inicializáláshoz használt
+     * metódus, amely elhelyezi a szomszédokat tároló kollekcióban az argumentumként
+     * megadott mezőt a megadott iránnyal párosítva.
+     * @param d A szomszéd iránya
+     * @param neighbour a szomszédos mező
      */
     public void setNeighbour(Direction d, AbstractField neighbour) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "setNeighbour()");
-        Skeleton.indent();
         neighbours.put(d, neighbour);
-        Skeleton.returned();
     }
 
     /**
-     * Megváltoztatja a hó menyiségét a jégtáblán
+     *  Hozzáadja az argumentumban megadott értéket a mezőt
+     * fedő hó mennyiségéhez. A hó mennyisége a változtatás után garantáltan nem lesz
+     * negatív.
      * @param i A változtatás mennyisége
      */
     public void ChangeSnow(int i){
-        Skeleton.indent();
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "ChangeSnow()");
-        Skeleton.returned();
+        SnowCount += i;
+        if(SnowCount < 0)
+            SnowCount = 0;
     }
 
     /**
-     * Visszatér a táblán lévő tárgyal
-     * @return A táblán lévő tárgy
+     * Ha a mezőn nincsen item, vagy, ha a mezőt több, mint 0
+     * egységnyi hó borítja, akkor a metódus null referenciával tér vissza. Ha a mezőn van
+     * item, és 0 egységnyi hó borítja, akkor ideiglenesen tárolja a mezőn lévő item
+     * referenciáját, törli a valós referenciát a mező tagváltozójából, majd visszatér a tárolt
+     * item referenciájával.
+     * @return A táblán lévő tárgy, vagy null, ha nem elérhető
      */
     public Item RequestItem(){
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "RequestItem()");
-        return this.item;
+        if(item != null && SnowCount == 0) {
+            Item tempItem = item;
+            item = null;
+            return tempItem;
+        }
+        else
+            return null;
     }
 
     /**
-     * Visszatér egy szomszédos jégtábla teherbírásával
+     * Visszatér a megadott irányban található szomszédos
+     * mező Capacity tagváltozójának jelenlegi értékével.
      * @param d A keresett irány
      * @return A jégtábla kapacitása
      */
     public int FindCapacity(Direction d){
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "FindCapacity()");
-        return this.neighbours.get(d).capacity;
+        return neighbours.get(d).Capacity;
     }
 
     /**
-     * Eléri a jégtáblát egy vihar
+     * Ez a metódus hívódik meg, ha a mezőt jégvihar érint.
+     * Meghívja a tárolt SnowStormStrategy execute() metódusát, átadva a characters
+     * tagváltozó referenciáját.
      */
     public void SnowStormHit(){
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "SnowStormShit()");
-        Skeleton.indent();
-        boolean res = Skeleton.askQuestion("Van a mezon iglu?");
-        if(res)
-            this.snowstormstrat = new SnowstormStrategyIgloo();
-        this.snowstormstrat.execute(this.characters);
-        Skeleton.returned();
+        snowstormstrat.execute(characters);
     }
 
     /**
-     * Megvizsgálja,
-     * hogy a jégtáblán lévő karaktereknél van-e az összes jelzőrakéta alkatrész
-     * @return A jégtáblán van-e
+     * A characters tagváltozó összes elemére meghívja fejenként
+     * háromszor a karakter HasItem() metódusát, sorban “Flare”, “Pistol”, majd “Cartridge”
+     * argumentumokkal. Ha, miután az összes karakterre lefutott mindhárom hívás, igaz az,
+     * hogy a három típusú hívás közül mindegyik legalább egyszer igazzal tért vissza (tehát
+     * például ha volt olyan HasItem(“Flare”) hívás, amely igazzal tért vissza, akkor a
+     * “Flare” hívás típusra ez a feltétel teljesült), akkor a metódus igazzal tér vissza,
+     * ellenkező esetben hamissal.
+     * @return Igaz, ha összerakható a Flaregun, különben hamis
      */
     public boolean CheckFlareGun(){
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "CheckFlareGun()");
-        Skeleton.indent();
         boolean flare = false, pistol = false, cart = false;
-        for (character.Character c : this.characters) {
+        for (character.Character c : characters) {
             if(c.HasItem("Flare")) flare = true;
             if(c.HasItem("Pistol")) pistol = true;
             if(c.HasItem("Cartridge")) cart = true;
         }
-        Skeleton.returned();
         return (flare && pistol && cart);
     }
 
     /**
-     * Kiment egy bajba jutott játékost
+     * Meghívja a mező összes szomszédjának RescueChars metódusát.
+     * Argumentumként a saját magára mutató referenciát adja át.
      */
     public void Rescue(){
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "Rescue()");
-        Skeleton.indent();
         for (Direction d : Direction.values()) {
-            if(this.neighbours.containsKey(d))
-                this.neighbours.get(d).RescueChars(d);
+            if(neighbours.containsKey(d))
+                neighbours.get(d).RescueChars(this);
         }
-        Skeleton.returned();
     }
 
     /**
-     * Kiment egy bajba jutott játékost
-     * @param d a mentés iránya
+     * A characters kollekció összes elemére meghívja
+     * először a karakter IsDrowning() metódusát, majd ha ez igazzal tér vissza, akkor
+     * meghívja a karakter Rescued() metódusát, majd az argumentumban kapott mező
+     * Accept() metódusát, argumentumként az éppen vizsgált karaktert átadva.
+     * @param f A mező, ahová a karaktereket menteni kell
      */
-    public void RescueChars(Direction d){ //TODO: Nincs dokumentumba specifikálva.
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "RescueChars()");
-        boolean res = Skeleton.askQuestion("Van a szomszedos mezon fulldoklo karakter?");
-        Skeleton.indent();
-        if(res) {
-            this.characters.get(0).Move(Direction.SOUTH);   //placeholder until final enum directions are decided
+    public void RescueChars(AbstractField f){
+        for (character.Character c : characters) {
+            if (c.isDrowning()) {
+                c.Rescued();
+                f.Accept(c);
+            }
         }
-        Skeleton.returned();
     }
 
     /**
-     * Megváltoztatja a viharkor bekövetkező eseményeket
-     * @param s Az új viharkor bekövetkező esemény
+     * Megváltoztatja a hóvihar érintés
+     * esetén végrehajtandó stratégiát az argumentumban megadottra.
+     * @param s Az új stratégia
      */
-    public void ChangeStrategy(SnowstormStrategy s){
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "ChangeStrategy()");
+    public void ChangeSnowStrategy(SnowstormStrategy s){
+        snowstormstrat = s;
+    }
+
+    /**
+     * Megváltoztatja a medve
+     * támadáskor végrehajtandó stratégiát az argumentumban megadottra.
+     * @param s Az új stratégia
+     */
+    public void ChangeBearStrategy(BearAttackStrategy s){
+        bearattackstrat = s;
+    }
+
+    /**
+     * Ez a metódus reprezentálja a medvetámadást. Meghívja a tárolt
+     * BearAttackStrategy execute() metódusát, átadva a characters tagváltozó referenciáját.
+     */
+    public void BearAttack() {
+        bearattackstrat.execute(characters);
     }
 }

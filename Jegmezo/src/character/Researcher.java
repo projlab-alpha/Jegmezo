@@ -1,23 +1,32 @@
 package character;
 
 import control.Direction;
-import control.Skeleton;
 
 /**
- * Egy játszható karakter,
- * felülírja az ősosztálya UseAbility metódusát úgy,
- * hogy meg tudja vizsgálni a szomszédos mező teherbírását.
+ * Ez az osztály reprezentálja az egyik játszható karaktert, a sarkkutatót. Leszármazottja a
+ * Character osztálynak, megvalósítja a UseAbility metódusát.
  */
 public class Researcher extends Character {
 
     /**
-     * Megvizsgálja a szomszédos mező teherbírását
+     * Beállítja a testhőt 4-re.
+     */
+    public Researcher() {
+        warmth = 4;
+    }
+
+    /**
+     * Használja a sarkkutató különleges képességét, mely
+     * során az argumentumban megadott irányban lévő szomszédos jégmezőről
+     * megállapítja, hány karaktert bír el átfordulás nélkül. Ehhez meghívja a jelenlegi mező
+     * FindCapacity metódusát, átadva neki a d Direction-t, eggyel csökkenti a sarkkutató
+     * hátralévő munkáinak számát., majd visszatér a kapott értékkel.
      * @param d Az irány amerre használja képességét.
-     * @return A kutatott tábla kapacitása
+     * @return A kutatott tábla kapacitása.
      */
     @Override
     public int UseAbility(Direction d) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseAbility()");
-        return this.field.FindCapacity(d);
+        --actionpoint;
+        return field.FindCapacity(d);
     }
 }

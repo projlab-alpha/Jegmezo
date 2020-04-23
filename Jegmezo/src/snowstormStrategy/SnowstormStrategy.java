@@ -3,12 +3,12 @@ package snowstormStrategy;
 import java.util.ArrayList;
 
 /**
- * A hóvihar stratégiákat megkötő interfész.
+ * Ez az interfész adja meg, hogy milyen metódusokat kell megvalósítaniuk a hóvihar stratégiáknak.
  */
 public interface SnowstormStrategy {
 
     /**
-     * A hóviharkor bekövetkező stratégiát végrehajtó metódus
+     * Végrehajtja a stratégia lefutásakor szükséges feladatokat.
      * @param chars Az érintett karakterek listája
      */
     void execute(ArrayList<character.Character> chars);

@@ -1,7 +1,7 @@
 package character;
 
+import bearAttackStrategy.BearAttackStrategyIgloo;
 import control.Direction;
-import control.Skeleton;
 import snowstormStrategy.SnowstormStrategyIgloo;
 
 /**
@@ -12,17 +12,26 @@ import snowstormStrategy.SnowstormStrategyIgloo;
 public class Eskimo extends Character {
 
     /**
-     * A karakter épít egy iglut a mezőre, amin áll
+     * Beállítja a testhőt 5-re.
+     */
+    public Eskimo() {
+        warmth = 5;
+    }
+
+    /**
+     * Használja az eszkimó különleges képességét, amely egy
+     * iglut épít a jelenlegi mezőre. Ehhez megváltoztatja a mező hóvihar stratégiáját
+     * SnowstormStrategyIgloo-ra, és a medve támadás stratégiáját BearAttackStrategy
+     * Igloo-ra, a ChangeSnowStrategy()/ChangeBearStrategy() metódusok meghívásával.
+     * Ez után eggyel csökkenti az eszkimó hátralévő munkáinak számát, majd visszatér -1 -gyel.
      * @param d Az irány amerre használja képességét.
-     * @return Az eszkimó képességének visszatérési értéke használatlan, így mindig 0
+     * @return 0
      */
     @Override
     public int UseAbility(Direction d) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseAbility()");
-        Skeleton.indent();
-        SnowstormStrategyIgloo strat = new SnowstormStrategyIgloo();
-        this.field.ChangeStrategy(strat);
-        Skeleton.returned();
+        field.ChangeSnowStrategy(new SnowstormStrategyIgloo());
+        field.ChangeBearStrategy(new BearAttackStrategyIgloo());
+        --actionpoint;
         return 0;
     }
 }

@@ -1,29 +1,21 @@
 package item;
 
-import control.Skeleton;
-
 /**
- * Azonos mennyiségű munkával kettő egység havat takarít el egy mezőről.
+ * Ez az osztály ásót reprezentál, ami egy olyan használható tárgy, amely használatkor csökkenti
+ * a használó karakter alatti mezőn lévő hó mennyiségét.
  */
 public class Shovel implements Item {
-    /**
-     * Konstruktor
-     */
-    public Shovel() {
-        Skeleton.ctorCalled(this.getClass().getSimpleName());
-    }
 
     /**
-     * Kettő egység havat eltakarít c karakter mezőjéről
+     * Meghívja az argumentumban kapott karakter GetField()
+     * metódusát, majd a kapott mező ChangeSnow() metódusát, argumentumként -2-t
+     * átadva, majd hamissal tér vissza.
      * @param c A karakter aki használja
-     * @return Sikeres-e a használat.
+     * @return False
      */
     @Override
     public boolean UseItem(character.Character c) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
-        Skeleton.indent();
         c.getField().ChangeSnow(-2);
-        Skeleton.returned();
         return false;
     }
 }

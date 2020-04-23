@@ -1,29 +1,20 @@
 package item;
 
-import control.Skeleton;
-
 /**
- * Megnöveli eggyel a játékos testhőjét, majd eltűnik az a birtokából.
+ * Ez az osztály ételt reprezentál, ami egy olyan használható tárgy, amely használatkor növeli a
+ * használó karakter testhőjét.
  */
 public class Food implements Item {
-    /**
-     * Konstruktor
-     */
-    public Food() {
-        Skeleton.ctorCalled(this.getClass().getSimpleName());
-    }
 
     /**
-     * Megnöveli a c karakter testhőjét eggyel
+     * Meghívja az argumentumban kapott karakter
+     * ChangeWarmth() metódusát, argumentumként 1-et átadva, majd igazzal tér vissza.
      * @param c A karakter aki használja
-     * @return Sikeres-e a használat.
+     * @return True
      */
     @Override
     public boolean UseItem(character.Character c) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
-        Skeleton.indent();
         c.ChangeWarmth(1);
-        Skeleton.returned();
         return true;
     }
 }

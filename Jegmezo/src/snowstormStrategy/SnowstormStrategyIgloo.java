@@ -1,25 +1,19 @@
 package snowstormStrategy;
 
-import control.Skeleton;
-
 import java.util.ArrayList;
 
 /**
- * A hóvihar stratégia, abban az esetben, amikor van iglu a kérdéses mezőn
+ * Ez a hóvihar stratégia reprezentálja azt az esetet, amikor egy olyan mezőt érint hóvihar,
+ * amelyen van iglu. Ebben az esetben a karakterekkel nem történik semmi.
  */
-public class SnowstormStrategyIgloo implements SnowstormStrategy { //TODO: Hiányos a dokumentációban
+public class SnowstormStrategyIgloo implements SnowstormStrategy {
+
     /**
-     * Konstruktor
-     */
-    public SnowstormStrategyIgloo() {
-        Skeleton.ctorCalled(this.getClass().getSimpleName());
-    }
-    /**
-     * (nem csökken a mezőn lévő karakterek testhője)
+     *  A metódus érdemi működés nélkül visszatér.
      * @param chars Az érintett karakterek listája
      */
     @Override
     public void execute(ArrayList<character.Character> chars) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "execute()");
+        return;
     }
 }

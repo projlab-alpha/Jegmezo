@@ -1,25 +1,18 @@
 package waterStrategy;
 
-import control.Skeleton;
-
 /**
- * A vízbeesési stratégia bóvárruhában
+ * Ez a vízbeesési stratégia reprezentálja azt az esetet, amikor egy búvár ruhát viselő karakter
+ * esik vízbe. Ebben az esetben a karakterrel nem történik semmi; a normálistól nem eltérő
+ * módon mozoghat, cselekedhet tovább.
  */
 public class WaterStrategySuit implements WaterStrategy {
-    /**
-     * Konstruktor
-     */
-    public WaterStrategySuit() {
-        Skeleton.ctorCalled(this.getClass().getSimpleName());
-    }
 
     /**
-     * A karakter akciópontjai lenullázódnak,
-     * de a fulldoklás veszélye nem fenyegeti
+     * A metódus érdemi működés nélkül visszatér.
      * @param c Az érintett karakter
      */
     @Override
     public void execute(character.Character c) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "execute()");
+        return;
     }
 }

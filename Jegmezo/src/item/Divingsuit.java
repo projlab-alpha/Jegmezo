@@ -1,31 +1,23 @@
 package item;
 
-import control.Skeleton;
 import waterStrategy.WaterStrategySuit;
 
 /**
- * Túlélővé teszi a karaktert a vízbe fulladással szemben.
+ * Ez az osztály búvárruhát reprezentál, ami egy olyan használható tárgy, amely használat után
+ * megvédi a használó karaktert a vízbe fulladástól.
  */
 public class Divingsuit implements Item {
-    /**
-     * Konstruktor
-     */
-    public Divingsuit() {
-        Skeleton.ctorCalled(this.getClass().getSimpleName());
-    }
 
     /**
-     * Ráadja a búvárruhát a c karakterre
+     * Meghívja az argumentumban kapott karakter
+     * ChangeStrategy() metódusát, argumentumként egy új WaterStrategySuit objektumot
+     * átadva, majd igazzal tér vissza.
      * @param c A karakter aki használja
-     * @return Sikeres-e a használat.
+     * @return True
      */
     @Override
     public boolean UseItem(character.Character c) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
-        Skeleton.indent();
-        WaterStrategySuit wss = new WaterStrategySuit();
-        c.ChangeStrategy(wss);
-        Skeleton.returned();
+        c.ChangeStrategy(new WaterStrategySuit());
         return true;
     }
 }

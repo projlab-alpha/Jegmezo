@@ -1,29 +1,20 @@
 package item;
 
-import control.Skeleton;
-
 /**
- * Segít kihúzni egy vízbeesett karaktert.
+ * Ez az osztály kötelet reprezentál, ami egy olyan használható tárgy, amely használatkor
+ * megkísérel kimenteni minden szomszédos táblán fuldokló karaktert.
  */
-public class Rope implements Item { //TODO: Dokumentációban rossz a leírás
-    /**
-     * Konstruktor
-     */
-    public Rope() {
-        Skeleton.ctorCalled(this.getClass().getSimpleName());
-    }
+public class Rope implements Item {
 
     /**
-     * Kimenti c karaktert
+     * Meghívja az argumentumban kapott karakter GetField()
+     * metódusát, majd a kapott mező Rescue() metódusát, majd hamissal tér vissza.
      * @param c A karakter aki használja
-     * @return Sikeres-e a használat.
+     * @return False
      */
     @Override
     public boolean UseItem(character.Character c) {
-        Skeleton.methodCalled(this.getClass().getSimpleName(), "UseItem()");
-        Skeleton.indent();
         c.getField().Rescue();
-        Skeleton.returned();
         return false;
     }
 }

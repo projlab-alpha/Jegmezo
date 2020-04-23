@@ -1,8 +1,8 @@
 package control;
 /**
- * A jégtáblák közötti relatív irányt megadó enumeráció
+ * Enumeráció, amely a lehetséges irányokat adja meg.
  */
-public enum Direction {
+public enum Direction { //TODO: most akkor milyen irányok is lehetnek?
     NORTH,
     EAST,
     WEST,

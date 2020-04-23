@@ -1,18 +1,20 @@
 package item;
 
 /**
- * Segít kihúzni egy vízbeesett karaktert.
+ * Ez az osztály kötelet reprezentál, ami egy olyan használható tárgy, amely használatkor
+ * megkísérel kimenteni minden szomszédos táblán fuldokló karaktert.
  */
-public class Rope implements Item { //TODO: Dokumentációban rossz a leírás
-
+public class Rope implements Item {
 
     /**
-     * Kimenti c karaktert
+     * Meghívja az argumentumban kapott karakter GetField()
+     * metódusát, majd a kapott mező Rescue() metódusát, majd hamissal tér vissza.
      * @param c A karakter aki használja
-     * @return Sikeres-e a használat.
+     * @return False
      */
     @Override
-    public boolean UseItem(Character c) {
-
+    public boolean UseItem(character.Character c) {
+        c.getField().Rescue();
+        return false;
     }
 }

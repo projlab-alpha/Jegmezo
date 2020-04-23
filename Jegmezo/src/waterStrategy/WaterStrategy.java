@@ -1,13 +1,14 @@
 package waterStrategy;
 
 /**
- * A vízbeesési stratégiákat megkötő interfész
+ * Ez az interfész adja meg, hogy milyen metódusokat kell megvalósítaniuk a vízbeesési
+ * stratégiáknak.
  */
 public interface WaterStrategy {
 
     /**
-     * A megvalósítandó metódus
+     * Végrehajtja a stratégia lefutásakor szükséges feladatokat.
      * @param c Az érintett karakter
      */
-    public void execute(Character c);
+    void execute(character.Character c);
 }

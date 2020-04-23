@@ -1,131 +1,202 @@
 package character;
 
+import control.Control;
 import control.Direction;
 import field.AbstractField;
 import item.Item;
 import waterStrategy.WaterStrategy;
+import waterStrategy.WaterStrategyDefault;
 
 import java.util.ArrayList;
 
 /**
- * A character osztály az ősosztálya a játszható karaktereknek.
+ * Ez az absztrakt osztály reprezentálja a pályán lévő karaktereket. Felelős a karakterek főbb
+ * tulajdonságainak tárolásáért és kezeléséért, a velük kapcsolatos parancsok (pl. mozgás) és
+ * egyéb események (pl. vízbe esés) végrehajtásáért.
  */
 public abstract class Character {
 
     /**
-     * A karakterek testhője
+     * A karakter teshőjének szintje.
      */
-    private int warmth;
+    protected int warmth;       //TODO: dokumentációban private helyett protected kellene
 
     /**
-     * A karakter képességpontjai, mutatja, hogy még mennyi munkát végezhet
+     * A karakter maradék munkáinak száma.
      */
-    private int actionpoint;
+    protected int actionpoint;      //TODO: dokumentációban private helyett protected kellene
 
     /**
-     * A karekter éppen fuldoklik-e
+     * Jelzi, hogy fuldoklik-e éppen a karakter.
      */
     private boolean drowning;
 
     /**
-     * A karakter tárgyainak listája
+     * A karakter tárgyainak listája.
      */
-    private Item inventory;
+    private ArrayList<Item> inventory;
 
     /**
-     * Megmutatja, hogy mi történik a karakterrel vízbeeséskor
+     * Referencia arra mezőre, amelyen a karakter jelenleg áll.
+     */
+    protected AbstractField field;      //TODO: dokumentációban private helyett protected kellene
+
+    /**
+     * A stratégia, amely végrehajtódik vízbe eséskor.
      */
     private WaterStrategy waterstrat;
 
     /**
-     * A mező ahol a karakter áll
+     * Konstruktor.
      */
-    private AbstractField field;
+    public Character() {
+        actionpoint = 0;
+        warmth = 0;
+        drowning = false;
+        inventory = new ArrayList<>();
+        waterstrat = new WaterStrategyDefault();
+    }
 
     /**
-     * A karakter a d irányban lévő jégtáblára mozog
+     * Megkísérli mozgatni a karaktert az adott irányba, úgy, hogy
+     * meghívja a jelenlegi mező MoveChar metódusát. Argumentumnak a d Direction-t, és a
+     * saját magára mutató referenciát adja át. Mozgás után csökkenti a karakter hátralévő
+     * munkáinak számát.
      * @param d A mozgás iránya
      */
     public void Move(Direction d){
-
+        field.MoveChar(d, this);
+        --actionpoint;
     }
 
     /**
-     * A karakter eltakarít egy egység havat a jégtábláról, amin áll
+     * Meghíváskor eggyel csökkenti a jelenlegi mezőn lévő hó mennyiségét,
+     * úgy, hogy meghívja a jelenlegi mező ChangeSnow metódusát (-1)-es argumentummal,
+     * majd csökkenti a karakter hátralévő munkáinak számát.
      */
     public void Dig(){
-
+        this.field.ChangeSnow(-1);
+        --actionpoint;
     }
 
     /**
-     * A karakter felvesz egy tárgyat
+     * Felveszi a jelenlegi mezőn lévő tárgyat, ha van rajta, a mező
+     * RequestItem metódusával, majd, ha sikerült tárgyat felvenni, csökkenti a karakter
+     * hátralévő munkáinak számát.
      */
     public void PickUpItem(){
-
+        Item i = field.RequestItem();
+        if (i != null) {
+            inventory.add(i);
+            --actionpoint;
+        }
     }
 
     /**
-     * A karakter összeépíti a jelzőrakétát
-     */
-    public void BuildFlareGun(){
-
-    }
-
-    /**
-     * A karakter használ egy nála lévő tárgyat
-     * @param n //TODO: Mi az n?
+     * Használja az Inventory-ban az argumentumban megadott helyen
+     * álló tárgyat (meghívja a tárgy UseItem metódusát, argumentumként az önmagára
+     * mutató referenciát megadva), és eggyel csökkenti a karakter hátralévő munkáinak
+     * számát, ha sikerült használni tárgyat. Ha a UseItem igazzal tér vissza, akkor az
+     * esedékes tárgyat ez a metódus megsemmisíti.
+     * @param n A használni kivánt tárgy indexe az inventory-ban
      */
     public void UseItem(int n){
-
+        if(this.inventory.get(n) != null) {
+            if (this.inventory.get(n).UseItem(this))
+                this.inventory.remove(n);
+            --actionpoint;
+        }
     }
 
     /**
-     * Megváltoztatja a karakter testhőjét
+     * Hozzáadja az argumentumban megadott értéket a
+     * karakter testhőjéhez. Ha a változtatás után a testhő nulla vagy kisebb, akkor a Control
+     * CharacterDied() metódusának meghívásával jelzi, hogy a karakter meghalt.
      * @param i ennyivel változtatja a testhőt
      */
     public void ChangeWarmth(int i){
-
+        warmth += i;
+        if (warmth <= 0)
+            Control.getInstance().CharacterDied();
     }
 
     /**
-     * A karakter használja a speciális képességét
+     * Absztrakt metódus, használja a karakter különleges
+     * képességét az adott irányban.
      * @param d Az irány amerre használja képességét.
-     * @return //TODO: Milyen számot ad vissza?
+     * @return A képesség használatának eredménye; a konkrét képességtől függ, mi ez.
      */
-    public int UseAbility(Direction d){ //TODO: Mire gondoltatok? (Java-ban minden virtual alapból)
-
-    }
+    public abstract int UseAbility(Direction d);
 
     /**
-     * A megfelelő Waterstrat alapján kezeli a karakter vízbeesését attól függően,
-     * hogy van-e rajta búvárruha
+     * Ez a metódus reprezentálja a vízbe esést. Meghívja a tárolt
+     * WaterStrategy execute() metódusát, átadva az önmagára mutató referenciát.
      */
     public void FellInWater(){
-
+        waterstrat.execute(this);
     }
 
     /**
-     * Beállítja a játékost fuldokló állapotba
+     * Ez a metódus reprezentálja a fulladást. Beállítja a megfelelő flag-et,
+     * majd lenullázza a karakter hátralévő munkáinak számát.
      */
-    public void Drown(){
-
+    public void Drown() {
+        drowning = true;
+        actionpoint = 0;
     }
 
     /**
-     * Megváltoztatja a waterstrategyt,
-     * lényegében a búvárruha felvételét hivatott reprezentálni
+     * Ezzel a metódussal lehet jelezni, hogy a karaktert kimentették a
+     * vízből. Hamisra állítja a drowning tagváltozó értékét.
+     */
+    public void Rescued() {
+        drowning = false;
+    }
+
+    /**
+     * Visszatér a drowning tagváltozó jelenlegi értékével.
+     * @return Drowning?
+     */
+    public boolean isDrowning() {
+        return drowning;
+    }
+
+    /**
+     * Megváltoztatja a vízbe eséskor
+     * végrehajtandó stratégiát az argumentumban megadottra.
      * @param w az új stratégia
      */
     public void ChangeStrategy(WaterStrategy w){
-
+        waterstrat = w;
     }
 
     /**
-     * Megmutatja, hogy a karakter inventoryjában van-e s Item
-     * @param s a kérdéses Item
-     * @return Van-e
+     *  Ha a kért nevű item megtalálható a karakter invetoryjában, akkor igazzal tér vissza, különben hammissal.
+     * @param s a kérdéses Item neve
+     * @return Igaz, ha megtalálható az Item az Inventory-ban, különben hamis
      */
     public boolean HasItem(String s){
+        for (Item i : inventory) {
+            if (i.toString().equals(s))
+                return true;
+        }
+        return false;
+    }
 
+    /**
+     * Visszatér a field tagváltozóban tárolt referenciával.
+     * @return A mező, amin a karakter áll
+     */
+    public AbstractField getField() {
+        return this.field;
+    }
+
+    /**
+     * Beállítja a karakter mezőjét (field tagváltozó) az
+     * argumentumban kapottra.
+     * @param f A mező, amin a karakter állni fog.
+     */
+    public void setField(AbstractField f) {
+        this.field = f;
     }
 }

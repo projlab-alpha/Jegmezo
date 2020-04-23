@@ -1,21 +1,26 @@
 package item;
 
+import control.Control;
+
 /**
- * A játék megnyeréséhez szükséges tárgyat lehet belőle összeépíteni,
- * ha a másik kettő tárgy, a jelzőfény és a patron is azon a mezőn vannak,
- * játékosok birtokában, nem pedig odafagyva.
- * Nem szükséges, hogy minden tárgy ugyanannál a játékosnál legyen.
+ * A játék megnyeréséhez szükséges három tárgy egyike. Használtkor felelős a győzelmi
+ * kondíció vizsgálatáért, és a győzelem jelzéséért, ha bizonyos feltételek teljesülnek.
  */
 public class Pistol implements Item {
 
     /**
-     * Használatkor ellenőrzi, hogy a tárgy másik két társa
-     * azon a mezőn van-e amin ő, és amennyiben igen akkor a játék véget ér.
+     * Ellenőrzi, hogy van-e lehetőség a játék megnyerésére.
+     * Ehhez először meghívja az argumentumban kapott karakter GetField() metódusát,
+     * majd a kapott mező CheckFlareGun() metódusát. Ha ez utóbbi igazzal tér vissza,
+     * akkor a Control Win() metódusának meghívásával jelzi, hogy a játék győzelemmel
+     * zárult. A feladatai elvégzése után hamissal tér vissza.
      * @param c A karakter aki használja
-     * @return Sikeres-e a használat.
+     * @return False
      */
     @Override
-    public boolean UseItem(Character c) {
-
+    public boolean UseItem(character.Character c) {
+        if(c.getField().CheckFlareGun())
+            Control.getInstance().Win();
+        return false;
     }
 }

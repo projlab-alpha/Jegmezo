@@ -1,17 +1,21 @@
 package item;
 
 /**
- * Azonos mennyiségű munkával kettő egység havat takarít el egy mezőről.
+ * Ez az osztály ásót reprezentál, ami egy olyan használható tárgy, amely használatkor csökkenti
+ * a használó karakter alatti mezőn lévő hó mennyiségét.
  */
 public class Shovel implements Item {
 
     /**
-     * Kettő egység havat eltakarít c karakter mezőjéről
+     * Meghívja az argumentumban kapott karakter GetField()
+     * metódusát, majd a kapott mező ChangeSnow() metódusát, argumentumként -2-t
+     * átadva, majd hamissal tér vissza.
      * @param c A karakter aki használja
-     * @return Sikeres-e a használat.
+     * @return False
      */
     @Override
-    public boolean UseItem(Character c) {
-
+    public boolean UseItem(character.Character c) {
+        c.getField().ChangeSnow(-2);
+        return false;
     }
 }

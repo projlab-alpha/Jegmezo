@@ -1,18 +1,23 @@
 package item;
 
+import waterStrategy.WaterStrategySuit;
+
 /**
- * Túlélővé teszi a karaktert a vízbe fulladással szemben.
+ * Ez az osztály búvárruhát reprezentál, ami egy olyan használható tárgy, amely használat után
+ * megvédi a használó karaktert a vízbe fulladástól.
  */
 public class Divingsuit implements Item {
 
-
     /**
-     * Ráadja a búvárruhát a c karakterre
+     * Meghívja az argumentumban kapott karakter
+     * ChangeStrategy() metódusát, argumentumként egy új WaterStrategySuit objektumot
+     * átadva, majd igazzal tér vissza.
      * @param c A karakter aki használja
-     * @return Sikeres-e a használat.
+     * @return True
      */
     @Override
-    public boolean UseItem(Character c) {
-
+    public boolean UseItem(character.Character c) {
+        c.ChangeStrategy(new WaterStrategySuit());
+        return true;
     }
 }

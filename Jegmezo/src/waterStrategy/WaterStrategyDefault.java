@@ -1,17 +1,17 @@
 package waterStrategy;
 
 /**
- * A vízbeesési stratégia búvárruha nélkül
+ * Ez az alapértelmezett vízbeesési stratégia arra az esetre, ha olyan karakter esik vízbe, akin
+ * nincsen búvár ruha. A meghívott karaktert fuldokló állapotba helyezi.
  */
 public class WaterStrategyDefault implements WaterStrategy {
 
     /**
-     * A karakter elkezd fuldokolni,
-     * ha legközelebb rákerül a sor a játékban megfullad és a játék véget ér
+     * Meghívja az argumentumban kapott karakter Drown() metódusát.
      * @param c Az érintett karakter
      */
     @Override
-    public void execute(Character c) {
-
+    public void execute(character.Character c) {
+        c.Drown();
     }
 }

@@ -7,6 +7,10 @@ import field.AbstractField;
 import field.Floe;
 import field.GameField;
 import item.*;
+import snowstormStrategy.SnowstormStrategy;
+import snowstormStrategy.SnowstormStrategyDefault;
+import snowstormStrategy.SnowstormStrategyIgloo;
+import snowstormStrategy.SnowstormStrategyTent;
 import waterStrategy.WaterStrategy;
 import waterStrategy.WaterStrategyDefault;
 import waterStrategy.WaterStrategySuit;
@@ -264,8 +268,21 @@ public class Control {
         return 0;
     }
 
-    public static int FlowSnowStormStrategy(int width, int height, String sss) {
-
+    public static int FloeSnowStormStrategy(int width, int height, String sss) {
+        SnowstormStrategy s;
+        if(sss.equalsIgnoreCase("default"))
+            s = new SnowstormStrategyDefault();
+        else if(sss.equalsIgnoreCase("igloo"))
+            s = new SnowstormStrategyIgloo();
+        else if(sss.equalsIgnoreCase("tent"))
+            s = new SnowstormStrategyTent();
+        else return -1;
+        try {
+            Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).ChangeSnowStrategy(s);
+        } catch(Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int CharActionPoints(int chara, int ap) {

@@ -212,6 +212,26 @@ public abstract class Character {
     }
 
     /**
+     * Beállítja a karakter Actionpoint mezőjét
+     * az argumentumban kapott értékre.
+     * A prototípus debuggolás érdekében
+     * @param i új actionpoint érték
+     */
+    public void setActionpoint(int i) {
+        this.actionpoint = i;
+    }
+
+    /**
+     * Beállítja a karakter warmth mezőjét
+     * az argumentumban kapott értékre.
+     * A prototípus debuggolás érdekében
+     * @param i új warmth érték
+     */
+    public void setWarmth(int i) {
+        this.warmth = i;
+    }
+
+    /**
      * Visszatér egy String tömbbel, ami tartalmazza a karakter bizonyos adatait.
      * [0] = akciópontok
      * [1] = Tárgyak

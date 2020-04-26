@@ -318,11 +318,21 @@ public class Control {
     }
 
     public static int CharActionPoints(int chara, int ap) {
-
+        try {
+            Control.getInstance().characters.get(chara).setActionpoint(ap);
+            return 0;
+        } catch(Exception e) {
+            return -1;
+        }
     }
 
     public static int CharWarmth(int chara, int warmth) {       //TODO: Miért? Karakterek konstruktorban megkapják alapból a testhőjüket...
-
+        try {
+            Control.getInstance().characters.get(chara).setWarmth(warmth);
+            return 0;
+        } catch(Exception e) {
+            return -1;
+        }
     }
 
     public static int AddUnstableFloe(String floename, int capacity) {

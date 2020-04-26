@@ -6,6 +6,7 @@ import character.Researcher;
 import field.AbstractField;
 import field.Floe;
 import field.GameField;
+import item.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -197,7 +198,33 @@ public class Control {
     }
 
     public static int CharAddItem(int chara, String item) {         //TODO: Prototípus concepcióban az argumentumnak Item helyett nem Stringnek kéne lennie?
-
+        try {
+            character.Character ch = Control.getInstance().characters.get(chara);
+            Item i;
+            if(item.equalsIgnoreCase("Cartridge"))
+                i = new Cartridge();
+            else if (item.equalsIgnoreCase("Divingsuit"))
+                i = new Divingsuit();
+            else if (item.equalsIgnoreCase("Flare"))
+                i = new Flare();
+            else if (item.equalsIgnoreCase("Food"))
+                i = new Food();
+            else if (item.equalsIgnoreCase("FragileShovel"))
+                i = new FragileShovel();
+            else if (item.equalsIgnoreCase("Pistol"))
+                i = new Pistol();
+            else if (item.equalsIgnoreCase("Rope"))
+                i = new Rope();
+            else if (item.equalsIgnoreCase("Shovel"))
+                i = new Shovel();
+            else if (item.equalsIgnoreCase("Tent"))
+                i = new Tent();
+            else return -1;
+            ch.addItem(i);
+        } catch (Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int FloeAddItem(int width, int height, String item) {

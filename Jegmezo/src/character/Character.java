@@ -199,4 +199,13 @@ public abstract class Character {
     public void setField(AbstractField f) {
         this.field = f;
     }
+
+    /**
+     * Hozzáadja az arg-ban kapott itemet az inventoryhoz
+     * A prototípus debuggolás érdekében
+     * @param i hozzáadandó item
+     */
+    public void addItem(Item i) {
+        this.inventory.add(i);
+    }
 }

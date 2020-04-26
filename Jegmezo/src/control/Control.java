@@ -184,7 +184,12 @@ public class Control {
     }
 
     public static int SnowStorm(int width, int height) {
-
+        try {
+            Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).SnowStormHit();
+        } catch(Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int Push(String filename) {

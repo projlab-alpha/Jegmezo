@@ -235,7 +235,7 @@ public class Control {
         return -1;
 
         //try {
-        //    this.characters.get(chara).UseItem(-1);      //TODO: item névből index?
+        //    this.characters.get(chara).UseItem(-1);      //TODO: item névből index? 
         //} catch(Exception e) {
         //    return -1;
         //}
@@ -245,6 +245,7 @@ public class Control {
     public int UseAbility(int chara, String floe) {
     	character.Character ch = this.characters.get(chara - 1);
     	String type=ch.getClass().getSimpleName();
+    	ch.ChActionpoint(-1);
     	if(type.equalsIgnoreCase("Eskimo")) {
     		snowstormStrategy.SnowstormStrategy s=new SnowstormStrategyIgloo();
     		ch.getField().ChangeSnowStrategy(s);

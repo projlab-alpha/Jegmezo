@@ -3,10 +3,7 @@ package control;
 import character.Eskimo;
 import character.PolarBear;
 import character.Researcher;
-import field.AbstractField;
-import field.Floe;
-import field.GameField;
-import field.UnstableFloe;
+import field.*;
 import item.*;
 import snowstormStrategy.SnowstormStrategy;
 import snowstormStrategy.SnowstormStrategyDefault;
@@ -306,7 +303,14 @@ public class Control {
     }
 
     public static int AddHole(int width, int height) {
-
+        int rand_snowcount = new Random().nextInt(4) + 1;
+        Hole h = new Hole(null, rand_snowcount);
+        try {
+            Control.getInstance().gameField.getFloes().set(convertCoords(width, height), h);
+        } catch(Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int SetSnow(int width, int height, int snow) {

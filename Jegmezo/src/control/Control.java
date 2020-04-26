@@ -242,7 +242,22 @@ public class Control {
         //return 0;
     }
 
-    public int UseAbility(int chara, String direction) {     //TODO
+    public int UseAbility(int chara, String floe) {
+    	character.Character ch = this.characters.get(chara - 1);
+    	String type=ch.getClass().getSimpleName();
+    	if(type.equalsIgnoreCase("Eskimo")) {
+    		snowstormStrategy.SnowstormStrategy s=new SnowstormStrategyIgloo();
+    		ch.getField().ChangeSnowStrategy(s);
+    		return 0;
+    	}
+    	if(type.equalsIgnoreCase("Researcher")) {
+    		int idx = Integer.parseInt(floe.substring(4, 5));
+    		int capacity=this.gameField.getFloeAt(idx).FindCapacity();
+    		System.out.println("Floe: floe"+ idx);
+    		System.out.println("	capacity: " + capacity);
+    		return 0;
+    		
+    	}
         return -1;
     }
 

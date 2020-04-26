@@ -218,4 +218,13 @@ public abstract class AbstractField {
     public void BearAttack() {
         bearattackstrat.execute(characters);
     }
+
+    /**
+     * Beállítja a táblán lévő itemet az arg-ban kapott itemre
+     * A prototípus debuggolás érdekében
+     * @param i beállítandó item
+     */
+    public void setItem(Item i) {
+        this.item = i;
+    }
 }

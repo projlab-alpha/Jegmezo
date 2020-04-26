@@ -87,6 +87,30 @@ public class Control {
         return y * map_size + x;
     }
 
+    private static Item convertItem(String item) {
+        Item i;
+        if(item.equalsIgnoreCase("Cartridge"))
+            i = new Cartridge();
+        else if (item.equalsIgnoreCase("Divingsuit"))
+            i = new Divingsuit();
+        else if (item.equalsIgnoreCase("Flare"))
+            i = new Flare();
+        else if (item.equalsIgnoreCase("Food"))
+            i = new Food();
+        else if (item.equalsIgnoreCase("FragileShovel"))
+            i = new FragileShovel();
+        else if (item.equalsIgnoreCase("Pistol"))
+            i = new Pistol();
+        else if (item.equalsIgnoreCase("Rope"))
+            i = new Rope();
+        else if (item.equalsIgnoreCase("Shovel"))
+            i = new Shovel();
+        else if (item.equalsIgnoreCase("Tent"))
+            i = new Tent();
+        else i = null;
+        return i;
+    }
+
 
     public static int Load(String filename) {
 
@@ -200,26 +224,9 @@ public class Control {
     public static int CharAddItem(int chara, String item) {         //TODO: Prototípus concepcióban az argumentumnak Item helyett nem Stringnek kéne lennie?
         try {
             character.Character ch = Control.getInstance().characters.get(chara);
-            Item i;
-            if(item.equalsIgnoreCase("Cartridge"))
-                i = new Cartridge();
-            else if (item.equalsIgnoreCase("Divingsuit"))
-                i = new Divingsuit();
-            else if (item.equalsIgnoreCase("Flare"))
-                i = new Flare();
-            else if (item.equalsIgnoreCase("Food"))
-                i = new Food();
-            else if (item.equalsIgnoreCase("FragileShovel"))
-                i = new FragileShovel();
-            else if (item.equalsIgnoreCase("Pistol"))
-                i = new Pistol();
-            else if (item.equalsIgnoreCase("Rope"))
-                i = new Rope();
-            else if (item.equalsIgnoreCase("Shovel"))
-                i = new Shovel();
-            else if (item.equalsIgnoreCase("Tent"))
-                i = new Tent();
-            else return -1;
+            Item i = convertItem(item);
+            if(i == null)
+                return -1;
             ch.addItem(i);
         } catch (Exception e) {
             return -1;
@@ -228,7 +235,15 @@ public class Control {
     }
 
     public static int FloeAddItem(int width, int height, String item) {
-
+        Item i = convertItem(item);
+        if(i == null)
+            return -1;
+        try {
+            Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).setItem(i);
+        } catch (Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int CharWaterStrategy(int chara, String ws) {

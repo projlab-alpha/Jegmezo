@@ -84,7 +84,6 @@ public class Control {
     /**
      * Pálya szélessége és magassága
      */
-    private static int map_size = -1;
 
     private static Item convertItem(String item) {
         Item i;
@@ -127,9 +126,7 @@ public class Control {
         if(size <= 0)
             return -1;
 
-        map_size = size;
-
-        for(int i = 0; i < map_size * map_size; ++i) {
+        for(int i = 0; i < size * size; ++i) {
             int rand_snowcount = new Random().nextInt(4) + 1;     //random int between 1 and 4 (inclusive)
             Floe f = new Floe(null, 10, rand_snowcount);
             Control.getInstance().gameField.addField(f);

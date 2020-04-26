@@ -1,6 +1,8 @@
 package control;
 
+import character.Eskimo;
 import character.PolarBear;
+import character.Researcher;
 import field.AbstractField;
 import field.Floe;
 import field.GameField;
@@ -73,9 +75,6 @@ public class Control {
 
     //// COMMANDS ////
 
-    private static int map_size = -1;
-
-
     public static int Load(String filename) {
 
     }
@@ -96,7 +95,6 @@ public class Control {
         return 0;
     }
 
-    //public static int SetNeighbor(AbstractFloe floe1, AbstractFloe floe2)     //TODO: Mire gondoltatok? Hogyan lesz egy szöveges parancsból AbstractFloe példány?
     public static int SetNeighbor(String floename1, String floename2) {                 //      inkább így, nem?
         int index1 = floename1.charAt(4);
         int index2 = floename1.charAt(4);
@@ -107,6 +105,14 @@ public class Control {
     }
 
     public static int AddChar(String chartype, int width, int height) {
+        character.Character ch;
+
+        if(chartype.equalsIgnoreCase("Eskimo")) {
+            ch = new Eskimo();
+        } else if (chartype.equalsIgnoreCase("Researcher")) {
+            ch = new Researcher();
+        } else return -1;
+
 
     }
 

@@ -130,10 +130,13 @@ public class Control {
         } else if (chartype.equalsIgnoreCase("Researcher")) {
             ch = new Researcher();
         } else return -1;
-
-        Control.getInstance().characters.add(ch);
-        Control.getInstance().PlayerCount += 1;
-        Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).Accept(ch);
+        try {
+            Control.getInstance().characters.add(ch);
+            Control.getInstance().PlayerCount += 1;
+            Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).Accept(ch);
+        } catch(Exception e) {
+            return -1;
+        }
         return 0;
     }
 

@@ -108,11 +108,11 @@ public class Control {
 
     public int Load(String filename) {       //TODO
         return -1;
-    }
+    }       //TODO
 
     public int Save(String filename) {       //TODO
         return -1;
-    }
+    }       //TODO
 
     public int Init() {
         return Init(5);
@@ -148,7 +148,9 @@ public class Control {
             ch = new Eskimo();
         } else if (chartype.equalsIgnoreCase("Researcher")) {
             ch = new Researcher();
-        } else return -1;
+        } else if (chartype.equalsIgnoreCase("polarbear"))
+            ch = new PolarBear();
+        else return -1;
         try {
             int idx = floename.charAt(4) - '0';
             this.characters.add(ch);
@@ -326,7 +328,7 @@ public class Control {
         }
     }
 
-    public int CharWarmth(int chara, int warmth) {       //TODO: Miért? Karakterek konstruktorban megkapják alapból a testhőjüket...
+    public int CharWarmth(int chara, int warmth) {
         try {
             this.characters.get(chara - 1).setWarmth(warmth);
             return 0;

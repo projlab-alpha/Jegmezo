@@ -1,0 +1,4 @@
+Init
+AddUnstableFloe „floe2” 1
+AddChar “researcher1” „floe1”
+UseAbility 1 Direction

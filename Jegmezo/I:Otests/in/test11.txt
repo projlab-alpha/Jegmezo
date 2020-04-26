@@ -1,0 +1,5 @@
+Init
+AddUnstableFloe „floe1” 
+AddChar “eskimo1” „floe2”
+MoveChar 1 „floe1”
+ShowCharDetails 1 warmth

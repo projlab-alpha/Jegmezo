@@ -1,0 +1,5 @@
+Init
+SetSnow „floe1” 4
+AddChar “eskimo1” „floe1”
+UseItem 1 shovel
+ShowFloeDetails „floe1” snow

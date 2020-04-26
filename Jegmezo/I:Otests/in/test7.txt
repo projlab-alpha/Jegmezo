@@ -1,0 +1,8 @@
+Init
+AddHole „floe2”
+AddChar “eskimo1” „floe1”
+CharAdditem 1 divingsuit
+MoveChar 1 down
+UseItem 1 divingsuit
+MoveChar 1 down
+ShowCharDetails 1 warmth

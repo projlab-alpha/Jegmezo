@@ -1,0 +1,6 @@
+Init
+AddChar “eskimo1” „floe1”
+UseAbility 1
+AddChar “polarbear” „floe2”
+MoveChar 2 „floe1”
+ShowCharDetails 1 warmth

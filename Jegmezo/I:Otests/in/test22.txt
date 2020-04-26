@@ -1,0 +1,5 @@
+Init
+AddChar “eskimo1” „floe1”
+CharWarmth 1 1
+SnowStorm
+ShowCharDetails 1 warmth

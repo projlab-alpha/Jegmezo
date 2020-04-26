@@ -7,6 +7,9 @@ import field.AbstractField;
 import field.Floe;
 import field.GameField;
 import item.*;
+import waterStrategy.WaterStrategy;
+import waterStrategy.WaterStrategyDefault;
+import waterStrategy.WaterStrategySuit;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -247,7 +250,18 @@ public class Control {
     }
 
     public static int CharWaterStrategy(int chara, String ws) {
-
+        WaterStrategy w;
+        if(ws.equalsIgnoreCase("Default"))
+            w = new WaterStrategyDefault();
+        else if(ws.equalsIgnoreCase("DivingSuit") || ws.equalsIgnoreCase("Suit"))
+            w = new WaterStrategySuit();
+        else return -1;
+        try {
+            Control.getInstance().characters.get(chara).ChangeStrategy(w);
+        } catch(Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int FlowSnowStormStrategy(int width, int height, String sss) {

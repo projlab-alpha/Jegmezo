@@ -75,6 +75,18 @@ public class Control {
 
     //// COMMANDS ////
 
+    /**
+     * Pálya szélessége és magassága
+     */
+    private static int map_size = -1;
+
+    private static int convertCoords(int x, int y) {
+        if (x < 0 || x >= map_size || y < 0 || y >= map_size)
+            return -1;
+        return y * map_size + x;
+    }
+
+
     public static int Load(String filename) {
 
     }
@@ -87,7 +99,9 @@ public class Control {
         if(size <= 0)
             return -1;
 
-        for(int i = 0; i < size; ++i) {
+        map_size = size;
+
+        for(int i = 0; i < map_size * map_size; ++i) {
             int rand_snowcount = new Random().nextInt(4) + 1;     //random int between 1 and 4 (inclusive)
             Floe f = new Floe(null, 10, rand_snowcount);
             Control.getInstance().gameField.addField(f);
@@ -98,8 +112,8 @@ public class Control {
     public static int SetNeighbor(String floename1, String floename2) {                 //      inkább így, nem?
         int index1 = floename1.charAt(4);
         int index2 = floename1.charAt(4);
-        AbstractField floe1 = Control.getInstance().gameField.getFloes().get(index1);
-        AbstractField floe2 = Control.getInstance().gameField.getFloes().get(index2);
+        AbstractField floe1 = Control.getInstance().gameField.getFloeAt(index1);
+        AbstractField floe2 = Control.getInstance().gameField.getFloeAt(index2);
         //TODO: Honnan tudjuk, melyik irányban szomszédosak?
         return -1;
     }
@@ -113,7 +127,9 @@ public class Control {
             ch = new Researcher();
         } else return -1;
 
-
+        Control.getInstance().characters.add(ch);
+        Control.getInstance().PlayerCount += 1;
+        Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).Accept(ch);
     }
 
     public static int MoveChar(int chara, String direction) {

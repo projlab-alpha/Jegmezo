@@ -53,4 +53,10 @@ public class GameField {
     public ArrayList<AbstractField> getFloes() {
         return floes;
     }
+
+    public AbstractField getFloeAt(int idx) {
+        if(idx < 0 || idx > floes.size())
+            return null;
+        return floes.get(idx);
+    }
 }

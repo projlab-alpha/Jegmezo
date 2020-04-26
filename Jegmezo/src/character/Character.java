@@ -50,7 +50,7 @@ public abstract class Character {
      * Konstruktor.
      */
     public Character() {
-        actionpoint = 0;
+        actionpoint = 4;
         warmth = 0;
         drowning = false;
         inventory = new ArrayList<>();

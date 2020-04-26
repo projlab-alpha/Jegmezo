@@ -39,7 +39,7 @@ public class Control {
     /**
      *  A játékmezőre mutató referencia.
      */
-    private GameField gameField;
+    private GameField gameField = new GameField();
 
     /**
      *  Az egyetlen példánya az osztálynak a Singleton működés érdekében.
@@ -122,11 +122,14 @@ public class Control {
         if(size <= 0)
             return -1;
 
+        this.gameField.getFloes().clear();
+
         for(int i = 0; i < size * size; ++i) {
             int rand_snowcount = new Random().nextInt(4) + 1;     //random int between 1 and 4 (inclusive)
             Floe f = new Floe(null, 10, rand_snowcount);
             this.gameField.addField(f);
         }
+        System.out.println(this.gameField.getFloes().size());
         return 0;
     }
 
@@ -141,14 +144,13 @@ public class Control {
 
     public int AddChar(String chartype, String floename) {
         character.Character ch;
-
         if(chartype.equalsIgnoreCase("Eskimo")) {
             ch = new Eskimo();
         } else if (chartype.equalsIgnoreCase("Researcher")) {
             ch = new Researcher();
         } else return -1;
         try {
-            int idx = floename.charAt(4);
+            int idx = floename.charAt(4) - '0';
             this.characters.add(ch);
             this.PlayerCount += 1;
             this.gameField.getFloeAt(idx).Accept(ch);
@@ -161,9 +163,9 @@ public class Control {
 
     public int MoveChar(int chara, String floename) {        //TODO: 08 - Részletes tervek: 8.2.7 - 'Down' argumentum helyett floe# kell
         try {
-            int idx = floename.charAt(4);
+            int idx = floename.charAt(4) - '0';
             AbstractField f = this.gameField.getFloeAt(idx);
-            character.Character c = this.characters.get(chara);
+            character.Character c = this.characters.get(chara - 1);
             c.setField(f);
             f.Accept(c);
         } catch(Exception e) {
@@ -174,7 +176,7 @@ public class Control {
 
     public int ShowCharDetails(int chara, String attr) {
         try {
-            character.Character ch = this.characters.get(chara);
+            character.Character ch = this.characters.get(chara - 1);
             System.out.println(ch.getClass().getSimpleName()+" : "+chara);
 
             if (attr.equalsIgnoreCase("pos")) {                    //pos parancs
@@ -211,7 +213,7 @@ public class Control {
 
     public int Dig(int chara) {
         try {
-            this.characters.get(chara).Dig();
+            this.characters.get(chara - 1).Dig();
         } catch(Exception e) {
             return -1;
         }
@@ -220,7 +222,7 @@ public class Control {
 
     public int Pickup(int chara) {
         try {
-            this.characters.get(chara).PickUpItem();
+            this.characters.get(chara - 1).PickUpItem();
         } catch(Exception e) {
             return -1;
         }
@@ -244,7 +246,7 @@ public class Control {
 
     public int SnowStorm(String floename) {
         try {
-            int idx = floename.charAt(4);
+            int idx = floename.charAt(4) - '0';
             this.gameField.getFloeAt(idx).SnowStormHit();
         } catch(Exception e) {
             return -1;
@@ -258,7 +260,7 @@ public class Control {
 
     public int CharAddItem(int chara, String item) {         //TODO: Prototípus concepcióban az argumentumnak Item helyett nem Stringnek kéne lennie?
         try {
-            character.Character ch = this.characters.get(chara);
+            character.Character ch = this.characters.get(chara - 1);
             Item i = convertItem(item);
             if(i == null)
                 return -1;
@@ -274,7 +276,7 @@ public class Control {
         if(i == null)
             return -1;
         try {
-            int idx = floename.charAt(4);
+            int idx = floename.charAt(4) - '0';
             this.gameField.getFloeAt(idx).setItem(i);
         } catch (Exception e) {
             return -1;
@@ -290,7 +292,7 @@ public class Control {
             w = new WaterStrategySuit();
         else return -1;
         try {
-            this.characters.get(chara).ChangeStrategy(w);
+            this.characters.get(chara - 1).ChangeStrategy(w);
         } catch(Exception e) {
             return -1;
         }
@@ -307,7 +309,7 @@ public class Control {
             s = new SnowstormStrategyTent();
         else return -1;
         try {
-            int idx = floename.charAt(4);
+            int idx = floename.charAt(4) - '0';
             this.gameField.getFloeAt(idx).ChangeSnowStrategy(s);
         } catch(Exception e) {
             return -1;
@@ -317,7 +319,7 @@ public class Control {
 
     public int CharActionPoints(int chara, int ap) {
         try {
-            this.characters.get(chara).setActionpoint(ap);
+            this.characters.get(chara - 1).setActionpoint(ap);
             return 0;
         } catch(Exception e) {
             return -1;
@@ -326,7 +328,7 @@ public class Control {
 
     public int CharWarmth(int chara, int warmth) {       //TODO: Miért? Karakterek konstruktorban megkapják alapból a testhőjüket...
         try {
-            this.characters.get(chara).setWarmth(warmth);
+            this.characters.get(chara - 1).setWarmth(warmth);
             return 0;
         } catch(Exception e) {
             return -1;
@@ -337,7 +339,7 @@ public class Control {
         int rand_snowcount = new Random().nextInt(4) + 1;
         UnstableFloe uf = new UnstableFloe(null, capacity, rand_snowcount);
         try {
-            int idx = floename.charAt(4);
+            int idx = floename.charAt(4) - '0';
             this.gameField.getFloes().set(idx, uf);
         } catch(Exception e) {
             return -1;
@@ -349,7 +351,7 @@ public class Control {
         int rand_snowcount = new Random().nextInt(4) + 1;
         Hole h = new Hole(null, rand_snowcount);
         try {
-            int idx = floename.charAt(4);
+            int idx = floename.charAt(4) - '0';
             this.gameField.getFloes().set(idx, h);
         } catch(Exception e) {
             return -1;
@@ -359,10 +361,10 @@ public class Control {
 
     public int SetSnow(String floename, int snow) {
         try {
-            int idx = floename.charAt(4);
+            int idx = floename.charAt(4) - '0';
             this.gameField.getFloeAt(idx).setSnowCount(snow);
         } catch(Exception e) {
-            return -1;
+            e.printStackTrace();
         }
         return 0;
     }

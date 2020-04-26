@@ -6,6 +6,7 @@ import character.Researcher;
 import field.AbstractField;
 import field.Floe;
 import field.GameField;
+import field.UnstableFloe;
 import item.*;
 import snowstormStrategy.SnowstormStrategy;
 import snowstormStrategy.SnowstormStrategyDefault;
@@ -294,7 +295,14 @@ public class Control {
     }
 
     public static int AddUnstableFloe(int width, int height, int capacity) {
-
+        int rand_snowcount = new Random().nextInt(4) + 1;
+        UnstableFloe uf = new UnstableFloe(null, capacity, rand_snowcount);
+        try {
+            Control.getInstance().gameField.getFloes().set(convertCoords(width, height), uf);
+        } catch(Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int AddHole(int width, int height) {

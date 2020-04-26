@@ -66,16 +66,16 @@ public class Control {
      * E metódus meghívásával jelezhetik a játék objektumok, hogy
      * egy játékos karakter valamilyen okból meghalt, és így a játéknak véget kell vetni.
      */
-    public void CharacterDied(){    //TODO
-
+    public void CharacterDied(){
+        System.out.println("Game Over");
     }
 
     /**
      * E metódus meghívásával jelezhetik a játék objektumok, hogy sikerült
      * összerakni és elsütni a jelző pisztolyt, és így játéknak véget kell vetni.
      */
-    public void Win(){      //TODO
-
+    public void Win(){
+        System.out.println("Congratulations! You won!");
     }
 
 
@@ -177,7 +177,40 @@ public class Control {
     }
 
     public static int ShowCharDetails(int chara, String attr) {
+        try {
+            character.Character ch = Control.getInstance().characters.get(chara);
+            System.out.println(ch.getClass().getSimpleName()+" : "+chara);
 
+            if (attr.equalsIgnoreCase("pos")) {                    //pos parancs
+                AbstractField floe = ch.getField();
+                for (int i = 0; i < Control.getInstance().gameField.getFloes().size(); ++i) {
+                    AbstractField f = Control.getInstance().gameField.getFloeAt(i);
+                    if (floe == f) {
+                        System.out.println("\tPosition: floe" + i);
+                        return 0;
+                    }
+                }
+                return -1;
+            }
+            else {
+                String[] attributes = ch.getAttributes();
+                if (attr.equalsIgnoreCase("ap")) {                  //ap parancs
+                    System.out.println("\tActionpoints: " + attributes[0]);
+                    return 0;
+                } else if (attr.equalsIgnoreCase("items")) {        //Items parancs
+                    System.out.println("\tItems: " + attributes[1]);
+                    return 0;
+                } else if (attr.equalsIgnoreCase("warmth")) {       //warmth parancs
+                    System.out.println("\tWarmth: " + attributes[2]);
+                    return 0;
+                } else if (attr.equalsIgnoreCase("ws")) {           //ws parancs
+                    System.out.println("\tWater strat: " + attributes[3]);
+                    return 0;
+                } else return -1;
+            }
+        } catch(Exception e) {
+            return -1;
+        }
     }
 
     public static int Dig(int chara) {

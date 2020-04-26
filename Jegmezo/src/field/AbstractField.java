@@ -221,6 +221,8 @@ public abstract class AbstractField {
 
     //// PROTOTÍPUS ////
 
+
+
     /**
      * Beállítja a táblán lévő itemet az arg-ban kapott itemre
      * A prototípus debuggolás érdekében

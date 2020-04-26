@@ -200,6 +200,8 @@ public abstract class Character {
         this.field = f;
     }
 
+    //// PROTOTÍPUS ////
+
     /**
      * Hozzáadja az arg-ban kapott itemet az inventoryhoz
      * A prototípus debuggolás érdekében
@@ -207,5 +209,29 @@ public abstract class Character {
      */
     public void addItem(Item i) {
         this.inventory.add(i);
+    }
+
+    /**
+     * Visszatér egy String tömbbel, ami tartalmazza a karakter bizonyos adatait.
+     * [0] = akciópontok
+     * [1] = Tárgyak
+     * [2] = testhő
+     * [3] = vízbeesési stratégia
+     * A prototípus debuggolás érdekében
+     * @return String tömb amely tartalmazza az adatokat
+     */
+    public String[] getAttributes() {
+        String[] res = new String[4];
+        res[0] = Integer.toString(this.actionpoint);
+        res[1] = "";
+        if(!this.inventory.isEmpty()) {
+            for (Item i : this.inventory) {
+                res[1] = res[1] + i.getClass().getSimpleName() + " ";
+            }
+        }
+        else res[1] = "None";
+        res[2] = Integer.toString(this.warmth);
+        res[3] = this.waterstrat.getClass().getSimpleName();
+        return res;
     }
 }

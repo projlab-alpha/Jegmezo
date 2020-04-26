@@ -95,6 +95,10 @@ public class Control {
 
     }
 
+    public static int Init() {
+        return Init(5);
+    }
+
     public static int Init(int size) {
         if(size <= 0)
             return -1;
@@ -109,7 +113,7 @@ public class Control {
         return 0;
     }
 
-    public static int SetNeighbor(String floename1, String floename2) {                 //      inkább így, nem?
+    public static int SetNeighbor(String floename1, String floename2) {                 //inkább így, nem?
         int index1 = floename1.charAt(4);
         int index2 = floename1.charAt(4);
         AbstractField floe1 = Control.getInstance().gameField.getFloeAt(index1);
@@ -130,6 +134,7 @@ public class Control {
         Control.getInstance().characters.add(ch);
         Control.getInstance().PlayerCount += 1;
         Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).Accept(ch);
+        return 0;
     }
 
     public static int MoveChar(int chara, String direction) {
@@ -145,7 +150,8 @@ public class Control {
     }
 
     public static int Dig(int chara) {
-
+        Control.getInstance().characters.get(chara).Dig();
+        return 0;
     }
 
     public static int Pickup(int chara) {

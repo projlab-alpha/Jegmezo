@@ -3,6 +3,8 @@ package control;
 import character.PolarBear;
 import field.GameField;
 
+import java.util.ArrayList;
+
 /**
  * Singleton osztály, amely a játék állapotának követésért, a játék lebonyolításáért felelős.
  */
@@ -12,6 +14,11 @@ public class Control {
      * A játékos karakterek száma a játékmezőn.
      */
     private int PlayerCount;
+
+    /**
+     * A játékos karakterek listája.
+     */
+    private ArrayList<character.Character> characters = new ArrayList<character.Character>();
 
     /**
      * A játékban résztvevő jegesmedve referenciája.

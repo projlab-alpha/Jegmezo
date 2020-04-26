@@ -81,10 +81,6 @@ public class Control {
 
     //// COMMANDS ////
 
-    /**
-     * Pálya szélessége és magassága
-     */
-
     private static Item convertItem(String item) {
         Item i;
         if(item.equalsIgnoreCase("Cartridge"))
@@ -110,12 +106,12 @@ public class Control {
     }
 
 
-    public static int Load(String filename) {
-
+    public static int Load(String filename) {       //TODO
+        return -1;
     }
 
-    public static int Save(String filename) {
-
+    public static int Save(String filename) {       //TODO
+        return -1;
     }
 
     public static int Init() {
@@ -134,7 +130,7 @@ public class Control {
         return 0;
     }
 
-    public static int SetNeighbor(String floename1, String floename2) {                 //inkább így, nem?
+    public static int SetNeighbor(String floename1, String floename2) {
         int index1 = floename1.charAt(4);
         int index2 = floename1.charAt(4);
         AbstractField floe1 = Control.getInstance().gameField.getFloeAt(index1);
@@ -231,17 +227,19 @@ public class Control {
         return 0;
     }
 
-    public static int UseItem(int chara, String item) {
-        try {
-            Control.getInstance().characters.get(chara).UseItem();      //TODO: item névből index
-        } catch(Exception e) {
-            return -1;
-        }
-        return 0;
+    public static int UseItem(int chara, String item) {         //TODO
+        return -1;
+
+        //try {
+        //    Control.getInstance().characters.get(chara).UseItem(-1);      //TODO: item névből index?
+        //} catch(Exception e) {
+        //    return -1;
+        //}
+        //return 0;
     }
 
-    public static int UseAbility(int chara, String direction) {     //TODO: milyen irányok vannak?
-
+    public static int UseAbility(int chara, String direction) {     //TODO
+        return -1;
     }
 
     public static int SnowStorm(String floename) {
@@ -254,8 +252,8 @@ public class Control {
         return 0;
     }
 
-    public static int Push(String filename) {
-
+    public static int Push(String filename) {       //TODO
+        return -1;
     }
 
     public static int CharAddItem(int chara, String item) {         //TODO: Prototípus concepcióban az argumentumnak Item helyett nem Stringnek kéne lennie?

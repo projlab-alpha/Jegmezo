@@ -86,12 +86,6 @@ public class Control {
      */
     private static int map_size = -1;
 
-    private static int convertCoords(int x, int y) {
-        if (x < 0 || x >= map_size || y < 0 || y >= map_size)
-            return -1;
-        return y * map_size + x;
-    }
-
     private static Item convertItem(String item) {
         Item i;
         if(item.equalsIgnoreCase("Cartridge"))
@@ -152,7 +146,7 @@ public class Control {
         return -1;
     }
 
-    public static int AddChar(String chartype, int width, int height) {
+    public static int AddChar(String chartype, String floename) {
         character.Character ch;
 
         if(chartype.equalsIgnoreCase("Eskimo")) {
@@ -161,9 +155,10 @@ public class Control {
             ch = new Researcher();
         } else return -1;
         try {
+            int idx = floename.charAt(4);
             Control.getInstance().characters.add(ch);
             Control.getInstance().PlayerCount += 1;
-            Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).Accept(ch);
+            Control.getInstance().gameField.getFloeAt(idx).Accept(ch);
         } catch(Exception e) {
             return -1;
         }
@@ -213,9 +208,10 @@ public class Control {
 
     }
 
-    public static int SnowStorm(int width, int height) {
+    public static int SnowStorm(String floename) {
         try {
-            Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).SnowStormHit();
+            int idx = floename.charAt(4);
+            Control.getInstance().gameField.getFloeAt(idx).SnowStormHit();
         } catch(Exception e) {
             return -1;
         }
@@ -239,12 +235,13 @@ public class Control {
         return 0;
     }
 
-    public static int FloeAddItem(int width, int height, String item) {
+    public static int FloeAddItem(String floename, String item) {
         Item i = convertItem(item);
         if(i == null)
             return -1;
         try {
-            Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).setItem(i);
+            int idx = floename.charAt(4);
+            Control.getInstance().gameField.getFloeAt(idx).setItem(i);
         } catch (Exception e) {
             return -1;
         }
@@ -266,7 +263,7 @@ public class Control {
         return 0;
     }
 
-    public static int FloeSnowStormStrategy(int width, int height, String sss) {
+    public static int FloeSnowStormStrategy(String floename, String sss) {
         SnowstormStrategy s;
         if(sss.equalsIgnoreCase("default"))
             s = new SnowstormStrategyDefault();
@@ -276,7 +273,8 @@ public class Control {
             s = new SnowstormStrategyTent();
         else return -1;
         try {
-            Control.getInstance().gameField.getFloeAt(convertCoords(width, height)).ChangeSnowStrategy(s);
+            int idx = floename.charAt(4);
+            Control.getInstance().gameField.getFloeAt(idx).ChangeSnowStrategy(s);
         } catch(Exception e) {
             return -1;
         }
@@ -291,29 +289,31 @@ public class Control {
 
     }
 
-    public static int AddUnstableFloe(int width, int height, int capacity) {
+    public static int AddUnstableFloe(String floename, int capacity) {
         int rand_snowcount = new Random().nextInt(4) + 1;
         UnstableFloe uf = new UnstableFloe(null, capacity, rand_snowcount);
         try {
-            Control.getInstance().gameField.getFloes().set(convertCoords(width, height), uf);
+            int idx = floename.charAt(4);
+            Control.getInstance().gameField.getFloes().set(idx, uf);
         } catch(Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int AddHole(int width, int height) {
+    public static int AddHole(String floename) {
         int rand_snowcount = new Random().nextInt(4) + 1;
         Hole h = new Hole(null, rand_snowcount);
         try {
-            Control.getInstance().gameField.getFloes().set(convertCoords(width, height), h);
+            int idx = floename.charAt(4);
+            Control.getInstance().gameField.getFloes().set(idx, h);
         } catch(Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int SetSnow(int width, int height, int snow) {
+    public static int SetSnow(String floename, int snow) {
 
     }
 }

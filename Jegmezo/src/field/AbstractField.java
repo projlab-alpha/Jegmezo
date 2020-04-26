@@ -219,6 +219,8 @@ public abstract class AbstractField {
         bearattackstrat.execute(characters);
     }
 
+    //// PROTOTÍPUS ////
+
     /**
      * Beállítja a táblán lévő itemet az arg-ban kapott itemre
      * A prototípus debuggolás érdekében
@@ -226,5 +228,16 @@ public abstract class AbstractField {
      */
     public void setItem(Item i) {
         this.item = i;
+    }
+
+    /**
+     * Beállítja a táblát borító hó mennyiségét
+     * A prototípus debuggolás érdekébe
+     * @param i a beállítandó hó mennyisége
+     */
+    public void setSnowCount(int i) {
+        if(i < 0)
+            return;
+        this.SnowCount = i;
     }
 }

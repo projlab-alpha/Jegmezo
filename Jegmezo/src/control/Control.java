@@ -314,6 +314,12 @@ public class Control {
     }
 
     public static int SetSnow(String floename, int snow) {
-
+        try {
+            int idx = floename.charAt(4);
+            Control.getInstance().gameField.getFloeAt(idx).setSnowCount(snow);
+        } catch(Exception e) {
+            return -1;
+        }
+        return 0;
     }
 }

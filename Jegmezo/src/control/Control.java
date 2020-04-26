@@ -165,12 +165,18 @@ public class Control {
         return 0;
     }
 
-    public static int MoveChar(int chara, String direction) {
 
-    }
-
-    public static int MoveChar(int chara, int width, int height) {
-
+    public static int MoveChar(int chara, String floename) {        //TODO: 08 - Részletes tervek: 8.2.7 - 'Down' argumentum helyett floex kell
+        try {
+            int idx = floename.charAt(4);
+            AbstractField f = Control.getInstance().gameField.getFloeAt(idx);
+            character.Character c = Control.getInstance().characters.get(chara);
+            c.setField(f);
+            f.Accept(c);
+        } catch(Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int ShowCharDetails(int chara, String attr) {
@@ -204,7 +210,7 @@ public class Control {
         return 0;
     }
 
-    public static int UseAbility(int chara, String direction) {
+    public static int UseAbility(int chara, String direction) {     //TODO: milyen irányok vannak?
 
     }
 

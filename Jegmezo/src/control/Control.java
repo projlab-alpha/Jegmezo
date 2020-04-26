@@ -150,7 +150,11 @@ public class Control {
     }
 
     public static int Dig(int chara) {
-        Control.getInstance().characters.get(chara).Dig();
+        try {
+            Control.getInstance().characters.get(chara).Dig();
+        } catch(Exception e) {
+            return -1;
+        }
         return 0;
     }
 

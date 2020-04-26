@@ -33,6 +33,10 @@ public class Commands {
 
     }
 
+    public static int ShowCharDetails(int chara, String attr) {
+
+    }
+
     public static int Dig(int chara) {
 
     }

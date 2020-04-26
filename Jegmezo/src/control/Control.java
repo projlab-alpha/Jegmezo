@@ -1,6 +1,7 @@
 package control;
 
 import character.PolarBear;
+import field.AbstractField;
 import field.Floe;
 import field.GameField;
 
@@ -96,8 +97,13 @@ public class Control {
     }
 
     //public static int SetNeighbor(AbstractFloe floe1, AbstractFloe floe2)     //TODO: Mire gondoltatok? Hogyan lesz egy szöveges parancsból AbstractFloe példány?
-    public static int SetNeighbor(String floe1, String floe2) {                 //      inkább így, nem?
-
+    public static int SetNeighbor(String floename1, String floename2) {                 //      inkább így, nem?
+        int index1 = floename1.charAt(4);
+        int index2 = floename1.charAt(4);
+        AbstractField floe1 = Control.getInstance().gameField.getFloes().get(index1);
+        AbstractField floe2 = Control.getInstance().gameField.getFloes().get(index2);
+        //TODO: Honnan tudjuk, melyik irányban szomszédosak?
+        return -1;
     }
 
     public static int AddChar(String chartype, int width, int height) {

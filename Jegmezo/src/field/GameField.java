@@ -42,6 +42,15 @@ public class GameField {
      * mező SnowStormHit() metódusát.
      */
     public void SnowStorm(){
+        //TODO
+    }
 
+    /**
+     * Visszatér a játékmezőn lévő jégtáblákat tartalmazó tömbbel.
+     * Prototípus működése érdekében.
+     * @return a jégtáblákat tartalmazó tömb.
+     */
+    public ArrayList<AbstractField> getFloes() {
+        return floes;
     }
 }

@@ -1,9 +1,11 @@
 package control;
 
 import character.PolarBear;
+import field.Floe;
 import field.GameField;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Singleton osztály, amely a játék állapotának követésért, a játék lebonyolításáért felelős.
@@ -72,6 +74,7 @@ public class Control {
 
     private static int map_size = -1;
 
+
     public static int Load(String filename) {
 
     }
@@ -81,7 +84,15 @@ public class Control {
     }
 
     public static int Init(int size) {
+        if(size <= 0)
+            return -1;
 
+        for(int i = 0; i < size; ++i) {
+            int rand_snowcount = new Random().nextInt(4) + 1;     //random int between 1 and 4 (inclusive)
+            Floe f = new Floe(null, 10, rand_snowcount);
+            Control.getInstance().gameField.addField(f);
+        }
+        return 0;
     }
 
     //public static int SetNeighbor(AbstractFloe floe1, AbstractFloe floe2)     //TODO: Mire gondoltatok? Hogyan lesz egy szöveges parancsból AbstractFloe példány?

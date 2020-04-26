@@ -1,2 +1,2 @@
-module jegmezo {
+module Jegmezo {
 }

@@ -81,7 +81,7 @@ public class Control {
 
     //// COMMANDS ////
 
-    private static Item convertItem(String item) {
+    private Item convertItem(String item) {
         Item i;
         if(item.equalsIgnoreCase("Cartridge"))
             i = new Cartridge();
@@ -106,40 +106,40 @@ public class Control {
     }
 
 
-    public static int Load(String filename) {       //TODO
+    public int Load(String filename) {       //TODO
         return -1;
     }
 
-    public static int Save(String filename) {       //TODO
+    public int Save(String filename) {       //TODO
         return -1;
     }
 
-    public static int Init() {
+    public int Init() {
         return Init(5);
     }
 
-    public static int Init(int size) {
+    public int Init(int size) {
         if(size <= 0)
             return -1;
 
         for(int i = 0; i < size * size; ++i) {
             int rand_snowcount = new Random().nextInt(4) + 1;     //random int between 1 and 4 (inclusive)
             Floe f = new Floe(null, 10, rand_snowcount);
-            Control.getInstance().gameField.addField(f);
+            this.gameField.addField(f);
         }
         return 0;
     }
 
-    public static int SetNeighbor(String floename1, String floename2) {
+    public int SetNeighbor(String floename1, String floename2) {
         int index1 = floename1.charAt(4);
         int index2 = floename1.charAt(4);
-        AbstractField floe1 = Control.getInstance().gameField.getFloeAt(index1);
-        AbstractField floe2 = Control.getInstance().gameField.getFloeAt(index2);
+        AbstractField floe1 = this.gameField.getFloeAt(index1);
+        AbstractField floe2 = this.gameField.getFloeAt(index2);
         //TODO: Honnan tudjuk, melyik irányban szomszédosak?
         return -1;
     }
 
-    public static int AddChar(String chartype, String floename) {
+    public int AddChar(String chartype, String floename) {
         character.Character ch;
 
         if(chartype.equalsIgnoreCase("Eskimo")) {
@@ -149,9 +149,9 @@ public class Control {
         } else return -1;
         try {
             int idx = floename.charAt(4);
-            Control.getInstance().characters.add(ch);
-            Control.getInstance().PlayerCount += 1;
-            Control.getInstance().gameField.getFloeAt(idx).Accept(ch);
+            this.characters.add(ch);
+            this.PlayerCount += 1;
+            this.gameField.getFloeAt(idx).Accept(ch);
         } catch(Exception e) {
             return -1;
         }
@@ -159,11 +159,11 @@ public class Control {
     }
 
 
-    public static int MoveChar(int chara, String floename) {        //TODO: 08 - Részletes tervek: 8.2.7 - 'Down' argumentum helyett floex kell
+    public int MoveChar(int chara, String floename) {        //TODO: 08 - Részletes tervek: 8.2.7 - 'Down' argumentum helyett floe# kell
         try {
             int idx = floename.charAt(4);
-            AbstractField f = Control.getInstance().gameField.getFloeAt(idx);
-            character.Character c = Control.getInstance().characters.get(chara);
+            AbstractField f = this.gameField.getFloeAt(idx);
+            character.Character c = this.characters.get(chara);
             c.setField(f);
             f.Accept(c);
         } catch(Exception e) {
@@ -172,15 +172,15 @@ public class Control {
         return 0;
     }
 
-    public static int ShowCharDetails(int chara, String attr) {
+    public int ShowCharDetails(int chara, String attr) {
         try {
-            character.Character ch = Control.getInstance().characters.get(chara);
+            character.Character ch = this.characters.get(chara);
             System.out.println(ch.getClass().getSimpleName()+" : "+chara);
 
             if (attr.equalsIgnoreCase("pos")) {                    //pos parancs
                 AbstractField floe = ch.getField();
-                for (int i = 0; i < Control.getInstance().gameField.getFloes().size(); ++i) {
-                    AbstractField f = Control.getInstance().gameField.getFloeAt(i);
+                for (int i = 0; i < this.gameField.getFloes().size(); ++i) {
+                    AbstractField f = this.gameField.getFloeAt(i);
                     if (floe == f) {
                         System.out.println("\tPosition: floe" + i);
                         return 0;
@@ -209,56 +209,56 @@ public class Control {
         }
     }
 
-    public static int Dig(int chara) {
+    public int Dig(int chara) {
         try {
-            Control.getInstance().characters.get(chara).Dig();
+            this.characters.get(chara).Dig();
         } catch(Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int Pickup(int chara) {
+    public int Pickup(int chara) {
         try {
-            Control.getInstance().characters.get(chara).PickUpItem();
+            this.characters.get(chara).PickUpItem();
         } catch(Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int UseItem(int chara, String item) {         //TODO
+    public int UseItem(int chara, String item) {         //TODO
         return -1;
 
         //try {
-        //    Control.getInstance().characters.get(chara).UseItem(-1);      //TODO: item névből index?
+        //    this.characters.get(chara).UseItem(-1);      //TODO: item névből index?
         //} catch(Exception e) {
         //    return -1;
         //}
         //return 0;
     }
 
-    public static int UseAbility(int chara, String direction) {     //TODO
+    public int UseAbility(int chara, String direction) {     //TODO
         return -1;
     }
 
-    public static int SnowStorm(String floename) {
+    public int SnowStorm(String floename) {
         try {
             int idx = floename.charAt(4);
-            Control.getInstance().gameField.getFloeAt(idx).SnowStormHit();
+            this.gameField.getFloeAt(idx).SnowStormHit();
         } catch(Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int Push(String filename) {       //TODO
+    public int Push(String filename) {       //TODO
         return -1;
     }
 
-    public static int CharAddItem(int chara, String item) {         //TODO: Prototípus concepcióban az argumentumnak Item helyett nem Stringnek kéne lennie?
+    public int CharAddItem(int chara, String item) {         //TODO: Prototípus concepcióban az argumentumnak Item helyett nem Stringnek kéne lennie?
         try {
-            character.Character ch = Control.getInstance().characters.get(chara);
+            character.Character ch = this.characters.get(chara);
             Item i = convertItem(item);
             if(i == null)
                 return -1;
@@ -269,20 +269,20 @@ public class Control {
         return 0;
     }
 
-    public static int FloeAddItem(String floename, String item) {
+    public int FloeAddItem(String floename, String item) {
         Item i = convertItem(item);
         if(i == null)
             return -1;
         try {
             int idx = floename.charAt(4);
-            Control.getInstance().gameField.getFloeAt(idx).setItem(i);
+            this.gameField.getFloeAt(idx).setItem(i);
         } catch (Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int CharWaterStrategy(int chara, String ws) {
+    public int CharWaterStrategy(int chara, String ws) {
         WaterStrategy w;
         if(ws.equalsIgnoreCase("Default"))
             w = new WaterStrategyDefault();
@@ -290,14 +290,14 @@ public class Control {
             w = new WaterStrategySuit();
         else return -1;
         try {
-            Control.getInstance().characters.get(chara).ChangeStrategy(w);
+            this.characters.get(chara).ChangeStrategy(w);
         } catch(Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int FloeSnowStormStrategy(String floename, String sss) {
+    public int FloeSnowStormStrategy(String floename, String sss) {
         SnowstormStrategy s;
         if(sss.equalsIgnoreCase("default"))
             s = new SnowstormStrategyDefault();
@@ -308,59 +308,59 @@ public class Control {
         else return -1;
         try {
             int idx = floename.charAt(4);
-            Control.getInstance().gameField.getFloeAt(idx).ChangeSnowStrategy(s);
+            this.gameField.getFloeAt(idx).ChangeSnowStrategy(s);
         } catch(Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int CharActionPoints(int chara, int ap) {
+    public int CharActionPoints(int chara, int ap) {
         try {
-            Control.getInstance().characters.get(chara).setActionpoint(ap);
+            this.characters.get(chara).setActionpoint(ap);
             return 0;
         } catch(Exception e) {
             return -1;
         }
     }
 
-    public static int CharWarmth(int chara, int warmth) {       //TODO: Miért? Karakterek konstruktorban megkapják alapból a testhőjüket...
+    public int CharWarmth(int chara, int warmth) {       //TODO: Miért? Karakterek konstruktorban megkapják alapból a testhőjüket...
         try {
-            Control.getInstance().characters.get(chara).setWarmth(warmth);
+            this.characters.get(chara).setWarmth(warmth);
             return 0;
         } catch(Exception e) {
             return -1;
         }
     }
 
-    public static int AddUnstableFloe(String floename, int capacity) {
+    public int AddUnstableFloe(String floename, int capacity) {
         int rand_snowcount = new Random().nextInt(4) + 1;
         UnstableFloe uf = new UnstableFloe(null, capacity, rand_snowcount);
         try {
             int idx = floename.charAt(4);
-            Control.getInstance().gameField.getFloes().set(idx, uf);
+            this.gameField.getFloes().set(idx, uf);
         } catch(Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int AddHole(String floename) {
+    public int AddHole(String floename) {
         int rand_snowcount = new Random().nextInt(4) + 1;
         Hole h = new Hole(null, rand_snowcount);
         try {
             int idx = floename.charAt(4);
-            Control.getInstance().gameField.getFloes().set(idx, h);
+            this.gameField.getFloes().set(idx, h);
         } catch(Exception e) {
             return -1;
         }
         return 0;
     }
 
-    public static int SetSnow(String floename, int snow) {
+    public int SetSnow(String floename, int snow) {
         try {
             int idx = floename.charAt(4);
-            Control.getInstance().gameField.getFloeAt(idx).setSnowCount(snow);
+            this.gameField.getFloeAt(idx).setSnowCount(snow);
         } catch(Exception e) {
             return -1;
         }

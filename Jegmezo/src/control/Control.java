@@ -162,11 +162,21 @@ public class Control {
     }
 
     public static int Pickup(int chara) {
-
+        try {
+            Control.getInstance().characters.get(chara).PickUpItem();
+        } catch(Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int UseItem(int chara, String item) {
-
+        try {
+            Control.getInstance().characters.get(chara).UseItem();      //TODO: item névből index
+        } catch(Exception e) {
+            return -1;
+        }
+        return 0;
     }
 
     public static int UseAbility(int chara, String direction) {

@@ -40,6 +40,8 @@ public class Prototype {
                 res = Control.getInstance().MoveChar(Integer.parseInt(input[1]), input[2]);
             else if (command.equalsIgnoreCase("ShowCharDetails"))
                 res = Control.getInstance().ShowCharDetails(Integer.parseInt(input[1]), input[2]);
+            else if (command.equalsIgnoreCase("showfloedetails"))
+                res = Control.getInstance().ShowFloeDetails(input[1], input[2]);
             else if (command.equalsIgnoreCase("Dig"))
                 res = Control.getInstance().Dig(Integer.parseInt(input[1]));
             else if (command.equalsIgnoreCase("Pickup"))

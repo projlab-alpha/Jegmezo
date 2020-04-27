@@ -175,6 +175,39 @@ public class Control {
         }
         return 0;
     }
+    
+    
+    public int ShowFloeDetails(String floea, String attr) {
+    	int idx = Integer.parseInt(floea.substring(4, 5));
+    	if(attr.equalsIgnoreCase("snow")) {
+    		int snow= this.gameField.getFloeAt(idx).ChangeSnow(0);
+    		System.out.println("Floe: "+ floea+"\n"+ attr + ":" + snow);
+    		return 0;
+    	
+    	}
+    	else if(attr.equalsIgnoreCase("capacity")) {
+    		int snow= this.gameField.getFloeAt(idx).FindCapacity();
+    		System.out.println("Floe: "+ floea+"\n"+ attr + ":" + snow);
+    		return 0;
+    	}
+    	else if(attr.equalsIgnoreCase("snowstormstartegy")) {
+    		String snow= this.gameField.getFloeAt(idx).ChangeSnowStrategy(null).getClass().getSimpleName();
+    		System.out.println("Floe: "+ floea+"\n"+ attr + ":" + snow);
+    	}
+    	else if(attr.equalsIgnoreCase("type")) {
+    		String snow= this.gameField.getFloeAt(idx).getClass().getSimpleName();
+    		System.out.println("Floe: "+ floea+"\n"+ attr + ":" + snow);
+    		return 0;
+    	}
+		
+    	
+    	return -1;
+    	
+    	
+    	
+    	
+    	
+    }
 
     public int ShowCharDetails(int chara, String attr) {
         try {

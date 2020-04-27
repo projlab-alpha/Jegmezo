@@ -103,10 +103,11 @@ public abstract class AbstractField {
      * negatĂ­v.
      * @param i A vĂˇltoztatĂˇs mennyisĂ©ge
      */
-    public void ChangeSnow(int i){
+    public int ChangeSnow(int i){
         SnowCount += i;
         if(SnowCount < 0)
             SnowCount = 0;
+        return SnowCount;
     }
 
     /**
@@ -202,8 +203,10 @@ public abstract class AbstractField {
      * esetĂ©n vĂ©grehajtandĂł stratĂ©giĂˇt az argumentumban megadottra.
      * @param s Az Ăşj stratĂ©gia
      */
-    public void ChangeSnowStrategy(SnowstormStrategy s){
-        snowstormstrat = s;
+    public SnowstormStrategy ChangeSnowStrategy(SnowstormStrategy s){
+        if(s==null) return snowstormstrat;
+    	snowstormstrat = s;
+        return s;
     }
 
     /**

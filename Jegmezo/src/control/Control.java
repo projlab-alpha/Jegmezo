@@ -182,7 +182,7 @@ public class Control {
     	if(attr.equalsIgnoreCase("snow")) {
     		int snow= this.gameField.getFloeAt(idx).ChangeSnow(0);
     		System.out.println("Floe: "+ floea+"\n"+ attr + ":" + snow);
-    		return 0;
+    		return 0;    
     	
     	}
     	else if(attr.equalsIgnoreCase("capacity")) {

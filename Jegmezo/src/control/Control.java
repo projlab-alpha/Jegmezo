@@ -13,8 +13,13 @@ import waterStrategy.WaterStrategy;
 import waterStrategy.WaterStrategyDefault;
 import waterStrategy.WaterStrategySuit;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Singleton osztály, amely a játék állapotának követésért, a játék lebonyolításáért felelős.
@@ -106,14 +111,31 @@ public class Control {
     }
 
 
-    public int Load(String filename) {       //TODO
-        return -1;
-    }       //TODO
+    public int Load(String filename) {
+    	try{
+    	boolean exit = false;
+    	File f=new File(filename);
+    	FileReader fr = new FileReader(f);
+    	BufferedReader scanner=new BufferedReader(fr);
+        while(!exit) {
+            String[] input = scanner.readLine().split(" ");
+            int res = Prototype.parseInput(input);
+            System.out.println(res);
+        }
+        scanner.close();
+        System.out.println("Goodbye");}
+    	catch(Exception e) {System.out.println("Hiba a bet�lt�sben");return -1;}//TODO
+        return 0;
+    }       
 
     public int Save(String filename) {       //TODO
         return -1;
     }       //TODO
 
+    
+    
+    
+    
     public int Init() {
         return Init(5);
     }

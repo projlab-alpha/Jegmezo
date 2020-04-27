@@ -20,7 +20,7 @@ public class Prototype {
         System.out.println("Goodbye");
     }
 
-    private static int parseInput(String[] input) {
+    public static int parseInput(String[] input) {
         try {
             String command = input[0];
             int res = -1;

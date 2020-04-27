@@ -220,6 +220,9 @@ public abstract class Character {
     public void setActionpoint(int i) {
         this.actionpoint = i;
     }
+    public void ChActionpoint(int i) {
+        this.actionpoint = this.actionpoint+i;
+    }
 
     /**
      * Beállítja a karakter warmth mezőjét

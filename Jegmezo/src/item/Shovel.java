@@ -18,4 +18,7 @@ public class Shovel implements Item {
         c.getField().ChangeSnow(-2);
         return false;
     }
+
+
+
 }

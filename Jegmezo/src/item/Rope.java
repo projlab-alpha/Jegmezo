@@ -17,4 +17,7 @@ public class Rope implements Item {
         c.getField().Rescue();
         return false;
     }
+
+
+
 }

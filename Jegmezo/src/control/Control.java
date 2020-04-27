@@ -233,7 +233,6 @@ public class Control {
 
     public int UseItem(int chara, String item) { 
     	character.Character ch = this.characters.get(chara - 1);  //TODO
-    	System.out.println(item);
         if( ch.HasItem(item)){
         	Item i =convertItem(item);
         	i.UseItem(ch);

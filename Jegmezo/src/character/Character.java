@@ -177,7 +177,7 @@ public abstract class Character {
      */
     public boolean HasItem(String s){
         for (Item i : inventory) {
-            if (i.toString().equals(s))
+            if (i.getClass().getSimpleName().equalsIgnoreCase(s))
                 return true;
         }
         return false;

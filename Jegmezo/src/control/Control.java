@@ -231,8 +231,15 @@ public class Control {
         return 0;
     }
 
-    public int UseItem(int chara, String item) {         //TODO
-        return -1;
+    public int UseItem(int chara, String item) { 
+    	character.Character ch = this.characters.get(chara - 1);  //TODO
+    	System.out.println(item);
+        if( ch.HasItem(item)){
+        	Item i =convertItem(item);
+        	i.UseItem(ch);
+        	return 0;
+        };
+    	return -1;
 
         //try {
         //    this.characters.get(chara).UseItem(-1);      //TODO: item névből index? 

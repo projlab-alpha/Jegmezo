@@ -30,4 +30,4 @@ public class Hole extends AbstractField {
         c.setField(this);
         c.FellInWater();
     }
-}
+} 

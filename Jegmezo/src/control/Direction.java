@@ -9,3 +9,4 @@ public enum Direction { //TODO: most akkor milyen irányok is lehetnek?
     SOUTH
     //Bővíthető
 }
+ 

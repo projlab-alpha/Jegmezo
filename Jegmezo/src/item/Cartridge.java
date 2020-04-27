@@ -24,6 +24,6 @@ public class Cartridge implements Item {
         return false;
     }
 
-
+ 
 }
 

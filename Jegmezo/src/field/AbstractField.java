@@ -207,7 +207,7 @@ public abstract class AbstractField {
         if(s==null) return snowstormstrat;
     	snowstormstrat = s;
         return s;
-    }
+    } 
 
     /**
      * MegvĂˇltoztatja a medve

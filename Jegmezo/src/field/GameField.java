@@ -26,7 +26,7 @@ public class GameField {
         this.SnowstormChance = 0.5;
         floes = new ArrayList<>();
     }
-
+ 
     /**
      * Hozzáad egy jégmezőt a jégtáblához.
      * @param f a hozzáadandó jégmező

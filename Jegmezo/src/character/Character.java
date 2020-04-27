@@ -179,7 +179,7 @@ public abstract class Character {
         for (Item i : inventory) {
             if (i.getClass().getSimpleName().equalsIgnoreCase(s))
                 return true;
-        }
+        } 
         return false;
     }
 

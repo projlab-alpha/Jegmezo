@@ -15,6 +15,6 @@ public interface Item {
      */
     boolean UseItem(character.Character c);
     
-
+ 
 }
 	

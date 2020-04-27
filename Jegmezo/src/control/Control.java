@@ -189,7 +189,7 @@ public class Control {
     		int snow= this.gameField.getFloeAt(idx).FindCapacity();
     		System.out.println("Floe: "+ floea+"\n"+ attr + ":" + snow);
     		return 0;
-    	}
+    	} 
     	else if(attr.equalsIgnoreCase("snowstormstartegy")) {
     		String snow= this.gameField.getFloeAt(idx).ChangeSnowStrategy(null).getClass().getSimpleName();
     		System.out.println("Floe: "+ floea+"\n"+ attr + ":" + snow);

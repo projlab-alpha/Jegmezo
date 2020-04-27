@@ -118,13 +118,18 @@ public class Control {
     	FileReader fr = new FileReader(f);
     	BufferedReader scanner=new BufferedReader(fr);
         while(!exit) {
-            String[] input = scanner.readLine().split(" ");
-            int res = Prototype.parseInput(input);
-            System.out.println(res);
+        	if(scanner.ready()) {
+        		String[] input = scanner.readLine().split(" ");
+        		int res = Prototype.parseInput(input);
+        		System.out.println(res);
+        	}
+        	else
+        		exit = true;
+            
         }
         scanner.close();
-        System.out.println("Goodbye");}
-    	catch(Exception e) {System.out.println("Hiba a betöltésben");return -1;}//TODO
+        }
+    	catch(Exception e) {System.out.println(e.getMessage());return -1;}//TODO
         return 0;
     }       
 

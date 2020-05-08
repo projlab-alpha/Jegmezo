@@ -1,6 +1,0 @@
-Init
-AddUnstableFloe „floe2” 1
-AddChar “eskimo1” „floe1”
-AddChar “researcher1” „floe1”
-MoveChar 1 „floe2”
-MoveChar 2 „floe2”

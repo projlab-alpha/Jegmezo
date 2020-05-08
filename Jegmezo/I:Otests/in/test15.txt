@@ -1,7 +1,0 @@
-Init
-AddChar “eskimo1” „floe1”
-CharWarmth 1 4
-CharAdditem 1 tent
-UseItem 1 tent
-SnowStorm
-ShowFloeDetails „floe1” snowstormstrat

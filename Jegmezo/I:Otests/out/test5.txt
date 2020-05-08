@@ -1,2 +1,0 @@
-researcher1: 2
-Warmth: 5

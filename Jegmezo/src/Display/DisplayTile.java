@@ -19,10 +19,12 @@ public class DisplayTile extends JLabel {
     }
 
     public void redraw() {
-        FieldAppearance appearance = field.getAppearance();
-        BufferedImage base, combined;
-        ArrayList<BufferedImage> overlays = new ArrayList<>();
         try {
+            //Get associated field appearance
+            FieldAppearance appearance = field.getAppearance();
+            BufferedImage base, combined;
+            ArrayList<BufferedImage> overlays = new ArrayList<>();
+
             //Set base layer
             if(appearance.isHole)
                 base = ImageIO.read(DisplayTile.class.getResource("/images/Hole.png"));
@@ -56,8 +58,7 @@ public class DisplayTile extends JLabel {
 
             //Set label icon to combined image
             this.setIcon(new ImageIcon(combined));
-
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
             this.setIcon(new ImageIcon(DisplayTile.class.getResource("/images/ErrorFloe.png")));
         }

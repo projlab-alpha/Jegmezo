@@ -1,6 +1,7 @@
 package Display;
 
 import control.Control;
+import field.Floe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,8 +55,11 @@ public class DisplayWindow extends JFrame {
         //container panel for game tiles
         JPanel gameTableDisplay = new JPanel();
         gameTableDisplay.setLayout(new GridLayout(width, height));
+
+        Floe testfloe = new Floe(null, 10, 3);  //TODO: replace test with initialized floes
+
         for(int i = 0; i < width * height; i++) {
-            gameTableDisplay.add(new DisplayTile());
+            gameTableDisplay.add(new DisplayTile(testfloe));
         }
         Dimension dim = new Dimension(width * 32, height * 32);
         gameTableDisplay.setPreferredSize(dim);

@@ -1,2 +1,0 @@
-Floe: „floe1”
-Snowstormstrat: SnowstormStrategyDefault

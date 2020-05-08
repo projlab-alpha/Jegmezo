@@ -1,8 +1,0 @@
-Init
-AddHole „floe2”
-AddChar “eskimo1” „floe1”
-AddChar “researcher1” „floe1”
-CharAdditem 1 rope
-MoveChar 2 „floe2”
-UseItem 1 rope
-ShowCharDetails 2 warmth

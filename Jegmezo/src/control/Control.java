@@ -9,6 +9,12 @@ import java.util.ArrayList;
  * Singleton osztály, amely a játék állapotának követésért, a játék lebonyolításáért felelős.
  */
 public class Control {
+    //TODO: Cycle between players
+    //TODO: Turn logic
+    //TODO: Snowstorms
+    //TODO: Remove tents after each turn
+    //TODO: End game if any character has isDrowning == true
+
 
     /**
      * A játékos karakterek száma a játékmezőn.

@@ -19,7 +19,7 @@ public class Researcher extends Character {
      * Használja a sarkkutató különleges képességét, mely
      * során az argumentumban megadott irányban lévő szomszédos jégmezőről
      * megállapítja, hány karaktert bír el átfordulás nélkül. Ehhez meghívja a jelenlegi mező
-     * FindCapacity metódusát, átadva neki a d Direction-t, eggyel csökkenti a sarkkutató
+     * FindCapacity metódusát, átadva neki a d Direction-t, eggyel csö kkenti a sarkkutató
      * hátralévő munkáinak számát., majd visszatér a kapott értékkel.
      * @param d Az irány amerre használja képességét.
      * @return A kutatott tábla kapacitása.

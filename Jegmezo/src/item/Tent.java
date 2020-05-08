@@ -22,4 +22,7 @@ public class Tent implements Item {
         c.getField().ChangeSnowStrategy(new SnowstormStrategyTent());
         return true;
     }
+
+
 }
+ 

@@ -26,7 +26,7 @@ public class Floe extends AbstractField {
      * argumentumként.
      * @param c Az átvett karakter
      */
-    @Override
+    @Override 
     public void Accept(character.Character c) {
         this.characters.add(c);
         c.setField(this);

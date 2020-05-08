@@ -19,7 +19,7 @@ public class BearAttackStrategyDefault implements BearAttackStrategy {
      */
     @Override
     public void execute(ArrayList<Character> chars) {
-        if (chars.isEmpty() == false)
+        if (chars.size() > 1)
             Control.getInstance().CharacterDied();
     }
 }

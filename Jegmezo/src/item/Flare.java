@@ -23,4 +23,6 @@ public class Flare implements Item {
             Control.getInstance().Win();
         return false;
     }
+
+ 
 }

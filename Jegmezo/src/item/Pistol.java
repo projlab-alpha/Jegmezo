@@ -23,4 +23,7 @@ public class Pistol implements Item {
             Control.getInstance().Win();
         return false;
     }
+
+ 
 }
+

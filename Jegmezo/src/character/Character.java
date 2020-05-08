@@ -50,7 +50,7 @@ public abstract class Character {
      * Konstruktor.
      */
     public Character() {
-        actionpoint = 0;
+        actionpoint = 4;
         warmth = 0;
         drowning = false;
         inventory = new ArrayList<>();
@@ -177,9 +177,9 @@ public abstract class Character {
      */
     public boolean HasItem(String s){
         for (Item i : inventory) {
-            if (i.toString().equals(s))
+            if (i.getClass().getSimpleName().equalsIgnoreCase(s))
                 return true;
-        }
+        } 
         return false;
     }
 
@@ -198,5 +198,63 @@ public abstract class Character {
      */
     public void setField(AbstractField f) {
         this.field = f;
+    }
+
+    //// PROTOTÍPUS ////
+
+    /**
+     * Hozzáadja az arg-ban kapott itemet az inventoryhoz
+     * A prototípus debuggolás érdekében
+     * @param i hozzáadandó item
+     */
+    public void addItem(Item i) {
+        this.inventory.add(i);
+    }
+
+    /**
+     * Beállítja a karakter Actionpoint mezőjét
+     * az argumentumban kapott értékre.
+     * A prototípus debuggolás érdekében
+     * @param i új actionpoint érték
+     */
+    public void setActionpoint(int i) {
+        this.actionpoint = i;
+    }
+    public void ChActionpoint(int i) {
+        this.actionpoint = this.actionpoint+i;
+    }
+
+    /**
+     * Beállítja a karakter warmth mezőjét
+     * az argumentumban kapott értékre.
+     * A prototípus debuggolás érdekében
+     * @param i új warmth érték
+     */
+    public void setWarmth(int i) {
+        this.warmth = i;
+    }
+
+    /**
+     * Visszatér egy String tömbbel, ami tartalmazza a karakter bizonyos adatait.
+     * [0] = akciópontok
+     * [1] = Tárgyak
+     * [2] = testhő
+     * [3] = vízbeesési stratégia
+     * A prototípus debuggolás érdekében
+     * @return String tömb amely tartalmazza az adatokat
+     */
+    public String[] getAttributes() {
+        String[] res = new String[4];
+        res[0] = Integer.toString(this.actionpoint);
+        res[1] = "";
+        if(!this.inventory.isEmpty()) {
+            for (Item i : this.inventory) {
+                res[1] = res[1] + i.getClass().getSimpleName() + " ";
+            }
+        }
+        else res[1] = "None";
+        res[2] = Integer.toString(this.warmth);
+        res[3] = this.waterstrat.getClass().getSimpleName();
+        return res;
     }
 }

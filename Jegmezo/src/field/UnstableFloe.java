@@ -27,7 +27,7 @@ public class UnstableFloe extends AbstractField {
      * argumentumként. Ha ez után a karaktereket tároló kollekció hossza nagyobb, mint az
      * osztály capacity tagváltozójának értéke, akkor meghívja a saját RollOver() metódusát.
      * @param c Az átvett karakter
-     */
+     */ 
     @Override
     public void Accept(Character c) {
         this.characters.add(c);
@@ -44,5 +44,12 @@ public class UnstableFloe extends AbstractField {
         for (character.Character c : this.characters) {
             c.FellInWater();
         }
+    }
+
+    @Override
+    public FieldAppearance getAppearance() {
+        FieldAppearance res = super.getAppearance();
+        res.isUnstable = true;
+        return res;
     }
 }

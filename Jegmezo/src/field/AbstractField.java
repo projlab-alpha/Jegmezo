@@ -1,64 +1,70 @@
 package field;
 
 import bearAttackStrategy.BearAttackStrategy;
+import bearAttackStrategy.BearAttackStrategyIgloo;
+import character.Eskimo;
+import character.PolarBear;
+import character.Researcher;
 import control.Direction;
 import item.Item;
 import snowstormStrategy.SnowstormStrategy;
 import snowstormStrategy.SnowstormStrategyDefault;
+import snowstormStrategy.SnowstormStrategyIgloo;
+import snowstormStrategy.SnowstormStrategyTent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * A játékban előforduló mezőket reprezentáló osztályok absztrakt ősosztálya,
- * tárolja a szomszédjait, valamint a karaktereket, akik rajta állnak.
+ * A jĂˇtĂ©kban elĹ‘fordulĂł mezĹ‘ket reprezentĂˇlĂł osztĂˇlyok absztrakt Ĺ‘sosztĂˇlya,
+ * tĂˇrolja a szomszĂ©djait, valamint a karaktereket, akik rajta Ăˇllnak.
  */
 public abstract class AbstractField {
 
     /**
-     * A mezőt fedő hó mennyisége.
+     * A mezĹ‘t fedĹ‘ hĂł mennyisĂ©ge.
      */
     private int SnowCount;
 
     /**
-     * A mező teherbíró képessége, megadja, egyszerre hány karakter fér el
-     * rajta vízbe esés veszélye nélkül.
+     * A mezĹ‘ teherbĂ­rĂł kĂ©pessĂ©ge, megadja, egyszerre hĂˇny karakter fĂ©r el
+     * rajta vĂ­zbe esĂ©s veszĂ©lye nĂ©lkĂĽl.
      */
-    protected int Capacity; //TODO: dokumentációban private helyett protected kellene
+    protected int Capacity;
 
     /**
-     * A stratégia, amely meghatározza a működést abban az esetben, ha
-     * egy medve lép a mezőre.
+     * A stratĂ©gia, amely meghatĂˇrozza a mĹ±kĂ¶dĂ©st abban az esetben, ha
+     * egy medve lĂ©p a mezĹ‘re.
      */
     private BearAttackStrategy bearattackstrat;
 
     /**
-     * A stratégia, amely meghatározza a működést abban az esetben, ha
-     * a mezőt jégvihar érint.
+     * A stratĂ©gia, amely meghatĂˇrozza a mĹ±kĂ¶dĂ©st abban az esetben, ha
+     * a mezĹ‘t jĂ©gvihar Ă©rint.
      */
     private SnowstormStrategy snowstormstrat;
 
     /**
-     * A mezőn található item. Ha a mezőn nincsen item, akkor ennek értéke null.
+     * A mezĹ‘n talĂˇlhatĂł item. Ha a mezĹ‘n nincsen item, akkor ennek Ă©rtĂ©ke null.
      */
     private Item item;
 
     /**
-     * Kollekció, amely a mezővel szomszédos mezők referenciáját tárolja, a lehetséges irányokban.
+     * KollekciĂł, amely a mezĹ‘vel szomszĂ©dos mezĹ‘k referenciĂˇjĂˇt tĂˇrolja, a lehetsĂ©ges irĂˇnyokban.
      */
     private HashMap<Direction, AbstractField> neighbours;
 
     /**
-     * Kollekció a mezőn jelenleg elhelyezkedő karakterekről.
+     * KollekciĂł a mezĹ‘n jelenleg elhelyezkedĹ‘ karakterekrĹ‘l.
      */
     protected ArrayList<character.Character> characters;
 
 
     /**
-     * Beállítja a jégtáblába fagyott tárgyat, a tábla kapacitását, és a táblán lévő hó mennyiségét.
-     * @param item a jégtáblába fagyott tárgy
-     * @param capacity a tábla kapacitása
-     * @param snowcount a táblán lévő hó mennyisége
+     * BeĂˇllĂ­tja a jĂ©gtĂˇblĂˇba fagyott tĂˇrgyat, a tĂˇbla kapacitĂˇsĂˇt, Ă©s a tĂˇblĂˇn lĂ©vĹ‘ hĂł mennyisĂ©gĂ©t.
+     * @param item a jĂ©gtĂˇblĂˇba fagyott tĂˇrgy
+     * @param capacity a tĂˇbla kapacitĂˇsa
+     * @param snowcount a tĂˇblĂˇn lĂ©vĹ‘ hĂł mennyisĂ©ge
      */
     public AbstractField(Item item, int capacity, int snowcount) {
         this.item = item;
@@ -70,52 +76,53 @@ public abstract class AbstractField {
     }
 
     /**
-     * Absztrakt metódus, elfogad egy karaktert, amely a mezőre próbál mozogni.
-     * @param c Az átvett karakter
+     * Absztrakt metĂłdus, elfogad egy karaktert, amely a mezĹ‘re prĂłbĂˇl mozogni.
+     * @param c Az Ăˇtvett karakter
      */
     public abstract void Accept(character.Character c);
 
     /**
-     * Átlépteti az argumentumként átadott
-     * karaktert a megfelelő irányban lévő szomszédos mezőre, úgy, hogy meghívja a
-     * szomszédos mező Accept metódusát az átadott karakterrel.
-     * @param d A mozgás iránya
-     * @param c A mozgatandó karakter
+     * Ă�tlĂ©pteti az argumentumkĂ©nt Ăˇtadott
+     * karaktert a megfelelĹ‘ irĂˇnyban lĂ©vĹ‘ szomszĂ©dos mezĹ‘re, Ăşgy, hogy meghĂ­vja a
+     * szomszĂ©dos mezĹ‘ Accept metĂłdusĂˇt az Ăˇtadott karakterrel.
+     * @param d A mozgĂˇs irĂˇnya
+     * @param c A mozgatandĂł karakter
      */
     public void MoveChar(Direction d, character.Character c){
         neighbours.get(d).Accept(c);
     }
 
     /**
-     * Az inicializáláshoz használt
-     * metódus, amely elhelyezi a szomszédokat tároló kollekcióban az argumentumként
-     * megadott mezőt a megadott iránnyal párosítva.
-     * @param d A szomszéd iránya
-     * @param neighbour a szomszédos mező
+     * Az inicializĂˇlĂˇshoz hasznĂˇlt
+     * metĂłdus, amely elhelyezi a szomszĂ©dokat tĂˇrolĂł kollekciĂłban az argumentumkĂ©nt
+     * megadott mezĹ‘t a megadott irĂˇnnyal pĂˇrosĂ­tva.
+     * @param d A szomszĂ©d irĂˇnya
+     * @param neighbour a szomszĂ©dos mezĹ‘
      */
     public void setNeighbour(Direction d, AbstractField neighbour) {
         neighbours.put(d, neighbour);
     }
 
     /**
-     *  Hozzáadja az argumentumban megadott értéket a mezőt
-     * fedő hó mennyiségéhez. A hó mennyisége a változtatás után garantáltan nem lesz
-     * negatív.
-     * @param i A változtatás mennyisége
+     *  HozzĂˇadja az argumentumban megadott Ă©rtĂ©ket a mezĹ‘t
+     * fedĹ‘ hĂł mennyisĂ©gĂ©hez. A hĂł mennyisĂ©ge a vĂˇltoztatĂˇs utĂˇn garantĂˇltan nem lesz
+     * negatĂ­v.
+     * @param i A vĂˇltoztatĂˇs mennyisĂ©ge
      */
-    public void ChangeSnow(int i){
+    public int ChangeSnow(int i){
         SnowCount += i;
         if(SnowCount < 0)
             SnowCount = 0;
+        return SnowCount;
     }
 
     /**
-     * Ha a mezőn nincsen item, vagy, ha a mezőt több, mint 0
-     * egységnyi hó borítja, akkor a metódus null referenciával tér vissza. Ha a mezőn van
-     * item, és 0 egységnyi hó borítja, akkor ideiglenesen tárolja a mezőn lévő item
-     * referenciáját, törli a valós referenciát a mező tagváltozójából, majd visszatér a tárolt
-     * item referenciájával.
-     * @return A táblán lévő tárgy, vagy null, ha nem elérhető
+     * Ha a mezĹ‘n nincsen item, vagy, ha a mezĹ‘t tĂ¶bb, mint 0
+     * egysĂ©gnyi hĂł borĂ­tja, akkor a metĂłdus null referenciĂˇval tĂ©r vissza. Ha a mezĹ‘n van
+     * item, Ă©s 0 egysĂ©gnyi hĂł borĂ­tja, akkor ideiglenesen tĂˇrolja a mezĹ‘n lĂ©vĹ‘ item
+     * referenciĂˇjĂˇt, tĂ¶rli a valĂłs referenciĂˇt a mezĹ‘ tagvĂˇltozĂłjĂˇbĂłl, majd visszatĂ©r a tĂˇrolt
+     * item referenciĂˇjĂˇval.
+     * @return A tĂˇblĂˇn lĂ©vĹ‘ tĂˇrgy, vagy null, ha nem elĂ©rhetĹ‘
      */
     public Item RequestItem(){
         if(item != null && SnowCount == 0) {
@@ -128,33 +135,37 @@ public abstract class AbstractField {
     }
 
     /**
-     * Visszatér a megadott irányban található szomszédos
-     * mező Capacity tagváltozójának jelenlegi értékével.
-     * @param d A keresett irány
-     * @return A jégtábla kapacitása
+     * VisszatĂ©r a megadott irĂˇnyban talĂˇlhatĂł szomszĂ©dos
+     * mezĹ‘ Capacity tagvĂˇltozĂłjĂˇnak jelenlegi Ă©rtĂ©kĂ©vel.
+     * @param d A keresett irĂˇny
+     * @return A jĂ©gtĂˇbla kapacitĂˇsa
      */
     public int FindCapacity(Direction d){
         return neighbours.get(d).Capacity;
     }
+    
+    public int FindCapacity() {
+    	return Capacity;
+    }
 
     /**
-     * Ez a metódus hívódik meg, ha a mezőt jégvihar érint.
-     * Meghívja a tárolt SnowStormStrategy execute() metódusát, átadva a characters
-     * tagváltozó referenciáját.
+     * Ez a metĂłdus hĂ­vĂłdik meg, ha a mezĹ‘t jĂ©gvihar Ă©rint.
+     * MeghĂ­vja a tĂˇrolt SnowStormStrategy execute() metĂłdusĂˇt, Ăˇtadva a characters
+     * tagvĂˇltozĂł referenciĂˇjĂˇt.
      */
     public void SnowStormHit(){
         snowstormstrat.execute(characters);
     }
 
     /**
-     * A characters tagváltozó összes elemére meghívja fejenként
-     * háromszor a karakter HasItem() metódusát, sorban “Flare”, “Pistol”, majd “Cartridge”
-     * argumentumokkal. Ha, miután az összes karakterre lefutott mindhárom hívás, igaz az,
-     * hogy a három típusú hívás közül mindegyik legalább egyszer igazzal tért vissza (tehát
-     * például ha volt olyan HasItem(“Flare”) hívás, amely igazzal tért vissza, akkor a
-     * “Flare” hívás típusra ez a feltétel teljesült), akkor a metódus igazzal tér vissza,
-     * ellenkező esetben hamissal.
-     * @return Igaz, ha összerakható a Flaregun, különben hamis
+     * A characters tagvĂˇltozĂł Ă¶sszes elemĂ©re meghĂ­vja fejenkĂ©nt
+     * hĂˇromszor a karakter HasItem() metĂłdusĂˇt, sorban â€śFlareâ€ť, â€śPistolâ€ť, majd â€śCartridgeâ€ť
+     * argumentumokkal. Ha, miutĂˇn az Ă¶sszes karakterre lefutott mindhĂˇrom hĂ­vĂˇs, igaz az,
+     * hogy a hĂˇrom tĂ­pusĂş hĂ­vĂˇs kĂ¶zĂĽl mindegyik legalĂˇbb egyszer igazzal tĂ©rt vissza (tehĂˇt
+     * pĂ©ldĂˇul ha volt olyan HasItem(â€śFlareâ€ť) hĂ­vĂˇs, amely igazzal tĂ©rt vissza, akkor a
+     * â€śFlareâ€ť hĂ­vĂˇs tĂ­pusra ez a feltĂ©tel teljesĂĽlt), akkor a metĂłdus igazzal tĂ©r vissza,
+     * ellenkezĹ‘ esetben hamissal.
+     * @return Igaz, ha Ă¶sszerakhatĂł a Flaregun, kĂĽlĂ¶nben hamis
      */
     public boolean CheckFlareGun(){
         boolean flare = false, pistol = false, cart = false;
@@ -167,8 +178,8 @@ public abstract class AbstractField {
     }
 
     /**
-     * Meghívja a mező összes szomszédjának RescueChars metódusát.
-     * Argumentumként a saját magára mutató referenciát adja át.
+     * MeghĂ­vja a mezĹ‘ Ă¶sszes szomszĂ©djĂˇnak RescueChars metĂłdusĂˇt.
+     * ArgumentumkĂ©nt a sajĂˇt magĂˇra mutatĂł referenciĂˇt adja Ăˇt.
      */
     public void Rescue(){
         for (Direction d : Direction.values()) {
@@ -178,11 +189,11 @@ public abstract class AbstractField {
     }
 
     /**
-     * A characters kollekció összes elemére meghívja
-     * először a karakter IsDrowning() metódusát, majd ha ez igazzal tér vissza, akkor
-     * meghívja a karakter Rescued() metódusát, majd az argumentumban kapott mező
-     * Accept() metódusát, argumentumként az éppen vizsgált karaktert átadva.
-     * @param f A mező, ahová a karaktereket menteni kell
+     * A characters kollekciĂł Ă¶sszes elemĂ©re meghĂ­vja
+     * elĹ‘szĂ¶r a karakter IsDrowning() metĂłdusĂˇt, majd ha ez igazzal tĂ©r vissza, akkor
+     * meghĂ­vja a karakter Rescued() metĂłdusĂˇt, majd az argumentumban kapott mezĹ‘
+     * Accept() metĂłdusĂˇt, argumentumkĂ©nt az Ă©ppen vizsgĂˇlt karaktert Ăˇtadva.
+     * @param f A mezĹ‘, ahovĂˇ a karaktereket menteni kell
      */
     public void RescueChars(AbstractField f){
         for (character.Character c : characters) {
@@ -194,28 +205,51 @@ public abstract class AbstractField {
     }
 
     /**
-     * Megváltoztatja a hóvihar érintés
-     * esetén végrehajtandó stratégiát az argumentumban megadottra.
-     * @param s Az új stratégia
+     * MegvĂˇltoztatja a hĂłvihar Ă©rintĂ©s
+     * esetĂ©n vĂ©grehajtandĂł stratĂ©giĂˇt az argumentumban megadottra.
+     * @param s Az Ăşj stratĂ©gia
      */
-    public void ChangeSnowStrategy(SnowstormStrategy s){
-        snowstormstrat = s;
-    }
+    public SnowstormStrategy ChangeSnowStrategy(SnowstormStrategy s){
+        if(s==null) return snowstormstrat;
+    	snowstormstrat = s;
+        return s;
+    } 
 
     /**
-     * Megváltoztatja a medve
-     * támadáskor végrehajtandó stratégiát az argumentumban megadottra.
-     * @param s Az új stratégia
+     * MegvĂˇltoztatja a medve
+     * tĂˇmadĂˇskor vĂ©grehajtandĂł stratĂ©giĂˇt az argumentumban megadottra.
+     * @param s Az Ăşj stratĂ©gia
      */
     public void ChangeBearStrategy(BearAttackStrategy s){
         bearattackstrat = s;
     }
 
     /**
-     * Ez a metódus reprezentálja a medvetámadást. Meghívja a tárolt
-     * BearAttackStrategy execute() metódusát, átadva a characters tagváltozó referenciáját.
+     * Ez a metĂłdus reprezentĂˇlja a medvetĂˇmadĂˇst. MeghĂ­vja a tĂˇrolt
+     * BearAttackStrategy execute() metĂłdusĂˇt, Ăˇtadva a characters tagvĂˇltozĂł referenciĂˇjĂˇt.
      */
     public void BearAttack() {
         bearattackstrat.execute(characters);
+    }
+
+    public FieldAppearance getAppearance() {
+        FieldAppearance res = new FieldAppearance();
+        res.hasSnow = (SnowCount > 0);
+        res.hasItem = (item != null);
+        res.hasIgloo = (snowstormstrat instanceof SnowstormStrategyIgloo);
+        res.hasTent = (snowstormstrat instanceof SnowstormStrategyTent);
+
+        if(!characters.isEmpty()) {
+            for(character.Character c : characters) {
+                if(c instanceof Eskimo)
+                    res.hasEskimo = true;
+                if(c instanceof Researcher)
+                    res.hasResearcher = true;
+                if(c instanceof PolarBear)
+                    res.hasBear = true;
+            }
+        }
+
+        return res;
     }
 }

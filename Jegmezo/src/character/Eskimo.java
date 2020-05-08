@@ -16,7 +16,7 @@ public class Eskimo extends Character {
      */
     public Eskimo() {
         warmth = 5;
-    }
+    } 
 
     /**
      * Használja az eszkimó különleges képességét, amely egy

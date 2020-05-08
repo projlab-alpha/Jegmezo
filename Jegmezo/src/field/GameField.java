@@ -26,7 +26,7 @@ public class GameField {
         this.SnowstormChance = 0.5;
         floes = new ArrayList<>();
     }
-
+ 
     /**
      * Hozzáad egy jégmezőt a jégtáblához.
      * @param f a hozzáadandó jégmező
@@ -42,6 +42,21 @@ public class GameField {
      * mező SnowStormHit() metódusát.
      */
     public void SnowStorm(){
+        //TODO
+    }
 
+    /**
+     * Visszatér a játékmezőn lévő jégtáblákat tartalmazó tömbbel.
+     * Prototípus működése érdekében.
+     * @return a jégtáblákat tartalmazó tömb.
+     */
+    public ArrayList<AbstractField> getFloes() {
+        return floes;
+    }
+
+    public AbstractField getFloeAt(int idx) {
+        if(idx < 0 || idx > floes.size())
+            return null;
+        return floes.get(idx);
     }
 }

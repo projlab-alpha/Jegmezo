@@ -30,4 +30,11 @@ public class Hole extends AbstractField {
         c.setField(this);
         c.FellInWater();
     }
+
+    @Override
+    public FieldAppearance getAppearance() {
+        FieldAppearance res = super.getAppearance();
+        res.isHole = true;
+        return res;
+    }
 }

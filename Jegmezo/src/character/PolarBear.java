@@ -15,7 +15,7 @@ public class PolarBear extends Character {
      * A medvét nem bántja a hóvihar, ezért ezt a metódust felülírja, úgy, hogy ne csináljon
      * semmit.
      * @param i Használatlan.
-     */
+     */ 
     @Override
     public void ChangeWarmth(int i) {
         return;

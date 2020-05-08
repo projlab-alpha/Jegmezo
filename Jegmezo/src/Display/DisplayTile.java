@@ -59,25 +59,7 @@ public class DisplayTile extends JLabel {
 
         } catch (IOException e) {
             e.printStackTrace();
+            this.setIcon(new ImageIcon(DisplayTile.class.getResource("/images/ErrorFloe.png")));
         }
-
-        //try {
-        //    BufferedImage image = ImageIO.read(DisplayTile.class.getResource("/images/Floe.png"));
-        //    BufferedImage overlay = ImageIO.read(DisplayTile.class.getResource("/images/Tent.png"));
-        //    combined = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
-//
-        //    Graphics g = combined.getGraphics();
-        //    g.drawImage(image, 0, 0, null);
-        //    g.drawImage(overlay, 0, 0, null);
-//
-        //    g.dispose();
-//
-        //    this.setIcon(new ImageIcon(combined));
-        //} catch (IOException e) {
-        //    e.printStackTrace();
-        //}
-
-        //do stuff with appearance here
-        //this.setIcon(new ImageIcon(DisplayTile.class.getResource("/images/floe.png")));
     }
 }

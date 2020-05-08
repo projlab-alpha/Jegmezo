@@ -1,12 +1,18 @@
 package Display;
 
+import character.Eskimo;
+import character.PolarBear;
+import character.Researcher;
 import control.Control;
 import field.Floe;
+import item.Shovel;
+import snowstormStrategy.SnowstormStrategyIgloo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.concurrent.Flow;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 public class DisplayWindow extends JFrame {
     private boolean locked;
@@ -40,12 +46,7 @@ public class DisplayWindow extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu optionsMenu = new JMenu("Options");
         JMenuItem OptionsMenuItemExit = new JMenuItem("Exit", KeyEvent.VK_E);
-        OptionsMenuItemExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DisplayWindow.this.dispatchEvent(new WindowEvent(DisplayWindow.this, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        OptionsMenuItemExit.addActionListener(e -> DisplayWindow.this.dispatchEvent(new WindowEvent(DisplayWindow.this, WindowEvent.WINDOW_CLOSING)));
         optionsMenu.add(OptionsMenuItemExit);
         menuBar.add(optionsMenu);
         this.setJMenuBar(menuBar);
@@ -56,7 +57,11 @@ public class DisplayWindow extends JFrame {
         JPanel gameTableDisplay = new JPanel();
         gameTableDisplay.setLayout(new GridLayout(width, height));
 
-        Floe testfloe = new Floe(null, 10, 3);  //TODO: replace test with initialized floes
+        Floe testfloe = new Floe(new Shovel(), 10, 0);  //TODO: replace test with initialized floes
+        testfloe.Accept(new Researcher());
+        testfloe.Accept(new Eskimo());
+        testfloe.Accept(new PolarBear());
+        testfloe.ChangeSnowStrategy(new SnowstormStrategyIgloo());
 
         for(int i = 0; i < width * height; i++) {
             gameTableDisplay.add(new DisplayTile(testfloe));

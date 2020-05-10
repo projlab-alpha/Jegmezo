@@ -25,6 +25,7 @@ public class DisplayWindow extends JFrame {
     public DisplayWindow(int width, int height) {
         //initialize variables
         invPanels = new JLabel[9];
+        final int imgDim = 32;
 
         //Window setup
         this.setResizable(false);
@@ -66,7 +67,7 @@ public class DisplayWindow extends JFrame {
         for(int i = 0; i < width * height; i++) {
             gameTableDisplay.add(new DisplayTile(testfloe));
         }
-        Dimension dim = new Dimension(width * 32, height * 32);
+        Dimension dim = new Dimension(width * imgDim, height * imgDim);
         gameTableDisplay.setPreferredSize(dim);
         gameTableDisplay.setMaximumSize(dim);
         gameTableDisplay.setMinimumSize(dim);
@@ -81,8 +82,10 @@ public class DisplayWindow extends JFrame {
         c1.gridy = 0;
         c1.gridwidth = 2;
         c1.gridheight = 3;
-        c1.ipady = 600;
-        c1.ipadx = 400;
+        c1.ipady = 0;
+        c1.ipadx = 0;
+        gameTableDisplayPanel.setMinimumSize(new Dimension(400, 400));
+        gameTableDisplayPanel.setMaximumSize(new Dimension(400, 400));
 
         gameTableDisplayPanel.setBackground(Color.CYAN);        //delete later
         gameTableDisplayPanel.add(gameTableDisplay);
@@ -90,6 +93,7 @@ public class DisplayWindow extends JFrame {
 
 
         //Character panel setup
+        character.Character currentChar = Control.getInstance().getCurrentChar();
         JPanel characterInfoDisplayPanel = new JPanel();
         characterInfoDisplayPanel.setLayout(new GridBagLayout());
             //add stuff to panel here

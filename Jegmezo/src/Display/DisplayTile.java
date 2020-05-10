@@ -19,6 +19,7 @@ public class DisplayTile extends JLabel {
     }
 
     public void redraw() {
+        final int imgDim = 32;
         try {
             //Get associated field appearance
             FieldAppearance appearance = field.getAppearance();
@@ -48,7 +49,7 @@ public class DisplayTile extends JLabel {
                 overlays.add(ImageIO.read(DisplayTile.class.getResource("/images/Bear.png")));
 
             //Combine base and additional layers
-            combined = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+            combined = new BufferedImage(imgDim, imgDim, BufferedImage.TYPE_INT_ARGB);
             Graphics g = combined.getGraphics();
             g.drawImage(base, 0, 0, null);               //Draw base onto combined
             for (BufferedImage overlay : overlays) {                    //Draw overlays on top of base

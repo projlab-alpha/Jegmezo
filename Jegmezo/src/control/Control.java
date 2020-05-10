@@ -1,7 +1,9 @@
 package control;
 
-import character.*;
-import field.*;
+import Display.DisplayWindow;
+import character.PolarBear;
+import field.GameField;
+
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class Control {
 
     private int turn;
     private int currentplayer;
+    private DisplayWindow window;
 
     /**
      * A játékos karakterek listája.
@@ -37,7 +40,7 @@ public class Control {
     /**
      *  A játékmezőre mutató referencia.
      */
-    private GameField gameField = new GameField();
+    private GameField gameField;
 
     /**
      *  Az egyetlen példánya az osztálynak a Singleton működés érdekében.
@@ -68,8 +71,13 @@ public class Control {
         return turn;
     }
 
-    public void requestRedraw() {
-        //TODO
+    public void requestRedraw() { window.redraw(); }
+
+    public void initializeGame(int width, int height, int playerCount) {        //TODO: new method
+        this.PlayerCount = Math.max(playerCount, 3);
+        window = new DisplayWindow(width, height);
+        gameField = new GameField();
+        window.setVisible(true);
     }
 
     public void keyPressed(KeyEvent e) {        //disabled for debug
@@ -77,7 +85,8 @@ public class Control {
         int keyCode = e.getKeyCode();
         switch(keyCode) {
             //case KeyEvent.VK_SPACE:
-            //    //TODO: Turn goes to next player
+            //    currentplayer = (currentplayer + 1 < PlayerCount) ? currentplayer + 1 : 0;
+            //    //TODO: step polar bear, summon snowstorm, remove tents, increase turn count, end game if any character is drowning
             //    break;
             //case KeyEvent.VK_LEFT:
             //    ch.Move(Direction.WEST);

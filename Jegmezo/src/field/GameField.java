@@ -23,11 +23,19 @@ public class GameField {
      * Megadja, mekkora az esélye annak, hogy egy
      * mezőn hóvihar támad.
      */
-    private final double SnowstormChance = 0.2;
+    private final double SnowstormChance = 0.1;
 
     private void addRandom(character.Character c) {
         Random rng = new Random();
-        floes.get(rng.nextInt(floes.size())).Accept(c);
+        AbstractField floe = floes.get(rng.nextInt(floes.size()));
+        if(c instanceof PolarBear) {
+            floe.Accept(c);
+            return;
+        }
+        while(!(floe instanceof Floe)) {
+            floe = floes.get(rng.nextInt(floes.size()));
+        }
+        floe.Accept(c);
     }
 
     private void addRandom(Item i) {
@@ -64,6 +72,8 @@ public class GameField {
                 tempFloes[i][j] = newField;
             }
         }
+        //Guarantee that at least one field is a normal Floe
+        tempFloes[rng.nextInt(width)][rng.nextInt(height)] = new Floe(null, chars.size() + 2, rng.nextInt(4));
         //set neighbors
         for(int i = 0; i < width; ++i) {
             for(int j = 0; j < height; ++j) {

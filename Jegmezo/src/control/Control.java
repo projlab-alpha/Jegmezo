@@ -1,6 +1,7 @@
 package control;
 
 import Display.DisplayWindow;
+import character.Character;
 import character.PolarBear;
 import field.GameField;
 
@@ -30,7 +31,7 @@ public class Control {
     /**
      * A játékos karakterek listája.
      */
-    private ArrayList<character.Character> characters = new ArrayList<character.Character>();
+    private ArrayList<character.Character> characters;
 
     /**
      * A játékban résztvevő jegesmedve referenciája.
@@ -75,6 +76,9 @@ public class Control {
 
     public void initializeGame(int width, int height, int playerCount) {        //TODO: new method
         this.PlayerCount = Math.max(playerCount, 3);
+        characters = new ArrayList<Character>();
+        polarBear = new PolarBear();
+        gameField = new GameField();
         window = new DisplayWindow(width, height);
         gameField = new GameField();
         window.setVisible(true);

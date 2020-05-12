@@ -93,7 +93,7 @@ public class DisplayWindow extends JFrame {
 
 
         //Character panel setup
-        character.Character currentChar = Control.getInstance().getCurrentChar();
+        //character.Character currentChar = Control.getInstance().getCurrentChar();
         JPanel characterInfoDisplayPanel = new JPanel();
         characterInfoDisplayPanel.setLayout(new GridBagLayout());
             //add stuff to panel here

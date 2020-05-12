@@ -75,21 +75,22 @@ public class GameField {
         //Guarantee that at least one field is a normal Floe
         tempFloes[rng.nextInt(width)][rng.nextInt(height)] = new Floe(null, chars.size() + 2, rng.nextInt(4));
         //set neighbors
-        for(int i = 0; i < width; ++i) {
-            for(int j = 0; j < height; ++j) {
-                if(i - 1 >= 0)
-                    tempFloes[i][j].setNeighbour(Direction.WEST, tempFloes[i-1][j]);
+        for(int i = 0; i < height; ++i) {
+            for(int j = 0; j < width; ++j) {
+                if(i - 1 >= 0) {
+                    tempFloes[i][j].setNeighbour(Direction.NORTH, tempFloes[i - 1][j]);
+                }
                 if(i + 1 < width)
-                    tempFloes[i][j].setNeighbour(Direction.EAST, tempFloes[i+1][j]);
+                    tempFloes[i][j].setNeighbour(Direction.SOUTH, tempFloes[i+1][j]);
                 if(j - 1 >= 0)
-                    tempFloes[i][j].setNeighbour(Direction.NORTH, tempFloes[i][j-1]);
+                    tempFloes[i][j].setNeighbour(Direction.WEST, tempFloes[i][j-1]);
                 if(j + 1 < height)
-                    tempFloes[i][j].setNeighbour(Direction.SOUTH, tempFloes[i][j+1]);
+                    tempFloes[i][j].setNeighbour(Direction.EAST, tempFloes[i][j+1]);
             }
         }
         //add floes to real array
-        for(int i = 0; i < width; ++i) {
-            floes.addAll(Arrays.asList(tempFloes[i]).subList(0, height));
+        for(int i = 0; i < height; ++i) {
+            floes.addAll(Arrays.asList(tempFloes[i]).subList(0, width));
         }
 
         //places polar bear and characters

@@ -4,6 +4,7 @@ import character.PolarBear;
 import control.Direction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -28,12 +29,11 @@ public class GameField {
      */
     public GameField(int width, int height, ArrayList<character.Character> chars, PolarBear polarBear) {
         final int size = width * height;
-        final double holeChance = 0.2;
-        final double unstableChance = 0.4;
-        final int itemcount = (int) size / 4;
+
+        //final int itemcount = (int) size / 4;
 
         Random rng = new Random();
-        floes = new ArrayList<>();
+        floes = new ArrayList<>(size);
 
         //initialize into 2d array for easier neighbor settings
         AbstractField[][] tempFloes = new AbstractField[width][height];
@@ -41,12 +41,12 @@ public class GameField {
             for(int j = 0; j < height; ++j) {
                 AbstractField newField;
                 double typeChance = rng.nextDouble();
-                if (typeChance < holeChance) {
+                if (typeChance < 0.15) {
                     newField = new Hole(null, rng.nextInt(4 + 1) + 1);
-                } else if (typeChance < unstableChance) {
+                } else if (typeChance < 0.55) {
                     newField = new UnstableFloe(null, rng.nextInt(chars.size()) + 1, rng.nextInt(4 + 1) + 1);
                 } else {
-                    newField = new Floe(null, chars.size() + 2, rng.nextInt(4 + 1) + 1);
+                    newField = new Floe(null, chars.size() + 2, 0);
                 }
                 tempFloes[i][j] = newField;
             }
@@ -66,9 +66,7 @@ public class GameField {
         }
         //add floes to real array
         for(int i = 0; i < width; ++i) {
-            for (int j = 0; j < height; ++j) {
-                floes.add(tempFloes[i][j]);
-            }
+            floes.addAll(Arrays.asList(tempFloes[i]).subList(0, height));
         }
         ////add win condition items
         //int x = rng.nextInt(width);

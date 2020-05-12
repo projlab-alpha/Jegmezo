@@ -24,13 +24,25 @@ public class GameField {
      * Konstruktor. Beállítja a SnowstormChance értékét.
      */
     public GameField(int width, int height) {
-        floes = new ArrayList<>(width * height);
+        final int size = width * height;
+        final int itemcount = (int) size / 4;
         Random rng = new Random();
+        floes = new ArrayList<>(size);
+
+
         for(int i = 0; i < width * height; ++i) {
             AbstractField newField;
-            if(rng.nextDouble() < 0.6) {
-                //newField = new Floe();
+            double typechance = rng.nextDouble();
+            if(typechance > 0.8) {
+                newField = new Hole(null, rng.nextInt(4));
+            } else if (typechance > 0.6) {
+                newField = new UnstableFloe(null, rng.nextInt(4), rng.nextInt(4));
+            } else {
+                newField = new Floe(null, 100, rng.nextInt(4));
             }
+            //TODO: set neighbors here
+
+            floes.add(newField);
         }
     }
  

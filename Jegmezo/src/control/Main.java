@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {        //TODO: size/player num selection
+    public static void main(String[] args) {
         System.out.println("Running");
         int widthInput = -1, heightInput = -1;
         while(widthInput < 0) {

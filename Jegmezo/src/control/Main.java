@@ -1,6 +1,10 @@
 package control;
 
+import character.Eskimo;
+import character.Researcher;
+
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {        //TODO: size/player num selection
@@ -33,6 +37,23 @@ public class Main {
                 playerCountInput = -1;
             }
         }
-        Control.getInstance().initializeGame(widthInput, heightInput, playerCountInput);
+        ArrayList<character.Character> chars = new ArrayList<>(playerCountInput);
+        Object[] characterSelectionPossibilities = {"Eskimo", "Researcher"};
+        for(int i = 0; i < playerCountInput; ++i) {
+            String s = (String) JOptionPane.showInputDialog(null, "Choose character (Player "+(i + 1)+"):",
+                    "New Game", JOptionPane.PLAIN_MESSAGE, null, characterSelectionPossibilities, "Eskimo");
+            switch(s) {
+                case "Eskimo":
+                    chars.add(new Eskimo());
+                    break;
+                case "Researcher":
+                    chars.add(new Researcher());
+                    break;
+                default:
+                    chars.add(new Eskimo());
+                    break;
+            }
+        }
+        Control.getInstance().initializeGame(widthInput, heightInput, chars);
     }
 }

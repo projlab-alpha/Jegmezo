@@ -74,9 +74,9 @@ public class Control {
 
     public void requestRedraw() { window.redraw(); }
 
-    public void initializeGame(int width, int height, int playerCount) {        //TODO: new method
-        this.PlayerCount = Math.max(playerCount, 3);
-        characters = new ArrayList<Character>();
+    public void initializeGame(int width, int height, ArrayList<Character> chars) {        //TODO: new method
+        this.PlayerCount = chars.size();
+        characters = chars;
         polarBear = new PolarBear();
         gameField = new GameField();
         window = new DisplayWindow(width, height);

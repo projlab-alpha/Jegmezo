@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class DisplayWindow extends JFrame {
     private boolean locked;
@@ -16,10 +17,12 @@ public class DisplayWindow extends JFrame {
     private JTextField turnsField;
     private JLabel charPortrait;
     private JLabel[] invPanels;
+    private ArrayList<DisplayTile> tiles;
 
     public DisplayWindow(int width, int height, GameField gameField) {
         //initialize variables
         invPanels = new JLabel[9];
+        tiles = new ArrayList<>(width * height);
         final int imgDim = 32;
 
         //Window setup
@@ -54,7 +57,9 @@ public class DisplayWindow extends JFrame {
         gameTableDisplay.setLayout(new GridLayout(width, height));
 
         for(int i = 0; i < width * height; i++) {
-            gameTableDisplay.add(new DisplayTile(gameField.getFloeAt(i)));
+            DisplayTile tile = new DisplayTile(gameField.getFloeAt(i));
+            tiles.add(tile);
+            gameTableDisplay.add(tile);
         }
         Dimension dim = new Dimension(width * imgDim, height * imgDim);
         gameTableDisplay.setPreferredSize(dim);
@@ -121,7 +126,9 @@ public class DisplayWindow extends JFrame {
     }
 
     public void redraw() {
-        //TODO
+        System.out.println("redrawing");
+        for(DisplayTile tile : tiles)
+            tile.redraw();
     }
 
     public void showVictory() {

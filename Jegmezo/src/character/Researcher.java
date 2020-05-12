@@ -22,11 +22,14 @@ public class Researcher extends Character {
      * FindCapacity metódusát, átadva neki a d Direction-t, eggyel csö kkenti a sarkkutató
      * hátralévő munkáinak számát., majd visszatér a kapott értékkel.
      * @param d Az irány amerre használja képességét.
-     * @return A kutatott tábla kapacitása.
+     * @return A kutatott tábla kapacitása, vagy -1 ha nem volt elég AP a képességhez.
      */
     @Override
     public int UseAbility(Direction d) {
-        --actionpoint;
-        return field.FindCapacity(d);
+        if(actionpoint > 0) {
+            --actionpoint;
+            return field.FindCapacity(d);
+        }
+        else return -1;
     }
 }

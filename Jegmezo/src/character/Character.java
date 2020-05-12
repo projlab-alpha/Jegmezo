@@ -65,8 +65,8 @@ public abstract class Character {
      * @param d A mozgás iránya
      */
     public void Move(Direction d){
-        field.MoveChar(d, this);
-        --actionpoint;
+        if(actionpoint > 0 && field.MoveChar(d, this))
+            --actionpoint;
     }
 
     /**
@@ -75,8 +75,10 @@ public abstract class Character {
      * majd csökkenti a karakter hátralévő munkáinak számát.
      */
     public void Dig(){
-        this.field.ChangeSnow(-1);
-        --actionpoint;
+        if(actionpoint > 0) {
+            this.field.ChangeSnow(-1);
+            --actionpoint;
+        }
     }
 
     /**
@@ -85,10 +87,12 @@ public abstract class Character {
      * hátralévő munkáinak számát.
      */
     public void PickUpItem(){
-        Item i = field.RequestItem();
-        if (i != null) {
-            inventory.add(i);
-            --actionpoint;
+        if(actionpoint > 0) {
+            Item i = field.RequestItem();
+            if (i != null) {
+                inventory.add(i);
+                --actionpoint;
+            }
         }
     }
 
@@ -101,7 +105,7 @@ public abstract class Character {
      * @param n A használni kivánt tárgy indexe az inventory-ban
      */
     public void UseItem(int n){
-        if(this.inventory.get(n) != null) {
+        if(actionpoint > 0 && this.inventory.get(n) != null) {
             if (this.inventory.get(n).UseItem(this))
                 this.inventory.remove(n);
             --actionpoint;
@@ -127,6 +131,8 @@ public abstract class Character {
      * @return A képesség használatának eredménye; a konkrét képességtől függ, mi ez.
      */
     public abstract int UseAbility(Direction d);
+
+    public void resetAP() { actionpoint = 4; }
 
     /**
      * Ez a metódus reprezentálja a vízbe esést. Meghívja a tárolt

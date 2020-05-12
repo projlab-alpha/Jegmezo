@@ -39,6 +39,7 @@ public class PolarBear extends Character {
      */
     @Override
     public void Move(Direction d) {
+        actionpoint = 99;
         super.Move(d);
         this.field.BearAttack();
     }

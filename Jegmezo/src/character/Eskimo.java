@@ -29,9 +29,11 @@ public class Eskimo extends Character {
      */
     @Override
     public int UseAbility(Direction d) {
-        field.ChangeSnowStrategy(new SnowstormStrategyIgloo());
-        field.ChangeBearStrategy(new BearAttackStrategyIgloo());
-        --actionpoint;
+        if(actionpoint > 0) {
+            field.ChangeSnowStrategy(new SnowstormStrategyIgloo());
+            field.ChangeBearStrategy(new BearAttackStrategyIgloo());
+            --actionpoint;
+        }
         return 0;
     }
 }

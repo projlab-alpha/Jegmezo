@@ -213,7 +213,7 @@ public abstract class AbstractField {
      * @param s Az Ăşj stratĂ©gia
      */
     public SnowstormStrategy ChangeSnowStrategy(SnowstormStrategy s){
-        if(s==null) return snowstormstrat;
+        if (s == null) return snowstormstrat;
     	snowstormstrat = s;
         return s;
     } 
@@ -255,4 +255,12 @@ public abstract class AbstractField {
 
         return res;
     }
+
+    public boolean hasItem() {
+        if (item == null)
+            return false;
+        else return true;
+    }
+
+    public void setItem(Item i) { this.item = i; }
 }

@@ -1,7 +1,6 @@
 package field;
 
 import bearAttackStrategy.BearAttackStrategy;
-import bearAttackStrategy.BearAttackStrategyIgloo;
 import character.Eskimo;
 import character.PolarBear;
 import character.Researcher;
@@ -89,7 +88,8 @@ public abstract class AbstractField {
      * @param c A mozgatandĂł karakter
      */
     public void MoveChar(Direction d, character.Character c){
-        neighbours.get(d).Accept(c);
+        if(neighbours.containsKey(d))
+            neighbours.get(d).Accept(c);
     }
 
     /**
@@ -100,7 +100,8 @@ public abstract class AbstractField {
      * @param neighbour a szomszĂ©dos mezĹ‘
      */
     public void setNeighbour(Direction d, AbstractField neighbour) {
-        neighbours.put(d, neighbour);
+        if(neighbours.containsKey(d))
+            neighbours.put(d, neighbour);
     }
 
     /**
@@ -141,7 +142,9 @@ public abstract class AbstractField {
      * @return A jĂ©gtĂˇbla kapacitĂˇsa
      */
     public int FindCapacity(Direction d){
-        return neighbours.get(d).Capacity;
+        if(neighbours.containsKey(d))
+            return neighbours.get(d).Capacity;
+        else return -1;
     }
     
     public int FindCapacity() {

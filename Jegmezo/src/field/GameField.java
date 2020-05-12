@@ -1,6 +1,7 @@
 package field;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Ez az ostály reprezentálja a játékmezőt, amelyen a különböző jégtáblák elhelyezkednek.
@@ -17,14 +18,20 @@ public class GameField {
      * Megadja, mekkora az esélye annak, hogy egy
      * mezőn hóvihar támad.
      */
-    private final double SnowstormChance;
+    private final double SnowstormChance = 0.2;
 
     /**
      * Konstruktor. Beállítja a SnowstormChance értékét.
      */
-    public GameField() {
-        this.SnowstormChance = 0.5;
-        floes = new ArrayList<>();
+    public GameField(int width, int height) {
+        floes = new ArrayList<>(width * height);
+        Random rng = new Random();
+        for(int i = 0; i < width * height; ++i) {
+            AbstractField newField;
+            if(rng.nextDouble() < 0.6) {
+                //newField = new Floe();
+            }
+        }
     }
  
     /**

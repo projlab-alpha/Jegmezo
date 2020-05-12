@@ -1,12 +1,7 @@
 package Display;
 
-import character.Eskimo;
-import character.PolarBear;
-import character.Researcher;
 import control.Control;
-import field.Floe;
-import item.Shovel;
-import snowstormStrategy.SnowstormStrategyIgloo;
+import field.GameField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +17,7 @@ public class DisplayWindow extends JFrame {
     private JLabel charPortrait;
     private JLabel[] invPanels;
 
-    public DisplayWindow(int width, int height) {
+    public DisplayWindow(int width, int height, GameField gameField) {
         //initialize variables
         invPanels = new JLabel[9];
         final int imgDim = 32;
@@ -58,14 +53,8 @@ public class DisplayWindow extends JFrame {
         JPanel gameTableDisplay = new JPanel();
         gameTableDisplay.setLayout(new GridLayout(width, height));
 
-        Floe testfloe = new Floe(new Shovel(), 10, 0);  //TODO: replace test with initialized floes
-        testfloe.Accept(new Researcher());
-        testfloe.Accept(new Eskimo());
-        testfloe.Accept(new PolarBear());
-        testfloe.ChangeSnowStrategy(new SnowstormStrategyIgloo());
-
         for(int i = 0; i < width * height; i++) {
-            gameTableDisplay.add(new DisplayTile(testfloe));
+            gameTableDisplay.add(new DisplayTile(gameField.getFloeAt(i)));
         }
         Dimension dim = new Dimension(width * imgDim, height * imgDim);
         gameTableDisplay.setPreferredSize(dim);

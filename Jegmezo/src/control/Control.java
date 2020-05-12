@@ -80,7 +80,7 @@ public class Control {
         characters = chars;
         polarBear = new PolarBear();
         gameField = new GameField(width, height, characters, polarBear);
-        window = new DisplayWindow(width, height);
+        window = new DisplayWindow(width, height, gameField);
         window.setVisible(true);
     }
 

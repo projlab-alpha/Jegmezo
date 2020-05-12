@@ -2,6 +2,7 @@ package field;
 
 import character.PolarBear;
 import control.Direction;
+import item.Item;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,13 +25,25 @@ public class GameField {
      */
     private final double SnowstormChance = 0.2;
 
+    private void addRandom(character.Character c) {
+        Random rng = new Random();
+        floes.get(rng.nextInt(floes.size())).Accept(c);
+    }
+
+    private void addRandom(Item i) {
+        Random rng = new Random();
+        int ranNum = rng.nextInt(floes.size());
+        while(floes.get(ranNum).hasItem()) {
+            ranNum = rng.nextInt(floes.size());
+        }
+        floes.get(ranNum).setItem(i);
+    }
+
     /**
      * Konstruktor. Beállítja a SnowstormChance értékét.
      */
     public GameField(int width, int height, ArrayList<character.Character> chars, PolarBear polarBear) {
         final int size = width * height;
-
-        //final int itemcount = (int) size / 4;
 
         Random rng = new Random();
         floes = new ArrayList<>(size);
@@ -68,6 +81,15 @@ public class GameField {
         for(int i = 0; i < width; ++i) {
             floes.addAll(Arrays.asList(tempFloes[i]).subList(0, height));
         }
+
+        //places polar bear and characters
+        addRandom(polarBear);
+        for(character.Character c : chars)
+            addRandom(c);
+
+        //TODO: add items here
+
+
         ////add win condition items
         //int x = rng.nextInt(width);
         //int y = rng.nextInt(height);
@@ -98,13 +120,6 @@ public class GameField {
         //
         //    }
         //}
-
-
-        //add chars
-
-        //add polar bear
-
-
     }
  
     /**

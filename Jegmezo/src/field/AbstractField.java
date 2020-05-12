@@ -87,9 +87,13 @@ public abstract class AbstractField {
      * @param d A mozgĂˇs irĂˇnya
      * @param c A mozgatandĂł karakter
      */
-    public void MoveChar(Direction d, character.Character c){
-        if(neighbours.containsKey(d))
+    public boolean MoveChar(Direction d, character.Character c){
+        if(neighbours.containsKey(d)) {
             neighbours.get(d).Accept(c);
+            characters.remove(c);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -100,7 +104,6 @@ public abstract class AbstractField {
      * @param neighbour a szomszĂ©dos mezĹ‘
      */
     public void setNeighbour(Direction d, AbstractField neighbour) {
-        if(neighbours.containsKey(d))
             neighbours.put(d, neighbour);
     }
 

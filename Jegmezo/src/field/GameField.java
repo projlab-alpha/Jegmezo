@@ -1,5 +1,8 @@
 package field;
 
+import character.PolarBear;
+import control.Direction;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,27 +26,87 @@ public class GameField {
     /**
      * Konstruktor. Beállítja a SnowstormChance értékét.
      */
-    public GameField(int width, int height) {
+    public GameField(int width, int height, ArrayList<character.Character> chars, PolarBear polarBear) {
         final int size = width * height;
+        final double holeChance = 0.2;
+        final double unstableChance = 0.4;
         final int itemcount = (int) size / 4;
+
         Random rng = new Random();
-        floes = new ArrayList<>(size);
+        floes = new ArrayList<>();
 
-
-        for(int i = 0; i < width * height; ++i) {
-            AbstractField newField;
-            double typechance = rng.nextDouble();
-            if(typechance > 0.8) {
-                newField = new Hole(null, rng.nextInt(4));
-            } else if (typechance > 0.6) {
-                newField = new UnstableFloe(null, rng.nextInt(4), rng.nextInt(4));
-            } else {
-                newField = new Floe(null, 100, rng.nextInt(4));
+        //initialize into 2d array for easier neighbor settings
+        AbstractField[][] tempFloes = new AbstractField[width][height];
+        for(int i = 0; i < width; ++i) {
+            for(int j = 0; j < height; ++j) {
+                AbstractField newField;
+                double typeChance = rng.nextDouble();
+                if (typeChance < holeChance) {
+                    newField = new Hole(null, rng.nextInt(4 + 1) + 1);
+                } else if (typeChance < unstableChance) {
+                    newField = new UnstableFloe(null, rng.nextInt(chars.size()) + 1, rng.nextInt(4 + 1) + 1);
+                } else {
+                    newField = new Floe(null, chars.size() + 2, rng.nextInt(4 + 1) + 1);
+                }
+                tempFloes[i][j] = newField;
             }
-            //TODO: set neighbors here
-
-            floes.add(newField);
         }
+        //set neighbors
+        for(int i = 0; i < width; ++i) {
+            for(int j = 0; j < height; ++j) {
+                if(i - 1 >= 0)
+                    tempFloes[i][j].setNeighbour(Direction.WEST, tempFloes[i-1][j]);
+                if(i + 1 < width)
+                    tempFloes[i][j].setNeighbour(Direction.EAST, tempFloes[i+1][j]);
+                if(j - 1 >= 0)
+                    tempFloes[i][j].setNeighbour(Direction.NORTH, tempFloes[i][j-1]);
+                if(j + 1 < height)
+                    tempFloes[i][j].setNeighbour(Direction.SOUTH, tempFloes[i][j+1]);
+            }
+        }
+        //add floes to real array
+        for(int i = 0; i < width; ++i) {
+            for (int j = 0; j < height; ++j) {
+                floes.add(tempFloes[i][j]);
+            }
+        }
+        ////add win condition items
+        //int x = rng.nextInt(width);
+        //int y = rng.nextInt(height);
+        //while(tempFloes[x][y].hasItem()) {
+        //    x = rng.nextInt(width);
+        //    y = rng.nextInt(height);
+        //}
+        //tempFloes[x][y].setItem(new Cartridge());
+        //while(tempFloes[x][y].hasItem()) {
+        //    x = rng.nextInt(width);
+        //    y = rng.nextInt(height);
+        //}
+        //tempFloes[x][y].setItem(new Flare());
+        //while(tempFloes[x][y].hasItem()) {
+        //    x = rng.nextInt(width);
+        //    y = rng.nextInt(height);
+        //}
+        //tempFloes[x][y].setItem(new Pistol());
+//
+        ////add usable items
+        //int itemsAdded = 0;
+        //while(itemsAdded < itemcount) {
+        //    x = rng.nextInt(width);
+        //    y = rng.nextInt(height);
+        //    if(!tempFloes[x][y].hasItem()) {
+        //        Item i;
+        //        double itemChance = rng.nextDouble();
+        //
+        //    }
+        //}
+
+
+        //add chars
+
+        //add polar bear
+
+
     }
  
     /**

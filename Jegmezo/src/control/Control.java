@@ -74,13 +74,13 @@ public class Control {
 
     public void requestRedraw() { window.redraw(); }
 
+
     public void initializeGame(int width, int height, ArrayList<Character> chars) {        //TODO: new method
-        this.PlayerCount = chars.size();
+        PlayerCount = chars.size();
         characters = chars;
         polarBear = new PolarBear();
-        gameField = new GameField();
+        gameField = new GameField(width, height, characters, polarBear);
         window = new DisplayWindow(width, height);
-        gameField = new GameField();
         window.setVisible(true);
     }
 

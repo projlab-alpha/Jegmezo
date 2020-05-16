@@ -2,7 +2,10 @@ package field;
 
 import character.PolarBear;
 import control.Direction;
+import item.Cartridge;
+import item.Flare;
 import item.Item;
+import item.Pistol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,18 +44,17 @@ public class GameField {
     private void addRandom(Item i) {
         Random rng = new Random();
         int ranNum = rng.nextInt(floes.size());
-        while(floes.get(ranNum).hasItem()) {
+        while(floes.get(ranNum) instanceof Hole || floes.get(ranNum).hasItem()) {
             ranNum = rng.nextInt(floes.size());
         }
         floes.get(ranNum).setItem(i);
     }
 
     /**
-     * Konstruktor. Beállítja a SnowstormChance értékét.
+     * Konstruktor.
      */
     public GameField(int width, int height, ArrayList<character.Character> chars, PolarBear polarBear) {
         final int size = width * height;
-
         Random rng = new Random();
         floes = new ArrayList<>(size);
 
@@ -77,9 +79,8 @@ public class GameField {
         //set neighbors
         for(int i = 0; i < height; ++i) {
             for(int j = 0; j < width; ++j) {
-                if(i - 1 >= 0) {
+                if(i - 1 >= 0)
                     tempFloes[i][j].setNeighbour(Direction.NORTH, tempFloes[i - 1][j]);
-                }
                 if(i + 1 < width)
                     tempFloes[i][j].setNeighbour(Direction.SOUTH, tempFloes[i+1][j]);
                 if(j - 1 >= 0)
@@ -92,45 +93,16 @@ public class GameField {
         for(int i = 0; i < height; ++i) {
             floes.addAll(Arrays.asList(tempFloes[i]).subList(0, width));
         }
-
-        //places polar bear and characters
+        //place polar bear and characters
         addRandom(polarBear);
         for(character.Character c : chars)
             addRandom(c);
+        //add win condition items
+        addRandom(new Cartridge());
+        addRandom(new Flare());
+        addRandom(new Pistol());
 
-        //TODO: add items here
 
-
-        ////add win condition items
-        //int x = rng.nextInt(width);
-        //int y = rng.nextInt(height);
-        //while(tempFloes[x][y].hasItem()) {
-        //    x = rng.nextInt(width);
-        //    y = rng.nextInt(height);
-        //}
-        //tempFloes[x][y].setItem(new Cartridge());
-        //while(tempFloes[x][y].hasItem()) {
-        //    x = rng.nextInt(width);
-        //    y = rng.nextInt(height);
-        //}
-        //tempFloes[x][y].setItem(new Flare());
-        //while(tempFloes[x][y].hasItem()) {
-        //    x = rng.nextInt(width);
-        //    y = rng.nextInt(height);
-        //}
-        //tempFloes[x][y].setItem(new Pistol());
-//
-        ////add usable items
-        //int itemsAdded = 0;
-        //while(itemsAdded < itemcount) {
-        //    x = rng.nextInt(width);
-        //    y = rng.nextInt(height);
-        //    if(!tempFloes[x][y].hasItem()) {
-        //        Item i;
-        //        double itemChance = rng.nextDouble();
-        //
-        //    }
-        //}
     }
  
     /**
@@ -148,12 +120,15 @@ public class GameField {
      * mező SnowStormHit() metódusát.
      */
     public void SnowStorm(){
-        //TODO
+        Random rng = new Random();
+        for(AbstractField floe : floes) {
+            if(rng.nextDouble() < SnowstormChance)
+                floe.SnowStormHit();
+        }
     }
 
     /**
      * Visszatér a játékmezőn lévő jégtáblákat tartalmazó tömbbel.
-     * Prototípus működése érdekében.
      * @return a jégtáblákat tartalmazó tömb.
      */
     public ArrayList<AbstractField> getFloes() {

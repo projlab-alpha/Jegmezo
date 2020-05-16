@@ -2,6 +2,7 @@ package Display;
 
 import control.Control;
 import field.GameField;
+import item.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,10 +88,12 @@ public class DisplayWindow extends JFrame {
 
 
         //Character panel setup
-        //character.Character currentChar = Control.getInstance().getCurrentChar();
+        character.Character currentChar = Control.getInstance().getCurrentChar();
+
+
         JPanel characterInfoDisplayPanel = new JPanel();
         characterInfoDisplayPanel.setLayout(new GridBagLayout());
-            //add stuff to panel here
+
 
         GridBagConstraints c2 = new GridBagConstraints();
         c2.fill = GridBagConstraints.BOTH;
@@ -127,6 +130,30 @@ public class DisplayWindow extends JFrame {
 
     public void redraw() {
         System.out.println("redrawing");
+        character.Character currentChar = Control.getInstance().getCurrentChar();
+        ArrayList<Item> currCharInv = currentChar.getInventory();
+        for(int i = 0; i < Math.min(currCharInv.size(), 9); i++) {
+            if(currCharInv.get(i) instanceof Cartridge)
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/cartridge.jpg")));
+            else if(currCharInv.get(i) instanceof Divingsuit)
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/divingsuit.jpg")));
+            else if(currCharInv.get(i) instanceof Flare)
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/flare.jpg")));
+            else if(currCharInv.get(i) instanceof Food)
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/food.jpg")));
+            else if(currCharInv.get(i) instanceof FragileShovel)
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/fragileshovel.jpg")));
+            else if(currCharInv.get(i) instanceof Pistol)
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/pistol.jpg")));
+            else if(currCharInv.get(i) instanceof Rope)
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/rope.jpg")));
+            else if(currCharInv.get(i) instanceof Shovel)
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/shovel.jpg")));
+            else if(currCharInv.get(i) instanceof Tent)
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/tent.jpg")));
+            else
+                invPanels[i].setIcon(new ImageIcon(JLabel.class.getResource("/images/invslot.jpg")));
+        }
         for(DisplayTile tile : tiles)
             tile.redraw();
     }

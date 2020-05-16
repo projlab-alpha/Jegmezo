@@ -87,7 +87,7 @@ public abstract class Character {
      * hátralévő munkáinak számát.
      */
     public void PickUpItem(){
-        if(actionpoint > 0) {
+        if(actionpoint > 0 && inventory.size() < 9) {
             Item i = field.RequestItem();
             if (i != null) {
                 inventory.add(i);
@@ -205,4 +205,6 @@ public abstract class Character {
     public void setField(AbstractField f) {
         this.field = f;
     }
+
+    public ArrayList<Item> getInventory() { return inventory; }
 }

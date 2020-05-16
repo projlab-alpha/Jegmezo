@@ -13,7 +13,7 @@ public class Hole extends AbstractField {
      * @param item      a jégtáblába fagyott tárgy
      * @param snowcount a táblán lévő hó mennyisége
      */
-    public Hole(Item item, int snowcount) {     //TODO: Engedjük, hogy lyukas táblán legyen item?
+    public Hole(Item item, int snowcount) {
         super(item, 0, snowcount);
     }
 

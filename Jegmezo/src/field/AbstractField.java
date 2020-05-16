@@ -1,6 +1,7 @@
 package field;
 
 import bearAttackStrategy.BearAttackStrategy;
+import bearAttackStrategy.BearAttackStrategyDefault;
 import character.Eskimo;
 import character.PolarBear;
 import character.Researcher;
@@ -72,6 +73,7 @@ public abstract class AbstractField {
         neighbours = new HashMap<>();
         characters = new ArrayList<>();
         snowstormstrat = new SnowstormStrategyDefault();
+        bearattackstrat = new BearAttackStrategyDefault();
     }
 
     /**

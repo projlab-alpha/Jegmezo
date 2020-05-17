@@ -52,9 +52,7 @@ public class DisplayWindow extends JFrame {
                 Control.getInstance().keyPressed(e);
             }
         });
-
-
-        this.getContentPane().setBackground(Color.darkGray);        //delete later
+        this.getContentPane().setBackground(new Color(128, 128, 128));
 
         //-------------------------------------------------
         //Menu bar setup
@@ -88,10 +86,6 @@ public class DisplayWindow extends JFrame {
             tiles.add(tile);
             gameTableDisplay.add(tile);
         }
-        //Dimension dim = new Dimension(width * imgDim, height * imgDim);
-        //gameTableDisplay.setPreferredSize(dim);
-        //gameTableDisplay.setMaximumSize(dim);
-        //gameTableDisplay.setMinimumSize(dim);
 
         JPanel gameTableDisplayPanel = new JPanel();
         gameTableDisplayPanel.setLayout(new GridBagLayout());
@@ -107,8 +101,7 @@ public class DisplayWindow extends JFrame {
         c1.ipadx = 0;
         gameTableDisplayPanel.setMinimumSize(new Dimension(400, 400));
         gameTableDisplayPanel.setMaximumSize(new Dimension(400, 400));
-
-        gameTableDisplayPanel.setBackground(Color.CYAN);        //delete later
+        gameTableDisplayPanel.setBackground(new Color(48, 106, 255));
         gameTableDisplayPanel.add(gameTableDisplay);
         this.add(gameTableDisplayPanel, c1);
 
@@ -133,7 +126,22 @@ public class DisplayWindow extends JFrame {
         JPanel charBoxPanel = new JPanel();
         charBoxPanel.setLayout(new BoxLayout(charBoxPanel, BoxLayout.Y_AXIS));
         charBoxPanel.add(charGridPanel);
+
+        warmthField.setFont(new Font("OCR A Extended", Font.BOLD, 14));
+        warmthField.setText("Warmth: ?");
+        warmthField.setEditable(false);
+        warmthField.setBackground(new Color(90, 90, 90));
+        warmthField.setDisabledTextColor(new Color(255, 131, 0));
+        warmthField.setEnabled(false);
         charBoxPanel.add(warmthField);
+
+        apField.setFont(new Font("OCR A Extended", Font.BOLD, 14));
+        apField.setText("AP: ?");
+        apField.setEditable(false);
+        apField.setBackground(new Color(90, 90, 90));
+        apField.setDisabledTextColor(new Color(255, 240, 5));
+        apField.setEnabled(false);
+        charBoxPanel.add(apField);
 
         characterInfoDisplayPanel.add(charBoxPanel);
 
@@ -148,7 +156,7 @@ public class DisplayWindow extends JFrame {
         c2.gridy = 0;
         c2.ipady = 400;
 
-        characterInfoDisplayPanel.setBackground(Color.magenta);        //delete later
+        characterInfoDisplayPanel.setBackground(new Color(158, 158, 158));
         this.add(characterInfoDisplayPanel, c2);
 
         //-------------------------------------------------
@@ -160,7 +168,7 @@ public class DisplayWindow extends JFrame {
         //turnsField.setColumns(2);
         JPanel turnsPanel = new JPanel();
         turnsPanel.setLayout(new FlowLayout());
-        turnsField.setFont(new Font("OCR A Extended", Font.BOLD, 30));
+        turnsField.setFont(new Font("OCR A Extended", Font.BOLD, 30));      //TODO: fix this shit
         turnsField.setText("aaaaaaa");
         turnsField.setEditable(false);
         //turnsField.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -179,18 +187,21 @@ public class DisplayWindow extends JFrame {
         c3.gridy = 2;
         c3.ipady = 200;
 
-        //statusDisplayPanel.setBackground(Color.red);        //delete later
+        statusDisplayPanel.setBackground(new Color(128, 128, 128));
         this.add(statusDisplayPanel, c3);
 
         //-------------------------------------------------
         redraw();
         this.setVisible(true);
+        this.requestFocus();
         //-------------------------------------------------
     }
 
     public void redraw() {
         System.out.println("redrawing");
         character.Character currentChar = Control.getInstance().getCurrentChar();
+        warmthField.setText("Warmth:\t"+currentChar.getWarmth());
+        apField.setText("AP:\t"+currentChar.getAP());
         if(currentChar instanceof Eskimo) {
             if(currentChar.isDrowning())
                 charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/eskimoportraitdrowning.png")));
@@ -228,6 +239,7 @@ public class DisplayWindow extends JFrame {
         }
         for(DisplayTile tile : tiles)
             tile.redraw();
+        turnsField.setText("Turn: "+Control.getInstance().getTurn());
     }
 
     public void showVictory() {

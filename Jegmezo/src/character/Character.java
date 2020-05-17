@@ -105,7 +105,7 @@ public abstract class Character {
      * @param n A használni kivánt tárgy indexe az inventory-ban
      */
     public void UseItem(int n){
-        if(actionpoint > 0 && this.inventory.get(n) != null) {
+        if(actionpoint > 0 && n < inventory.size()) {
             if (this.inventory.get(n).UseItem(this))
                 this.inventory.remove(n);
             --actionpoint;

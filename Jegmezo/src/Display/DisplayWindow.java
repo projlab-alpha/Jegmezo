@@ -1,5 +1,7 @@
 package Display;
 
+import character.Eskimo;
+import character.Researcher;
 import control.Control;
 import field.GameField;
 import item.*;
@@ -102,12 +104,14 @@ public class DisplayWindow extends JFrame {
         //Character panel setup
         JPanel characterInfoDisplayPanel = new JPanel();
         characterInfoDisplayPanel.setLayout(new GridBagLayout());
+        charPortrait = new JLabel();
 
         JPanel inventoryDisplay = new JPanel();
         inventoryDisplay.setLayout(new GridLayout(3, 3));
         for(int i = 0; i < 9; i++) {
             inventoryDisplay.add(invPanels[i]);
         }
+        characterInfoDisplayPanel.add(charPortrait);
         characterInfoDisplayPanel.add(inventoryDisplay);
 
 
@@ -148,6 +152,18 @@ public class DisplayWindow extends JFrame {
     public void redraw() {
         System.out.println("redrawing");
         character.Character currentChar = Control.getInstance().getCurrentChar();
+        if(currentChar instanceof Eskimo) {
+            if(currentChar.isDrowning())
+                charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/eskimoportraitdrowning.png")));
+            else
+                charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/eskimoportrait.png")));
+        } else if (currentChar instanceof Researcher) {
+            if(currentChar.isDrowning())
+                charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/reseacherportraitdrowning.png")));
+            else
+                charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/researcherportrait.png")));
+        }
+
         ArrayList<Item> currCharInv = currentChar.getInventory();
         for(int i = 0; i < Math.min(currCharInv.size(), 9); i++) {
             if(currCharInv.get(i) instanceof Cartridge)

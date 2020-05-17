@@ -80,7 +80,6 @@ public class Control {
         polarBear = new PolarBear();
         gameField = new GameField(width, height, characters, polarBear);
         window = new DisplayWindow(width, height, gameField);
-        window.setVisible(true);
     }
 
     public void keyPressed(KeyEvent e) {
@@ -132,7 +131,7 @@ public class Control {
                 case KeyEvent.VK_SHIFT:
                     ch.PickUpItem();
                     break;
-                default:                                    //handle number keys here to reduce clutter
+                default:                                      //handle number keys here to reduce clutter
                     if (49 <= keyCode && keyCode <= 57) {    //49-57 are the key codes of 1-9 on the keyboard
                         ch.UseItem(keyCode - 48 - 1);   // keyCode - 48 gets an int between 1 and 9, subtract 1 to get valid array index
                         //System.out.println("Keycode: "+keyCode+" Number pressed: "+(keyCode - 48)+" Array idx: "+(keyCode - 48 - 1));

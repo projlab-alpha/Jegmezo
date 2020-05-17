@@ -207,4 +207,7 @@ public abstract class Character {
     }
 
     public ArrayList<Item> getInventory() { return inventory; }
+
+    public int getWarmth() { return warmth; }
+    public int getAP() { return actionpoint; }
 }

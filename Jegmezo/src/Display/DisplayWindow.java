@@ -222,7 +222,8 @@ public class DisplayWindow extends JFrame {
         }
         //update inventory display
         ArrayList<Item> currCharInv = currentChar.getInventory();
-        for(int i = 0; i < Math.min(currCharInv.size(), 9); i++) {
+        int i = 0;
+        while(i < Math.min(currCharInv.size(), 9)) {
             if(currCharInv.get(i) instanceof Cartridge)
                 invPanels[i].setIcon(new ImageIcon(this.getClass().getResource("/images/cartridge.png")));
             else if(currCharInv.get(i) instanceof Divingsuit)
@@ -243,6 +244,11 @@ public class DisplayWindow extends JFrame {
                 invPanels[i].setIcon(new ImageIcon(this.getClass().getResource("/images/tentitem.png")));
             else
                 invPanels[i].setIcon(new ImageIcon(this.getClass().getResource("/images/invslot.png")));
+            i++;
+        }
+        while(i < 9) {
+            invPanels[i].setIcon(new ImageIcon(this.getClass().getResource("/images/invslot.png")));
+            i++;
         }
         //update game field tiles
         for(DisplayTile tile : tiles)

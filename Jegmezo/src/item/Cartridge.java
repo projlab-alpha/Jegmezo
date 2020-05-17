@@ -23,7 +23,5 @@ public class Cartridge implements Item {
             Control.getInstance().Win();
         return false;
     }
-
- 
 }
 

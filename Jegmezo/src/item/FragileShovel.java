@@ -21,5 +21,4 @@ public class FragileShovel extends Shovel {
         super.UseItem(c);
         return (--UsesLeft <= 0);
     }
-  
 }

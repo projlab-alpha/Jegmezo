@@ -20,6 +20,4 @@ public class Divingsuit implements Item {
         c.ChangeStrategy(new WaterStrategySuit());
         return true;
     }
-
- 
 }

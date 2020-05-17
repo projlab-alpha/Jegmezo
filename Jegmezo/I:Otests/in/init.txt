@@ -1,0 +1,44 @@
+Init 13
+SetNeighbor „floe1” „floe2”
+SetNeighbor „floe1” „floe4”
+SetNeighbor „floe1” „floe8”
+SetNeighbor „floe2” „floe4”
+SetNeighbor „floe2” „floe5”
+SetNeighbor „floe2” „floe3”
+SetNeighbor „floe3” „floe5”
+SetNeighbor „floe3” „floe6”
+SetNeighbor „floe4” „floe8”
+SetNeighbor „floe4” „floe9”
+SetNeighbor „floe4” „floe5”
+SetNeighbor „floe5” „floe6”
+SetNeighbor „floe5” „floe9”
+SetNeighbor „floe5” „floe10”
+SetNeighbor „floe6” „floe7”
+SetNeighbor „floe6” „floe10”
+SetNeighbor „floe6” „floe13”
+SetNeighbor „floe7” „floe13”
+SetNeighbor „floe8” „floe9”
+SetNeighbor „floe8” „floe11”
+SetNeighbor „floe9” „floe10”
+SetNeighbor „floe9” „floe11”
+SetNeighbor „floe9” „floe12”
+SetNeighbor „floe10” „floe12”
+SetNeighbor „floe10” „floe13”
+SetNeighbor „floe11” „floe12”
+SetNeighbor „floe12” „floe13”
+Addchar „kutato1” „floe12”
+Addchar „kutato2” „floe13”
+Addchar „eszkimo3” „floe6”
+Addchar „medve4” „floe2”
+FloeAdditem „floe1” „flare”
+FloeAdditem „floe8” „cartridge”
+FloeAdditem „floe5” „pistol”
+FloeAdditem „floe9” „shovel”
+AddUnstableFloe „floe1” 1
+AddUnstableFloe „floe6” 1
+AddUnstableFloe „floe12” 1
+AddHole „floe3”
+AddHole „floe4”
+AddHole „floe7”
+AddHole „floe10”
+AddHole „floe11”

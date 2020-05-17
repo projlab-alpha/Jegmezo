@@ -1,0 +1,9 @@
+Init
+AddChar “eskimo1” „floe1”
+AddChar “eskimo2” „floe1”
+AddChar “researcher1” „floe1”
+CharAdditem 1 pistol
+CharAdditem 2 flare
+CharAdditem 3 cartridge
+UseItem 1 assemble
+UseItem 1 flaregun

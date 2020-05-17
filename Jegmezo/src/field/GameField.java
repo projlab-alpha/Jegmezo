@@ -2,10 +2,7 @@ package field;
 
 import character.PolarBear;
 import control.Direction;
-import item.Cartridge;
-import item.Flare;
-import item.Item;
-import item.Pistol;
+import item.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,11 +47,31 @@ public class GameField {
         floes.get(ranNum).setItem(i);
     }
 
+    private Item getRandomItem() {
+        Item item;
+        Random rng = new Random();
+        double ranNum = rng.nextDouble();
+        if(ranNum < 0.15)
+            item = new Divingsuit();
+        else if(ranNum < 0.3)
+            item = new Shovel();
+        else if (ranNum < 0.45)
+            item = new Rope();
+        else if (ranNum < 0.65)
+            item = new FragileShovel();
+        else if (ranNum < 0.80)
+            item = new Tent();
+        else
+            item = new Food();
+        return item;
+    }
+
     /**
      * Konstruktor.
      */
     public GameField(int width, int height, ArrayList<character.Character> chars, PolarBear polarBear) {
         final int size = width * height;
+        final int itemcount = (size / 5); //intentional integer division
         Random rng = new Random();
         floes = new ArrayList<>(size);
 
@@ -65,11 +82,11 @@ public class GameField {
                 AbstractField newField;
                 double typeChance = rng.nextDouble();
                 if (typeChance < 0.15) {
-                    newField = new Hole(null, rng.nextInt(4));
+                    newField = new Hole(null, 0);
                 } else if (typeChance < 0.55) {
-                    newField = new UnstableFloe(null, rng.nextInt(chars.size()) + 1, rng.nextInt(4));
+                    newField = new UnstableFloe(null, rng.nextInt(chars.size()) + 1, 0);
                 } else {
-                    newField = new Floe(null, chars.size() + 2, rng.nextInt(4));
+                    newField = new Floe(null, chars.size() + 2, 0);
                 }
                 tempFloes[i][j] = newField;
             }
@@ -102,7 +119,10 @@ public class GameField {
         addRandom(new Flare());
         addRandom(new Pistol());
 
-        //TODO: Add other items
+        //add other items
+        for(int i = 0; i < itemcount; i++) {
+            addRandom(getRandomItem());
+        }
 
     }
  

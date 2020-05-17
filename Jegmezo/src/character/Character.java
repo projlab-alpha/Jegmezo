@@ -19,12 +19,12 @@ public abstract class Character {
     /**
      * A karakter teshőjének szintje.
      */
-    protected int warmth;       //TODO: dokumentációban private helyett protected kellene
+    protected int warmth;
 
     /**
      * A karakter maradék munkáinak száma.
      */
-    protected int actionpoint;      //TODO: dokumentációban private helyett protected kellene
+    protected int actionpoint;
 
     /**
      * Jelzi, hogy fuldoklik-e éppen a karakter.
@@ -39,7 +39,7 @@ public abstract class Character {
     /**
      * Referencia arra mezőre, amelyen a karakter jelenleg áll.
      */
-    protected AbstractField field;      //TODO: dokumentációban private helyett protected kellene
+    protected AbstractField field;
 
     /**
      * A stratégia, amely végrehajtódik vízbe eséskor.

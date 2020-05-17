@@ -71,7 +71,7 @@ public class Control {
 
     public void requestRedraw() { window.redraw(); }
 
-    public void initializeGame(int width, int height, ArrayList<Character> chars) {        //TODO: new method
+    public void initializeGame(int width, int height, ArrayList<Character> chars) {
         PlayerCount = chars.size();
         currentplayer = 0;
         characters = chars;

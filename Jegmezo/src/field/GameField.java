@@ -110,7 +110,7 @@ public class GameField {
      * Hozzáad egy jégmezőt a jégtáblához.
      * @param f a hozzáadandó jégmező
      */
-    public void addField(AbstractField f) {     //TODO: Dokumentációról lemaradt
+    public void addField(AbstractField f) {
         floes.add(f);
     }
 

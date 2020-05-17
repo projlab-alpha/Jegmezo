@@ -68,6 +68,7 @@ public class DisplayWindow extends JFrame {
                 +"Arrow keys to move\n"
                 +"a/w/s/d to use ability in the given direction\n"
                 +"Shift to pick an item up\n"
+                +"Control to dig\n"
                 +"Number keys 1-9 to use item in the given slot\n"
                 +"Space to end turn\n", "Controls", JOptionPane.INFORMATION_MESSAGE));
         optionsMenu.add(OptionsMenuItemExit);

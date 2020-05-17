@@ -126,6 +126,7 @@ public class Control {
                     window.showActionResult("Reasearcher", Direction.SOUTH, res);
                 break;
             case KeyEvent.VK_SHIFT: ch.PickUpItem(); break;
+            case KeyEvent.VK_CONTROL: ch.Dig(); break;
             default:                                      //handle number keys here to reduce clutter
                 if (49 <= keyCode && keyCode <= 57) {    //49-57 are the key codes of 1-9 on the keyboard
                     ch.UseItem(keyCode - 48 - 1);   // keyCode - 48 gets an int between 1 and 9, subtract 1 to get valid array index

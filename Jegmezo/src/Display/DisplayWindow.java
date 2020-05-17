@@ -23,7 +23,13 @@ public class DisplayWindow extends JFrame {
     private ArrayList<DisplayTile> tiles;
 
     public DisplayWindow(int width, int height, GameField gameField) {
+        //-------------------------------------------------
         //initialize variables
+        //-------------------------------------------------
+        apField = new JTextField();
+        warmthField = new JTextField();
+        turnsField = new JTextField();
+        charPortrait = new JLabel();
         for(int i = 0; i < 9; i++) {
             invPanels[i] = new JLabel();
             System.out.println(invPanels[i].getClass().getSimpleName());
@@ -32,10 +38,12 @@ public class DisplayWindow extends JFrame {
         tiles = new ArrayList<>(width * height);
         final int imgDim = 32;
 
+        //-------------------------------------------------
         //Window setup
+        //-------------------------------------------------
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setTitle("Jégmező");
+        this.setTitle("Jegmezo");
         this.setSize(800, 600);
         this.setLayout(new GridBagLayout());
         this.addKeyListener(new KeyAdapter() {
@@ -48,7 +56,9 @@ public class DisplayWindow extends JFrame {
 
         this.getContentPane().setBackground(Color.darkGray);        //delete later
 
+        //-------------------------------------------------
         //Menu bar setup
+        //-------------------------------------------------
         JMenuBar menuBar = new JMenuBar();
         JMenu optionsMenu = new JMenu("Options");
         JMenuItem OptionsMenuItemExit = new JMenuItem("Exit", KeyEvent.VK_E);
@@ -65,8 +75,10 @@ public class DisplayWindow extends JFrame {
         menuBar.add(optionsMenu);
         this.setJMenuBar(menuBar);
 
-
+        //-------------------------------------------------
         //Game table panel setup
+        //-------------------------------------------------
+
         //container panel for game tiles
         JPanel gameTableDisplay = new JPanel();
         gameTableDisplay.setLayout(new GridLayout(width, height));
@@ -76,10 +88,10 @@ public class DisplayWindow extends JFrame {
             tiles.add(tile);
             gameTableDisplay.add(tile);
         }
-        Dimension dim = new Dimension(width * imgDim, height * imgDim);
-        gameTableDisplay.setPreferredSize(dim);
-        gameTableDisplay.setMaximumSize(dim);
-        gameTableDisplay.setMinimumSize(dim);
+        //Dimension dim = new Dimension(width * imgDim, height * imgDim);
+        //gameTableDisplay.setPreferredSize(dim);
+        //gameTableDisplay.setMaximumSize(dim);
+        //gameTableDisplay.setMinimumSize(dim);
 
         JPanel gameTableDisplayPanel = new JPanel();
         gameTableDisplayPanel.setLayout(new GridBagLayout());
@@ -100,21 +112,32 @@ public class DisplayWindow extends JFrame {
         gameTableDisplayPanel.add(gameTableDisplay);
         this.add(gameTableDisplayPanel, c1);
 
-
+        //-------------------------------------------------
         //Character panel setup
+        //-------------------------------------------------
         JPanel characterInfoDisplayPanel = new JPanel();
         characterInfoDisplayPanel.setLayout(new GridBagLayout());
-        charPortrait = new JLabel();
 
+        //Inventory display
         JPanel inventoryDisplay = new JPanel();
         inventoryDisplay.setLayout(new GridLayout(3, 3));
         for(int i = 0; i < 9; i++) {
             inventoryDisplay.add(invPanels[i]);
         }
-        characterInfoDisplayPanel.add(charPortrait);
-        characterInfoDisplayPanel.add(inventoryDisplay);
+        //Panel for character portrait + inventory grid
+        JPanel charGridPanel = new JPanel();
+        charGridPanel.setLayout(new GridLayout(2, 1));
+        charGridPanel.add(charPortrait);
+        charGridPanel.add(inventoryDisplay);
+        //Panel for portrait + grid, warmth text field, AP text field
+        JPanel charBoxPanel = new JPanel();
+        charBoxPanel.setLayout(new BoxLayout(charBoxPanel, BoxLayout.Y_AXIS));
+        charBoxPanel.add(charGridPanel);
+        charBoxPanel.add(warmthField);
 
+        characterInfoDisplayPanel.add(charBoxPanel);
 
+        //constraints for character panel
         GridBagConstraints c2 = new GridBagConstraints();
         c2.fill = GridBagConstraints.BOTH;
         c2.anchor = GridBagConstraints.FIRST_LINE_END;
@@ -128,11 +151,23 @@ public class DisplayWindow extends JFrame {
         characterInfoDisplayPanel.setBackground(Color.magenta);        //delete later
         this.add(characterInfoDisplayPanel, c2);
 
-
+        //-------------------------------------------------
         //Status panel setup
+        //-------------------------------------------------
         JPanel statusDisplayPanel = new JPanel();
         statusDisplayPanel.setLayout(new GridBagLayout());
-            //add stuff to panel here
+
+        //turnsField.setColumns(2);
+        JPanel turnsPanel = new JPanel();
+        turnsPanel.setLayout(new FlowLayout());
+        turnsField.setFont(new Font("OCR A Extended", Font.BOLD, 30));
+        turnsField.setText("aaaaaaa");
+        turnsField.setEditable(false);
+        //turnsField.setHorizontalAlignment(SwingConstants.RIGHT);
+        //turnsField.setBackground(new Color(120, 0, 0));
+        //turnsField.setForeground(new Color(255, 10, 0));
+        turnsPanel.add(turnsField);
+        statusDisplayPanel.add(turnsPanel);
 
         GridBagConstraints c3 = new GridBagConstraints();
         c3.fill = GridBagConstraints.BOTH;
@@ -144,9 +179,13 @@ public class DisplayWindow extends JFrame {
         c3.gridy = 2;
         c3.ipady = 200;
 
-        statusDisplayPanel.setBackground(Color.red);        //delete later
+        //statusDisplayPanel.setBackground(Color.red);        //delete later
         this.add(statusDisplayPanel, c3);
+
+        //-------------------------------------------------
         redraw();
+        this.setVisible(true);
+        //-------------------------------------------------
     }
 
     public void redraw() {

@@ -162,6 +162,7 @@ public abstract class AbstractField {
      * tagvĂˇltozĂł referenciĂˇjĂˇt.
      */
     public void SnowStormHit(){
+        this.ChangeSnow(1);
         snowstormstrat.execute(characters);
     }
 
@@ -262,9 +263,7 @@ public abstract class AbstractField {
     }
 
     public boolean hasItem() {
-        if (item == null)
-            return false;
-        else return true;
+        return (item != null);
     }
 
     public void setItem(Item i) { this.item = i; }

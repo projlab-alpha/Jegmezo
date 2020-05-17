@@ -59,9 +59,9 @@ public class GameField {
         floes = new ArrayList<>(size);
 
         //initialize into 2d array for easier neighbor settings
-        AbstractField[][] tempFloes = new AbstractField[width][height];
-        for(int i = 0; i < width; ++i) {
-            for(int j = 0; j < height; ++j) {
+        AbstractField[][] tempFloes = new AbstractField[height][width];
+        for(int i = 0; i < height; ++i) {
+            for(int j = 0; j < width; ++j) {
                 AbstractField newField;
                 double typeChance = rng.nextDouble();
                 if (typeChance < 0.15) {
@@ -75,17 +75,17 @@ public class GameField {
             }
         }
         //Guarantee that at least one field is a normal Floe
-        tempFloes[rng.nextInt(width)][rng.nextInt(height)] = new Floe(null, chars.size() + 2, rng.nextInt(4));
+        tempFloes[rng.nextInt(height)][rng.nextInt(width)] = new Floe(null, chars.size() + 2, rng.nextInt(4));
         //set neighbors
         for(int i = 0; i < height; ++i) {
             for(int j = 0; j < width; ++j) {
                 if(i - 1 >= 0)
                     tempFloes[i][j].setNeighbour(Direction.NORTH, tempFloes[i - 1][j]);
-                if(i + 1 < width)
+                if(i + 1 < height)
                     tempFloes[i][j].setNeighbour(Direction.SOUTH, tempFloes[i+1][j]);
                 if(j - 1 >= 0)
                     tempFloes[i][j].setNeighbour(Direction.WEST, tempFloes[i][j-1]);
-                if(j + 1 < height)
+                if(j + 1 < width)
                     tempFloes[i][j].setNeighbour(Direction.EAST, tempFloes[i][j+1]);
             }
         }

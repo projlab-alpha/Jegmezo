@@ -102,6 +102,7 @@ public class GameField {
         addRandom(new Flare());
         addRandom(new Pistol());
 
+        //TODO: Add other items
 
     }
  

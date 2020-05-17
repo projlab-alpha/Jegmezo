@@ -26,17 +26,17 @@ public class DisplayWindow extends JFrame {
         //-------------------------------------------------
         //initialize variables
         //-------------------------------------------------
+        this.locked = false;
         apField = new JTextField();
         warmthField = new JTextField();
         turnsField = new JTextField();
         charPortrait = new JLabel();
         for(int i = 0; i < 9; i++) {
             invPanels[i] = new JLabel();
-            System.out.println(invPanels[i].getClass().getSimpleName());
             invPanels[i].setIcon(new ImageIcon(this.getClass().getResource("/images/invslot.png")));
         }
         tiles = new ArrayList<>(width * height);
-        final int imgDim = 32;
+
 
         //-------------------------------------------------
         //Window setup
@@ -49,7 +49,8 @@ public class DisplayWindow extends JFrame {
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                Control.getInstance().keyPressed(e);
+                if(!DisplayWindow.this.locked)
+                    Control.getInstance().keyPressed(e);
             }
         });
         this.getContentPane().setBackground(new Color(128, 128, 128));
@@ -76,7 +77,8 @@ public class DisplayWindow extends JFrame {
         //-------------------------------------------------
         //Game table panel setup
         //-------------------------------------------------
-
+        JPanel gameTableDisplayPanel = new JPanel();
+        gameTableDisplayPanel.setLayout(new GridBagLayout());
         //container panel for game tiles
         JPanel gameTableDisplay = new JPanel();
         gameTableDisplay.setLayout(new GridLayout(width, height));
@@ -86,23 +88,23 @@ public class DisplayWindow extends JFrame {
             tiles.add(tile);
             gameTableDisplay.add(tile);
         }
+        gameTableDisplayPanel.add(gameTableDisplay);
 
-        JPanel gameTableDisplayPanel = new JPanel();
-        gameTableDisplayPanel.setLayout(new GridBagLayout());
+        //constraints for game panel
         GridBagConstraints c1 = new GridBagConstraints();
         c1.fill = GridBagConstraints.BOTH;
         c1.anchor = GridBagConstraints.FIRST_LINE_START;
         c1.weightx = 1;
         c1.gridx = 0;
         c1.gridy = 0;
-        c1.gridwidth = 2;
-        c1.gridheight = 3;
+        c1.gridwidth = 1;
+        c1.gridheight = 2;
         c1.ipady = 0;
         c1.ipadx = 0;
         gameTableDisplayPanel.setMinimumSize(new Dimension(400, 400));
         gameTableDisplayPanel.setMaximumSize(new Dimension(400, 400));
         gameTableDisplayPanel.setBackground(new Color(48, 106, 255));
-        gameTableDisplayPanel.add(gameTableDisplay);
+
         this.add(gameTableDisplayPanel, c1);
 
         //-------------------------------------------------
@@ -127,6 +129,7 @@ public class DisplayWindow extends JFrame {
         charBoxPanel.setLayout(new BoxLayout(charBoxPanel, BoxLayout.Y_AXIS));
         charBoxPanel.add(charGridPanel);
 
+        //warmth text field setup
         warmthField.setFont(new Font("OCR A Extended", Font.BOLD, 14));
         warmthField.setText("Warmth: ?");
         warmthField.setEditable(false);
@@ -135,6 +138,7 @@ public class DisplayWindow extends JFrame {
         warmthField.setEnabled(false);
         charBoxPanel.add(warmthField);
 
+        //action point text field setup
         apField.setFont(new Font("OCR A Extended", Font.BOLD, 14));
         apField.setText("AP: ?");
         apField.setEditable(false);
@@ -177,6 +181,7 @@ public class DisplayWindow extends JFrame {
         turnsPanel.add(turnsField);
         statusDisplayPanel.add(turnsPanel);
 
+        //constraints for status panel
         GridBagConstraints c3 = new GridBagConstraints();
         c3.fill = GridBagConstraints.BOTH;
         c3.anchor = GridBagConstraints.LAST_LINE_END;
@@ -198,10 +203,11 @@ public class DisplayWindow extends JFrame {
     }
 
     public void redraw() {
-        System.out.println("redrawing");
         character.Character currentChar = Control.getInstance().getCurrentChar();
+        //update text fields
         warmthField.setText("Warmth:\t"+currentChar.getWarmth());
         apField.setText("AP:\t"+currentChar.getAP());
+        //update character portrait
         if(currentChar instanceof Eskimo) {
             if(currentChar.isDrowning())
                 charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/eskimoportraitdrowning.png")));
@@ -213,7 +219,7 @@ public class DisplayWindow extends JFrame {
             else
                 charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/researcherportrait.png")));
         }
-
+        //update inventory display
         ArrayList<Item> currCharInv = currentChar.getInventory();
         for(int i = 0; i < Math.min(currCharInv.size(), 9); i++) {
             if(currCharInv.get(i) instanceof Cartridge)
@@ -237,16 +243,20 @@ public class DisplayWindow extends JFrame {
             else
                 invPanels[i].setIcon(new ImageIcon(this.getClass().getResource("/images/invslot.png")));
         }
+        //update game field tiles
         for(DisplayTile tile : tiles)
             tile.redraw();
+        //update turn text field
         turnsField.setText("Turn: "+Control.getInstance().getTurn());
     }
 
     public void showVictory() {
-        JOptionPane.showMessageDialog(this, "You win!", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+        this.locked = true;
+        JOptionPane.showMessageDialog(this, "Flaregun fired! Rescue is coming!\n"+"You win!", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void showDefeat() {
-        JOptionPane.showMessageDialog(this, "You lose!", "Game over!", JOptionPane.WARNING_MESSAGE);
+        this.locked = true;
+        JOptionPane.showMessageDialog(this, "A player has died!\n"+"You lose!", "Game over!", JOptionPane.WARNING_MESSAGE);
     }
 }

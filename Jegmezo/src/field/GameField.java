@@ -82,11 +82,11 @@ public class GameField {
                 AbstractField newField;
                 double typeChance = rng.nextDouble();
                 if (typeChance < 0.15) {
-                    newField = new Hole(null, 0);
+                    newField = new Hole(null, rng.nextInt(4));
                 } else if (typeChance < 0.55) {
-                    newField = new UnstableFloe(null, rng.nextInt(chars.size()) + 1, 0);
+                    newField = new UnstableFloe(null, rng.nextInt(chars.size()) + 1, rng.nextInt(4));
                 } else {
-                    newField = new Floe(null, chars.size() + 2, 0);
+                    newField = new Floe(null, chars.size() + 2, rng.nextInt(4));
                 }
                 tempFloes[i][j] = newField;
             }

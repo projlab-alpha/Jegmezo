@@ -209,6 +209,7 @@ public abstract class AbstractField {
             if (c.isDrowning()) {
                 c.Rescued();
                 f.Accept(c);
+                this.characters.remove(c);
             }
         }
     }

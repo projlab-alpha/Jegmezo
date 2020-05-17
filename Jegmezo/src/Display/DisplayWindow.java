@@ -149,6 +149,15 @@ public class DisplayWindow extends JFrame {
         apField.setEnabled(false);
         charBoxPanel.add(apField);
 
+        //turns text field setup
+        turnsField.setFont(new Font("OCR A Extended", Font.BOLD, 14));
+        turnsField.setText("Turn ?");
+        turnsField.setEditable(false);
+        turnsField.setBackground(new Color(90, 90, 90));
+        turnsField.setDisabledTextColor(new Color(100, 200, 5));
+        turnsField.setEnabled(false);
+        charBoxPanel.add(turnsField);
+
         characterInfoDisplayPanel.add(charBoxPanel);
 
         //constraints for character panel
@@ -170,17 +179,6 @@ public class DisplayWindow extends JFrame {
         //-------------------------------------------------
         JPanel statusDisplayPanel = new JPanel();
         statusDisplayPanel.setLayout(new GridBagLayout());
-
-        JPanel turnsPanel = new JPanel();
-        turnsPanel.setLayout(new FlowLayout());
-        turnsField.setFont(new Font("OCR A Extended", Font.BOLD, 30));      //TODO: fix this shit
-        turnsField.setText("Turn ?");
-        turnsField.setEditable(false);
-        //turnsField.setHorizontalAlignment(SwingConstants.RIGHT);
-        //turnsField.setBackground(new Color(120, 0, 0));
-        //turnsField.setForeground(new Color(255, 10, 0));
-        turnsPanel.add(turnsField);
-        statusDisplayPanel.add(turnsPanel);
 
         //constraints for status panel
         GridBagConstraints c3 = new GridBagConstraints();
@@ -254,7 +252,7 @@ public class DisplayWindow extends JFrame {
         for(DisplayTile tile : tiles)
             tile.redraw();
         //update turn text field
-        turnsField.setText("Turn: "+Control.getInstance().getTurn());
+        turnsField.setText("Turn\t"+Control.getInstance().getTurn());
     }
 
     public void showVictory() {

@@ -73,6 +73,7 @@ public class Control {
 
     public void initializeGame(int width, int height, ArrayList<Character> chars) {
         PlayerCount = chars.size();
+        turn = 1;
         currentplayer = 0;
         characters = chars;
         polarBear = new PolarBear();

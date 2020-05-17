@@ -24,7 +24,6 @@ public class Control {
     private int turn;
     private int currentplayer;
     private DisplayWindow window;
-    private boolean locked = false;
 
     /**
      * A játékos karakterek listája.
@@ -73,7 +72,6 @@ public class Control {
     public void requestRedraw() { window.redraw(); }
 
     public void initializeGame(int width, int height, ArrayList<Character> chars) {        //TODO: new method
-        locked = false;
         PlayerCount = chars.size();
         currentplayer = 0;
         characters = chars;
@@ -83,63 +81,41 @@ public class Control {
     }
 
     public void keyPressed(KeyEvent e) {
-        if(!locked) {
-            character.Character ch = characters.get(currentplayer);
-            int keyCode = e.getKeyCode();
-            switch (keyCode) {
-                case KeyEvent.VK_SPACE:
-                    if (currentplayer + 1 >= PlayerCount) {  //all players played this turn, control goes back to player 1, new turn begins
-                        currentplayer = 0;
-                        int ranDir = new Random().nextInt(4);   //move polar bear in a random direction
-                        polarBear.Move(Direction.values()[ranDir]);
-
-                        for (AbstractField f : gameField.getFloes()) {   //remove tents
-                            if (f.ChangeSnowStrategy(null) instanceof SnowstormStrategyTent)
-                                f.ChangeSnowStrategy(new SnowstormStrategyDefault());
-                        }
-                        gameField.SnowStorm();
-                        turn++;
-                    } else currentplayer++;
-                    if (characters.get(currentplayer).isDrowning())  //end game if next player is drowning
-                        CharacterDied();
-                    characters.get(currentplayer).resetAP();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    ch.Move(Direction.WEST);
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    ch.Move(Direction.EAST);
-                    break;
-                case KeyEvent.VK_UP:
-                    ch.Move(Direction.NORTH);
-                    break;
-                case KeyEvent.VK_DOWN:
-                    ch.Move(Direction.SOUTH);
-                    break;
-                case KeyEvent.VK_A:
-                    ch.UseAbility(Direction.WEST);
-                    break;
-                case KeyEvent.VK_D:
-                    ch.UseAbility(Direction.EAST);
-                    break;
-                case KeyEvent.VK_W:
-                    ch.UseAbility(Direction.NORTH);
-                    break;
-                case KeyEvent.VK_S:
-                    ch.UseAbility(Direction.SOUTH);
-                    break;
-                case KeyEvent.VK_SHIFT:
-                    ch.PickUpItem();
-                    break;
-                default:                                      //handle number keys here to reduce clutter
-                    if (49 <= keyCode && keyCode <= 57) {    //49-57 are the key codes of 1-9 on the keyboard
-                        ch.UseItem(keyCode - 48 - 1);   // keyCode - 48 gets an int between 1 and 9, subtract 1 to get valid array index
-                        //System.out.println("Keycode: "+keyCode+" Number pressed: "+(keyCode - 48)+" Array idx: "+(keyCode - 48 - 1));
+        character.Character ch = characters.get(currentplayer);
+        int keyCode = e.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.VK_SPACE:
+                if (currentplayer + 1 >= PlayerCount) {  //all players played this turn, control goes back to player 1, new turn begins
+                    currentplayer = 0;
+                    int ranDir = new Random().nextInt(4);   //move polar bear in a random direction
+                    polarBear.Move(Direction.values()[ranDir]);
+                    for (AbstractField f : gameField.getFloes()) {   //remove tents
+                        if (f.ChangeSnowStrategy(null) instanceof SnowstormStrategyTent)
+                            f.ChangeSnowStrategy(new SnowstormStrategyDefault());
                     }
-                    break;
-            }
-            window.redraw();
+                    gameField.SnowStorm();
+                    turn++;
+                } else currentplayer++;
+                if (characters.get(currentplayer).isDrowning())  //end game if next player is drowning
+                    CharacterDied();
+                characters.get(currentplayer).resetAP();
+                break; case KeyEvent.VK_LEFT: ch.Move(Direction.WEST);
+                break; case KeyEvent.VK_RIGHT: ch.Move(Direction.EAST);
+                break; case KeyEvent.VK_UP: ch.Move(Direction.NORTH);
+                break; case KeyEvent.VK_DOWN: ch.Move(Direction.SOUTH);
+                break; case KeyEvent.VK_A: ch.UseAbility(Direction.WEST);
+                break; case KeyEvent.VK_D: ch.UseAbility(Direction.EAST);
+                break; case KeyEvent.VK_W: ch.UseAbility(Direction.NORTH);
+                break; case KeyEvent.VK_S: ch.UseAbility(Direction.SOUTH);
+                break; case KeyEvent.VK_SHIFT: ch.PickUpItem();
+                break; default:                                      //handle number keys here to reduce clutter
+                if (49 <= keyCode && keyCode <= 57) {    //49-57 are the key codes of 1-9 on the keyboard
+                    ch.UseItem(keyCode - 48 - 1);   // keyCode - 48 gets an int between 1 and 9, subtract 1 to get valid array index
+                    //System.out.println("Keycode: "+keyCode+" Number pressed: "+(keyCode - 48)+" Array idx: "+(keyCode - 48 - 1));
+                }
+                break;
         }
+        window.redraw();
     }
 
     /**
@@ -147,7 +123,6 @@ public class Control {
      * egy játékos karakter valamilyen okból meghalt, és így a játéknak véget kell vetni.
      */
     public void CharacterDied(){
-        this.locked = true;
         window.showDefeat();
     }
 
@@ -156,7 +131,6 @@ public class Control {
      * összerakni és elsütni a jelző pisztolyt, és így játéknak véget kell vetni.
      */
     public void Win(){
-        this.locked = true;
         window.showVictory();
     }
 }

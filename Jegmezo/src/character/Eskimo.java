@@ -34,6 +34,6 @@ public class Eskimo extends Character {
             field.ChangeBearStrategy(new BearAttackStrategyIgloo());
             --actionpoint;
         }
-        return 0;
+        return -1;
     }
 }

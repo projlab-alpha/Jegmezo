@@ -3,6 +3,7 @@ package Display;
 import character.Eskimo;
 import character.Researcher;
 import control.Control;
+import control.Direction;
 import field.GameField;
 import item.*;
 
@@ -169,11 +170,10 @@ public class DisplayWindow extends JFrame {
         JPanel statusDisplayPanel = new JPanel();
         statusDisplayPanel.setLayout(new GridBagLayout());
 
-        //turnsField.setColumns(2);
         JPanel turnsPanel = new JPanel();
         turnsPanel.setLayout(new FlowLayout());
         turnsField.setFont(new Font("OCR A Extended", Font.BOLD, 30));      //TODO: fix this shit
-        turnsField.setText("aaaaaaa");
+        turnsField.setText("Turn ?");
         turnsField.setEditable(false);
         //turnsField.setHorizontalAlignment(SwingConstants.RIGHT);
         //turnsField.setBackground(new Color(120, 0, 0));
@@ -215,7 +215,7 @@ public class DisplayWindow extends JFrame {
                 charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/eskimoportrait.png")));
         } else if (currentChar instanceof Researcher) {
             if(currentChar.isDrowning())
-                charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/reseacherportraitdrowning.png")));
+                charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/researcherportraitdrowning.png")));
             else
                 charPortrait.setIcon(new ImageIcon(this.getClass().getResource("/images/researcherportrait.png")));
         }
@@ -258,5 +258,9 @@ public class DisplayWindow extends JFrame {
     public void showDefeat() {
         this.locked = true;
         JOptionPane.showMessageDialog(this, "A player has died!\n"+"You lose!", "Game over!", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void showActionResult(String user, Direction d, int i) {
+        JOptionPane.showMessageDialog(this, "Capacity of floe to the "+d+": "+i, user+" used ability", JOptionPane.INFORMATION_MESSAGE);
     }
 }

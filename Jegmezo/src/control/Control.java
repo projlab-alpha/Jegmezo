@@ -83,6 +83,7 @@ public class Control {
     public void keyPressed(KeyEvent e) {
         character.Character ch = characters.get(currentplayer);
         int keyCode = e.getKeyCode();
+        int res;
         switch (keyCode) {
             case KeyEvent.VK_SPACE:
                 if (currentplayer + 1 >= PlayerCount) {  //all players played this turn, control goes back to player 1, new turn begins
@@ -99,19 +100,35 @@ public class Control {
                 if (characters.get(currentplayer).isDrowning())  //end game if next player is drowning
                     CharacterDied();
                 characters.get(currentplayer).resetAP();
-                break; case KeyEvent.VK_LEFT: ch.Move(Direction.WEST);
-                break; case KeyEvent.VK_RIGHT: ch.Move(Direction.EAST);
-                break; case KeyEvent.VK_UP: ch.Move(Direction.NORTH);
-                break; case KeyEvent.VK_DOWN: ch.Move(Direction.SOUTH);
-                break; case KeyEvent.VK_A: ch.UseAbility(Direction.WEST);
-                break; case KeyEvent.VK_D: ch.UseAbility(Direction.EAST);
-                break; case KeyEvent.VK_W: ch.UseAbility(Direction.NORTH);
-                break; case KeyEvent.VK_S: ch.UseAbility(Direction.SOUTH);
-                break; case KeyEvent.VK_SHIFT: ch.PickUpItem();
-                break; default:                                      //handle number keys here to reduce clutter
+                break;
+            case KeyEvent.VK_LEFT: ch.Move(Direction.WEST); break;
+            case KeyEvent.VK_RIGHT: ch.Move(Direction.EAST); break;
+            case KeyEvent.VK_UP: ch.Move(Direction.NORTH); break;
+            case KeyEvent.VK_DOWN: ch.Move(Direction.SOUTH); break;
+            case KeyEvent.VK_A:
+                res = ch.UseAbility(Direction.WEST);
+                if(res > -1)
+                    window.showActionResult("Reasearcher", Direction.WEST, res);
+                break;
+            case KeyEvent.VK_D:
+                res = ch.UseAbility(Direction.EAST);
+                if(res > -1)
+                    window.showActionResult("Reasearcher", Direction.EAST, res);
+                break;
+            case KeyEvent.VK_W:
+                res = ch.UseAbility(Direction.NORTH);
+                if(res > -1)
+                    window.showActionResult("Reasearcher", Direction.NORTH, res);
+                break;
+            case KeyEvent.VK_S:
+                res = ch.UseAbility(Direction.SOUTH);
+                if(res > -1)
+                    window.showActionResult("Reasearcher", Direction.SOUTH, res);
+                break;
+            case KeyEvent.VK_SHIFT: ch.PickUpItem(); break;
+            default:                                      //handle number keys here to reduce clutter
                 if (49 <= keyCode && keyCode <= 57) {    //49-57 are the key codes of 1-9 on the keyboard
                     ch.UseItem(keyCode - 48 - 1);   // keyCode - 48 gets an int between 1 and 9, subtract 1 to get valid array index
-                    //System.out.println("Keycode: "+keyCode+" Number pressed: "+(keyCode - 48)+" Array idx: "+(keyCode - 48 - 1));
                 }
                 break;
         }

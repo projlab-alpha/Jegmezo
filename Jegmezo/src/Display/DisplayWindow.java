@@ -14,15 +14,55 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+/**
+ * Ez az osztály felelős a grafikus megjelenítéséért
+ * és a felhasználóval folytatott kommunikáció lebonyolításáért.
+ * Az osztály JSwing-es eszközökkel valósítja meg a működését.
+ */
 public class DisplayWindow extends JFrame {
+
+    /**
+     * Zászló, amivel zárolni lehet a felületet. Zároláskor a felület nem fogad több inputot.
+     */
     private boolean locked;
+
+    /**
+     * A jelenlegi karakter maradék munkáinak kiírására használt szöveg mező.
+     */
     private JTextField apField;
+
+    /**
+     * A jelenlegi karakter testhőjének kiírására használt szöveg mező.
+     */
     private JTextField warmthField;
+
+    /**
+     * A jelenlegi forduló kiírására használt szöveg mező.
+     */
     private JTextField turnsField;
+
+    /**
+     * Portré a jelenlegi karakterről, ez vagy egy eszkimót, vagy egy sarkkutatót ábrázol.
+     */
     private JLabel charPortrait;
-    private JLabel[] invPanels = new JLabel[9];
+
+    /**
+     * Tömb a jelenlegi karakter inventory-ának tartalmát megjelenítő címkékből.
+     */
+    private JLabel[] invPanels;
+
+    /**
+     * Kollekció a különböző modellbeli játékmezőket reprezentáló DisplayTile objektumokról.
+     * Pontosan olyan hosszú, mint amennyi mezőből áll a játékpálya.
+     */
     private ArrayList<DisplayTile> tiles;
 
+    /**
+     * Konstruktor. Létrehozza a grafikai felületet.
+     * @param width         A játéktábla szélessége
+     * @param height        A játéktábla magassága
+     * @param gameField     Maga a játéktábla
+     */
     public DisplayWindow(int width, int height, GameField gameField) {
         //-------------------------------------------------
         //initialize variables
@@ -32,12 +72,12 @@ public class DisplayWindow extends JFrame {
         warmthField = new JTextField();
         turnsField = new JTextField();
         charPortrait = new JLabel();
+        invPanels = new JLabel[9];
         for(int i = 0; i < 9; i++) {
             invPanels[i] = new JLabel();
             invPanels[i].setIcon(new ImageIcon(this.getClass().getResource("/images/invslot.png")));
         }
         tiles = new ArrayList<>(width * height);
-
 
         //-------------------------------------------------
         //Window setup
@@ -81,6 +121,7 @@ public class DisplayWindow extends JFrame {
         //-------------------------------------------------
         JPanel gameTableDisplayPanel = new JPanel();
         gameTableDisplayPanel.setLayout(new GridBagLayout());
+
         //container panel for game tiles
         JPanel gameTableDisplay = new JPanel();
         gameTableDisplay.setLayout(new GridLayout(width, height));
@@ -201,6 +242,11 @@ public class DisplayWindow extends JFrame {
         //-------------------------------------------------
     }
 
+    /**
+     * Elvégzi a grafikus elemek kirajzolását. Lekéri a Control-tól a jelenlegi játékos karakterét,
+     * majd annak attribútumai szerint frissíti a karakter panelt,
+     * majd meghívja az összes DisplayTile redraw() metódusát, így frissítve a játékpálya megjelenítésének állását.
+     */
     public void redraw() {
         character.Character currentChar = Control.getInstance().getCurrentChar();
         //update text fields
@@ -255,16 +301,29 @@ public class DisplayWindow extends JFrame {
         turnsField.setText("Turn\t"+Control.getInstance().getTurn());
     }
 
+    /**
+     * Egy dialógus megjelenítésével jelzi a játékosoknak, hogy a játék győzelemmel zárult, és zárolja a felületet.
+     */
     public void showVictory() {
         this.locked = true;
         JOptionPane.showMessageDialog(this, "Flaregun fired! Rescue is coming!\n"+"You win!", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Egy dialógus megjelenítésével jelzi a játékosoknak, hogy a játék vereséggel zárult, és zárolja a felületet.
+     */
     public void showDefeat() {
         this.locked = true;
         JOptionPane.showMessageDialog(this, "A player has died!\n"+"You lose!", "Game over!", JOptionPane.WARNING_MESSAGE);
     }
 
+    /**
+     * Megjelenít egy dialógus panelt, amely egy karakter különleges képességének
+     * eredményét írja ki.
+     * @param user      A karakter neve, aki a képességet használta
+     * @param d         A képesség használatának iránya
+     * @param i         A képesség eredménye
+     */
     public void showActionResult(String user, Direction d, int i) {
         JOptionPane.showMessageDialog(this, "Capacity of floe to the "+d+": "+i, user+" used ability", JOptionPane.INFORMATION_MESSAGE);
     }

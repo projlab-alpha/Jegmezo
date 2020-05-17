@@ -25,6 +25,11 @@ public class GameField {
      */
     private final double SnowstormChance = 0.1;
 
+    /**
+     * Hozzáadja a megadott karaktert a játékmező egy véletlen
+     * jégtáblájára.
+     * @param c Az elhelyezendő karakter
+     */
     private void addRandom(character.Character c) {
         Random rng = new Random();
         AbstractField floe = floes.get(rng.nextInt(floes.size()));
@@ -38,6 +43,11 @@ public class GameField {
         floe.Accept(c);
     }
 
+    /**
+     * Hozzáadja a megadott tárgyat a játékmező egy véletlen
+     * jégtáblájára.
+     * @param i Az elhelyezendő tárgy
+     */
     private void addRandom(Item i) {
         Random rng = new Random();
         int ranNum = rng.nextInt(floes.size());
@@ -47,6 +57,10 @@ public class GameField {
         floes.get(ranNum).setItem(i);
     }
 
+    /**
+     * Visszatér egy véletlenszerűen kiválasztott tárgyal.
+     * @return  A kapott tárgy
+     */
     private Item getRandomItem() {
         Item item;
         Random rng = new Random();
@@ -67,7 +81,11 @@ public class GameField {
     }
 
     /**
-     * Konstruktor.
+     * Konstruktor. Inicializálja a játék pályát.
+     * @param width         A pálya szélessége
+     * @param height        A pálya magassága
+     * @param chars         Kollekció, amely a játékos karaktereket tartalmazza
+     * @param polarBear     A pályán szereplő jegesmedve
      */
     public GameField(int width, int height, ArrayList<character.Character> chars, PolarBear polarBear) {
         final int size = width * height;
@@ -123,7 +141,6 @@ public class GameField {
         for(int i = 0; i < itemcount; i++) {
             addRandom(getRandomItem());
         }
-
     }
  
     /**
@@ -156,6 +173,11 @@ public class GameField {
         return floes;
     }
 
+    /**
+     * Visszatér a játékmezőn lévő, megadott indexű táblával.
+     * @param idx   A kért tábla indexe.
+     * @return      A kért tábla, vagy null, ha az index out of bounds.
+     */
     public AbstractField getFloeAt(int idx) {
         if(idx < 0 || idx > floes.size())
             return null;

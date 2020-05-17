@@ -46,10 +46,16 @@ public class UnstableFloe extends AbstractField {
         }
     }
 
+    /**
+     * Létrehoz egy FieldAppearance objektumot, és beállítja a flag-eit a mező státusza szerint,
+     * majd visszatér vele. A FieldAppearance-ban az isUnstable igaz, az isHole hamis lesz.
+     * @return A mező megjelenését tartalmazó FieldAppearance.
+     */
     @Override
     public FieldAppearance getAppearance() {
         FieldAppearance res = super.getAppearance();
         res.isUnstable = true;
+        res.isHole = false;
         return res;
     }
 }

@@ -6,7 +6,18 @@ import character.Researcher;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * Ez az osztály a program belépési pontja, innen indul a játék.
+ */
 public class Main {
+    /**
+     * A program belépési pontja, lekérdezi az indítandó játék kívánt beállításait, avagy
+     * - a játéktábla szélessége és magassága
+     * - a játékosok száma
+     * - melyik játékos milyen karaktert kíván irányítani.
+     * Ez után elindítja a játék inicializálását.
+     * @param args  Nem használt.
+     */
     public static void main(String[] args) {
         System.out.println("Running");
         int widthInput = -1, heightInput = -1;

@@ -132,8 +132,6 @@ public abstract class Character {
      */
     public abstract int UseAbility(Direction d);
 
-    public void resetAP() { actionpoint = 4; }
-
     /**
      * Ez a metódus reprezentálja a vízbe esést. Meghívja a tárolt
      * WaterStrategy execute() metódusát, átadva az önmagára mutató referenciát.
@@ -206,8 +204,26 @@ public abstract class Character {
         this.field = f;
     }
 
+    /**
+     * Visszaállítja az actionpoint-ot 4-re.
+     */
+    public void resetAP() { actionpoint = 4; }
+
+    /**
+     * Getter.
+     * @return A karakter tárgyait tartalmazó kollekció.
+     */
     public ArrayList<Item> getInventory() { return inventory; }
 
+    /**
+     * Getter.
+     * @return A karakter testhőjének szintje.
+     */
     public int getWarmth() { return warmth; }
+
+    /**
+     * Getter.
+     * @return A karakter hátralévő munkáinak (actionpoint) száma.
+     */
     public int getAP() { return actionpoint; }
 }

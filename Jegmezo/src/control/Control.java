@@ -21,8 +21,19 @@ public class Control {
      */
     private int PlayerCount;
 
+    /**
+     * A jelenlegi forduló száma.
+     */
     private int turn;
+
+    /**
+     * A jelenlegi játékos sorszáma.
+     */
     private int currentplayer;
+
+    /**
+     * Referencia a megjelenítésért felelős ablakra.
+     */
     private DisplayWindow window;
 
     /**
@@ -61,16 +72,33 @@ public class Control {
         return control;
     }
 
+    /**
+     * Getter.
+     * @return A jelenlegi játékos karakterének referenciája.
+     */
     public character.Character getCurrentChar() {
         return characters.get(currentplayer);
     }
 
+    /**
+     * Getter.
+     * @return A jelenlegi forduló száma.
+     */
     public int getTurn() {
         return turn;
     }
 
+    /**
+     * Jelzi a display ablak felé, hogy frissítse a megjelenítést.
+     */
     public void requestRedraw() { window.redraw(); }
 
+    /**
+     * Inicializálja a játékot a megadott paraméterek alapján.
+     * @param width     A játék pálya szélessége
+     * @param height    A játék pálya magassága
+     * @param chars     A játékosok karaktereit tartalmazó tömb
+     */
     public void initializeGame(int width, int height, ArrayList<Character> chars) {
         PlayerCount = chars.size();
         turn = 1;
@@ -81,6 +109,11 @@ public class Control {
         window = new DisplayWindow(width, height, gameField);
     }
 
+    /**
+     * Parse-olja az argumentumban megadott KeyEvent-et, és
+     * végrehajtja a lenyomott billentyű által megadott parancsot.
+     * @param e A KeyEvent amely a lenyomott billentyű eseményét reprezentálja.
+     */
     public void keyPressed(KeyEvent e) {
         character.Character ch = characters.get(currentplayer);
         int keyCode = e.getKeyCode();

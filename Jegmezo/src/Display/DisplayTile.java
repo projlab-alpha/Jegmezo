@@ -10,14 +10,31 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Képet megjelenítő JLabel leszármazott.
+ * Pontosan egy AbstractField mezőt reprezentál grafikusan,
+ * annak kinézete alapján változtatja a megjelenített képet.
+ */
 public class DisplayTile extends JLabel {
+
+    /**
+     * A Tile-nek megfelelő mező referenciája, ezt reprezentálja vizuálisan a DisplayTile objektum.
+     */
     private AbstractField field;
 
+    /**
+     * Konstruktor.
+     * @param field A reprezentálandó mező.
+     */
     public DisplayTile(AbstractField field) {
         this.field = field;
         this.redraw();
     }
 
+    /**
+     * Lekérdezi a hozzá tartozó AbstractField kinézetét,
+     * majd ennek függvényében setIcon függvény hívással megváltoztatja a kirajzolt képet.
+     */
     public void redraw() {
         final int imgDim = 32;
         try {

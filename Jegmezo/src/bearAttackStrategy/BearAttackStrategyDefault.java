@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * vége lesz.
  */
 public class BearAttackStrategyDefault implements BearAttackStrategy {
-
     /**
      * Ha az argumentumban kapott
      * kollekció nem üres, akkor a Control CharacterDied() metódusának meghívásával jelzi,

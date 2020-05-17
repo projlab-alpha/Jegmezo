@@ -31,10 +31,16 @@ public class Hole extends AbstractField {
         c.FellInWater();
     }
 
+    /**
+     * Létrehoz egy FieldAppearance objektumot, és beállítja a flag-eit a mező státusza szerint,
+     * majd visszatér vele. A FieldAppearance-ban az isUnstable hamis, az isHole igaz lesz.
+     * @return A mező megjelenését tartalmazó FieldAppearance.
+     */
     @Override
     public FieldAppearance getAppearance() {
         FieldAppearance res = super.getAppearance();
         res.isHole = true;
+        res.isUnstable = false;
         return res;
     }
 }

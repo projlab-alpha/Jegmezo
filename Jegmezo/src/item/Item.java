@@ -14,7 +14,5 @@ public interface Item {
      * @return El kell tűnnie-e az itemnek használat után
      */
     boolean UseItem(character.Character c);
-    
- 
 }
 	

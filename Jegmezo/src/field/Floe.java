@@ -31,4 +31,17 @@ public class Floe extends AbstractField {
         this.characters.add(c);
         c.setField(this);
     }
+
+    /**
+     * Létrehoz egy FieldAppearance objektumot, és beállítja a flag-eit a mező státusza szerint,
+     * majd visszatér vele. A FieldAppearance-ban az isHole és az isUnstable flag-ek mind hamisak lesznek.
+     * @return  A mező megjelenését tartalmazó FieldAppearance.
+     */
+    @Override
+    public FieldAppearance getAppearance() {
+        FieldAppearance res = super.getAppearance();
+        res.isHole = false;
+        res.isUnstable = false;
+        return res;
+    }
 }

@@ -101,8 +101,6 @@ public class DisplayWindow extends JFrame {
         //-------------------------------------------------
         JMenuBar menuBar = new JMenuBar();
         JMenu optionsMenu = new JMenu("Options");
-        JMenuItem OptionsMenuItemExit = new JMenuItem("Exit", KeyEvent.VK_E);
-        OptionsMenuItemExit.addActionListener(e -> DisplayWindow.this.dispatchEvent(new WindowEvent(DisplayWindow.this, WindowEvent.WINDOW_CLOSING)));
         JMenuItem OptionsMenuItemControls = new JMenuItem("Controls", KeyEvent.VK_C);
         OptionsMenuItemControls.addActionListener(e -> JOptionPane.showMessageDialog(DisplayWindow.this, "Controls:\n"
                 +"Arrow keys to move\n"
@@ -111,8 +109,10 @@ public class DisplayWindow extends JFrame {
                 +"Control to dig\n"
                 +"Number keys 1-9 to use item in the given slot\n"
                 +"Space to end turn\n", "Controls", JOptionPane.INFORMATION_MESSAGE));
-        optionsMenu.add(OptionsMenuItemExit);
+        JMenuItem OptionsMenuItemExit = new JMenuItem("Exit", KeyEvent.VK_E);
+        OptionsMenuItemExit.addActionListener(e -> DisplayWindow.this.dispatchEvent(new WindowEvent(DisplayWindow.this, WindowEvent.WINDOW_CLOSING)));
         optionsMenu.add(OptionsMenuItemControls);
+        optionsMenu.add(OptionsMenuItemExit);
         menuBar.add(optionsMenu);
         this.setJMenuBar(menuBar);
 

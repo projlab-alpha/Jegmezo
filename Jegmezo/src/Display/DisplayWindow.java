@@ -47,7 +47,15 @@ public class DisplayWindow extends JFrame {
         JMenu optionsMenu = new JMenu("Options");
         JMenuItem OptionsMenuItemExit = new JMenuItem("Exit", KeyEvent.VK_E);
         OptionsMenuItemExit.addActionListener(e -> DisplayWindow.this.dispatchEvent(new WindowEvent(DisplayWindow.this, WindowEvent.WINDOW_CLOSING)));
+        JMenuItem OptionsMenuItemControls = new JMenuItem("Controls", KeyEvent.VK_C);
+        OptionsMenuItemControls.addActionListener(e -> JOptionPane.showMessageDialog(DisplayWindow.this, "Controls:\n"
+                +"Arrow keys to move\n"
+                +"a/w/s/d to use ability in the given direction\n"
+                +"Shift to pick an item up\n"
+                +"Number keys 1-9 to use item in the given slot\n"
+                +"Space to end turn\n", "Controls", JOptionPane.INFORMATION_MESSAGE));
         optionsMenu.add(OptionsMenuItemExit);
+        optionsMenu.add(OptionsMenuItemControls);
         menuBar.add(optionsMenu);
         this.setJMenuBar(menuBar);
 
@@ -159,10 +167,10 @@ public class DisplayWindow extends JFrame {
     }
 
     public void showVictory() {
-        //TODO
+        JOptionPane.showMessageDialog(this, "You win!", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void showDefeat() {
-        //TODO
+        JOptionPane.showMessageDialog(this, "You lose!", "Game over!", JOptionPane.WARNING_MESSAGE);
     }
 }
